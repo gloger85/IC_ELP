@@ -1,2 +1,2 @@
 cd ..\ic-elp
-node install
+npm install
