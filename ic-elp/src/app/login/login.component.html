@@ -3,19 +3,22 @@
   This area is restricted to view by logged users only. Please provide your e-mail and password to log in to a IC ELP portal. Thank you.
 </p>
 
-<div>
-  <div class="ui-inputgroup">
-    E-Mail <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
-    <input type="text" pInputText placeholder="User name">
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12">
+    <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
+        <input type="text" pInputText placeholder="E-Mail">         
+    </div>
+  </div>
+  
+  <div class="ui-g-12">
+    <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
+        <input type="password" pInputText placeholder="Password">         
+    </div>
   </div>
 
-  <div class="ui-inputgroup">
-    Password <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
-    <input type="password" pInputText placeholder="Password">
-  </div>
-
-  <div>
-      <!--<button pButton type="button" icon="pi pi-check" iconPos="left"></button>
-      <p-button label="Click" icon="fa fa-check" iconPos="left"></p-button>-->
+  <div class="ui-g-12">
+    <button pButton type="button" routerLink="/dashboard"><i class="pi pi-check"></i>Login</button>
   </div>
 </div>
