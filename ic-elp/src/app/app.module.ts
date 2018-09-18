@@ -10,6 +10,8 @@ import { EventLogComponent } from './event-log/event-log.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AboutComponent } from './about/about.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
+import { PasswordCreateNewComponent } from './password-create-new/password-create-new.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { AboutComponent } from './about/about.component';
     EventLogComponent,
     LoginComponent,
     LogoutComponent,
-    AboutComponent
+    AboutComponent,
+    PasswordResetComponent,
+    PasswordCreateNewComponent
   ],
   imports: [
     BrowserModule,
