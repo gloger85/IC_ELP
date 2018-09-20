@@ -1,4 +1,3 @@
-
 <p class="lead" style="margin-top: 20px;">
   This area is restricted to view by registered members only. Please provide your e-mail and password to log in to a IC ELP portal. Thank you.
 </p>
@@ -13,7 +12,7 @@
       <div class="ui-g-12">
         <div class="ui-inputgroup">
             <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
-            <input type="email" pInputText placeholder="Infosys e-mail address">
+            <input #userEmail type="email" pInputText placeholder="Infosys e-mail address">
         </div>
       </div>
 
@@ -25,7 +24,7 @@
       </div>
 
       <div class="ui-g-12">
-        <button pButton type="button" routerLink="/dashboard"><i class="pi pi-check"></i>Login</button>
+        <button pButton type="button" (click)="login(userEmail.value)"><i class="pi pi-check"></i>Login</button>
           &nbsp;&nbsp;
         <button pButton type="button" routerLink="/password-reset" styleClass="ui-button-info"><i class="pi pi-check"></i>Missing Password</button>
       </div>
@@ -36,5 +35,3 @@
   </div>
 
 </div>
-
-
