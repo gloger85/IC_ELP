@@ -24,9 +24,19 @@
       </div>
 
       <div class="ui-g-12">
-        <button pButton type="button" (click)="login(userEmail.value)"><i class="pi pi-check"></i>Login</button>
+        <button pButton 
+        (click)="login(userEmail.value)" 
+        label="Login" 
+        icon="pi pi-check"
+        class="ui-button-secondary"></button>
+
           &nbsp;&nbsp;
-        <button pButton type="button" routerLink="/password-reset" styleClass="ui-button-info"><i class="pi pi-check"></i>Missing Password</button>
+          
+        <button pButton 
+        routerLink="/password-reset"
+        label="Missing Password"
+        icon="pi pi-check"
+        class="ui-button-secondary ui-button-rounded"></button>
       </div>
     </div>
   </div>
