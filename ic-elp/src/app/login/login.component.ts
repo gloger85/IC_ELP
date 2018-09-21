@@ -1,48 +1,49 @@
 import { Component, OnInit } from '@angular/core';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
-  private _loginRoutingMap : Map<string,string> = new Map([
-    ['hr@infosys.com', 'hr-dashboard'],
-    ['manager@infosys.com','manager-dashboard'],
-    ['others', 'dashboard']
+  private _loginRoutingMap: Map<string, string> = new Map([
+      ['hr@infosys.com', 'hr-dashboard'],
+      ['manager@infosys.com', 'manager-dashboard'],
+      ['member@infosys.com', 'dashboard']
     ]);
 
-  constructor() { }
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
   }
 
-  login(email : string) : void {
-    
-    console.log('Email entered: ' + email);
+  public login(email: string): void {
+    // tslint:disable-next-line:no-console
+    console.info(`Email entered: ${email}`);
+    email = email.trim().toLocaleLowerCase();
 
-    email = email.trim();
-    if (!email) { 
-      console.log('Email not provided');
+    if (!email) {
+      console.error('Email not provided');
       return;
-     }
-    ///TODO: Email validation (@infosys.com)
+    }
 
-    console.log('Navigate to: ' + this.getDashboardUrlByEmail(email));
-    
-    ///TODO: Navigate to the login page with extras
-    //this.router.navigate(['/'+]);
+    // tslint:disable-next-line:no-console
+    console.info(`Navigate to: ${this.getDashboardUrlByEmail(email)}`);
+    this.router.navigate([`./${this.getDashboardUrlByEmail(email)}`]);
   }
 
-  getDashboardUrlByEmail(email : string) : string {
-    
-    var dashboardUrl : string = this._loginRoutingMap.get(email);
+  private getDashboardUrlByEmail(email: string): string {
+    const dashboardUrl: string = this._loginRoutingMap.get(email);
 
-    if(dashboardUrl){
-      return dashboardUrl;
-    }else{
-      return this._loginRoutingMap.get('others');
+    // TODO: We should look for better option here.
+    if (typeof dashboardUrl === 'undefined' || !dashboardUrl) {
+      return '/enter-error-page-here';
     }
-  } 
+
+    return dashboardUrl;
+  }
 }
