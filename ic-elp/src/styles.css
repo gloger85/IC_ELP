@@ -27,6 +27,19 @@ input {
   background-color: #007bc1;
 }
 
+.debug-border {
+  border: 1px solid red;
+}
+
+.panel-border {
+  border: 1px solid #f0f0f0;
+}
+
+/*** ngPrime controls setup ***/
+.ui-accordion-content-wrapper-overflown {
+  overflow: hidden;
+}
+
 /*** NAVIGATION BAR ***/
 .navbar {
   background-color: #007bc1;

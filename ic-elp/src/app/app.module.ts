@@ -1,6 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {ButtonModule} from 'primeng/button';
+import { ButtonModule } from 'primeng/button';
+import { MegaMenuModule } from 'primeng/megamenu';
+import { AccordionModule } from 'primeng/accordion';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CardModule } from 'primeng/card';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -13,6 +19,9 @@ import { LogoutComponent } from './logout/logout.component';
 import { AboutComponent } from './about/about.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { PasswordCreateNewComponent } from './password-create-new/password-create-new.component';
+import { SharedDetailInfoBarComponent } from './shared-detail-info-bar/shared-detail-info-bar.component';
+import { SharedTeamViewerComponent } from './shared-team-viewer/shared-team-viewer.component';
+import { SharedDashboardMenuComponent } from './shared-dashboard-menu/shared-dashboard-menu.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +34,20 @@ import { PasswordCreateNewComponent } from './password-create-new/password-creat
     LogoutComponent,
     AboutComponent,
     PasswordResetComponent,
-    PasswordCreateNewComponent
+    PasswordCreateNewComponent,
+    SharedDetailInfoBarComponent,
+    SharedTeamViewerComponent,
+    SharedDashboardMenuComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ButtonModule
+    ButtonModule,
+    MegaMenuModule,
+    AccordionModule,
+    BrowserAnimationsModule,
+    CardModule,
+    ProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
