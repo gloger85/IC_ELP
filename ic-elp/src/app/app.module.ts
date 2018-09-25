@@ -25,6 +25,7 @@ import { SharedTeamViewerComponent } from './shared-team-viewer/shared-team-view
 import { SharedDashboardMenuComponent } from './shared-dashboard-menu/shared-dashboard-menu.component';
 import { SharedCalendarComponent } from './shared-calendar/shared-calendar.component';
 import { RequestLeaveComponent } from './request-leave/request-leave.component';
+import { SharedMemberLeaveDetailsComponent } from './shared-member-leave-details/shared-member-leave-details.component';
 
 @NgModule({
   declarations: [
@@ -41,8 +42,12 @@ import { RequestLeaveComponent } from './request-leave/request-leave.component';
     SharedDetailInfoBarComponent,
     SharedTeamViewerComponent,
     SharedDashboardMenuComponent,
+<<<<<<< HEAD
     SharedCalendarComponent,
     RequestLeaveComponent
+=======
+    SharedMemberLeaveDetailsComponent
+>>>>>>> 448128afdba5ca2b1923a96cec37ab52e5be661c
   ],
   imports: [
     BrowserModule,
