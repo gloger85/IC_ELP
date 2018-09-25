@@ -22,6 +22,7 @@ import { PasswordCreateNewComponent } from './password-create-new/password-creat
 import { SharedDetailInfoBarComponent } from './shared-detail-info-bar/shared-detail-info-bar.component';
 import { SharedTeamViewerComponent } from './shared-team-viewer/shared-team-viewer.component';
 import { SharedDashboardMenuComponent } from './shared-dashboard-menu/shared-dashboard-menu.component';
+import { SharedMemberLeaveDetailsComponent } from './shared-member-leave-details/shared-member-leave-details.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SharedDashboardMenuComponent } from './shared-dashboard-menu/shared-das
     PasswordCreateNewComponent,
     SharedDetailInfoBarComponent,
     SharedTeamViewerComponent,
-    SharedDashboardMenuComponent
+    SharedDashboardMenuComponent,
+    SharedMemberLeaveDetailsComponent
   ],
   imports: [
     BrowserModule,
