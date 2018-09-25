@@ -6,7 +6,8 @@ import { AccordionModule } from 'primeng/accordion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CardModule } from 'primeng/card';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-
+import { CalendarModule } from 'primeng/calendar';
+import { PanelModule } from 'primeng/panel';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -22,6 +23,8 @@ import { PasswordCreateNewComponent } from './password-create-new/password-creat
 import { SharedDetailInfoBarComponent } from './shared-detail-info-bar/shared-detail-info-bar.component';
 import { SharedTeamViewerComponent } from './shared-team-viewer/shared-team-viewer.component';
 import { SharedDashboardMenuComponent } from './shared-dashboard-menu/shared-dashboard-menu.component';
+import { SharedCalendarComponent } from './shared-calendar/shared-calendar.component';
+import { RequestLeaveComponent } from './request-leave/request-leave.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,9 @@ import { SharedDashboardMenuComponent } from './shared-dashboard-menu/shared-das
     PasswordCreateNewComponent,
     SharedDetailInfoBarComponent,
     SharedTeamViewerComponent,
-    SharedDashboardMenuComponent
+    SharedDashboardMenuComponent,
+    SharedCalendarComponent,
+    RequestLeaveComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +52,9 @@ import { SharedDashboardMenuComponent } from './shared-dashboard-menu/shared-das
     AccordionModule,
     BrowserAnimationsModule,
     CardModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    CalendarModule,
+    PanelModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

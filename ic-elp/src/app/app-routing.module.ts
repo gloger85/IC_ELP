@@ -11,6 +11,7 @@ import { EventLogComponent } from './event-log/event-log.component';
 import { AboutComponent } from './about/about.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { PasswordCreateNewComponent } from './password-create-new/password-create-new.component';
+import { RequestLeaveComponent } from './request-leave/request-leave.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent },
   { path: 'manager-dashboard', component: ManagerDashboardComponent },
   { path: 'password-reset', component: PasswordResetComponent },
-  { path: 'password-create-new', component: PasswordCreateNewComponent }
+  { path: 'password-create-new', component: PasswordCreateNewComponent },
+  { path: 'request-leave', component: RequestLeaveComponent }
 ];
 
 @NgModule({
