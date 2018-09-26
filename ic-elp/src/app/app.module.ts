@@ -8,6 +8,8 @@ import { CardModule } from 'primeng/card';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { CalendarModule } from 'primeng/calendar';
 import { PanelModule } from 'primeng/panel';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -57,6 +59,8 @@ import { SharedMemberLeaveDetailsComponent } from './shared-member-leave-details
     ProgressSpinnerModule,
     CalendarModule,
     PanelModule,
+    MessagesModule,
+    MessageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

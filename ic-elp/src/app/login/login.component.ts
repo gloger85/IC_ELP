@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {Message} from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +9,8 @@ import { Router } from '@angular/router';
 })
 
 export class LoginComponent implements OnInit {
+
+  msgs: Message[] = [];
 
   private _loginRoutingMap: Map<string, string> = new Map([
       ['hr@infosys.com', 'hr-dashboard'],
@@ -27,6 +30,7 @@ export class LoginComponent implements OnInit {
     email = email.trim().toLocaleLowerCase();
 
     if (!email) {
+      this.showErrorMessage();
       console.error('Email not provided');
       return;
     }
@@ -41,9 +45,17 @@ export class LoginComponent implements OnInit {
 
     // TODO: We should look for better option here.
     if (typeof dashboardUrl === 'undefined' || !dashboardUrl) {
-      return '/enter-error-page-here';
+      this.showErrorMessage();
     }
 
     return dashboardUrl;
+  }
+
+  public showErrorMessage() : void{
+    // tslint:disable-next-line:no-console
+    console.error('Incorect e-mail and/or password');
+    this.msgs = [];
+    this.msgs.push({severity:'error', summary:'Incorect e-mail and/or password', detail:'Please make sure that the email and password are correct'});
+    return;
   }
 }
