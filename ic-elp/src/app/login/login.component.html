@@ -2,36 +2,29 @@
   This area is restricted to view by registered members only. Please provide your e-mail and password to log in to a IC ELP portal. Thank you.
 </p>
 
-<div class="row">
-
-  <div class="col-md-4">
+<div class="ui-g">
+  <div class="ui-g-4">
   </div>
 
-  <div class="col-md-4">
-    <div class="ui-g">
-      <div class="ui-g-12">
-        <div class="ui-inputgroup">
-            <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
-            <input #userEmail type="email" pInputText placeholder="Infosys e-mail address">
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <div class="ui-inputgroup">
-            <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
-            <input type="password" pInputText placeholder="Password">
-        </div>
-      </div>
-
-      <div class="ui-g-12">
-        <button pButton (click)="login(userEmail.value)" label="Login"  icon="pi pi-check" class="ui-button-secondary"></button>
-          &nbsp;&nbsp;
-        <button pButton routerLink="/password-reset" label="Missing Password" icon="pi pi-check" class="ui-button-secondary ui-button-rounded"></button>
+  <div class="ui-g-4">
+    <div class="ui-g-12">
+      <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
+          <input #userEmail type="email" pInputText placeholder="Infosys e-mail address">
       </div>
     </div>
-  </div>
 
-  <div class="col-md-4">
-  </div>
+    <div class="ui-g-12">
+      <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
+          <input type="password" pInputText placeholder="Password">
+      </div>
+    </div>
 
+    <div class="ui-g-12">
+      <p-button (click)="login(userEmail.value)" icon="pi pi-check" label="Login"></p-button>
+        &nbsp;&nbsp;
+      <p-button routerLink="/password-reset" icon="pi pi-check" label="Missing Password"></p-button>
+    </div>
+  </div>
 </div>

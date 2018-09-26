@@ -42,12 +42,9 @@ import { SharedMemberLeaveDetailsComponent } from './shared-member-leave-details
     SharedDetailInfoBarComponent,
     SharedTeamViewerComponent,
     SharedDashboardMenuComponent,
-<<<<<<< HEAD
     SharedCalendarComponent,
-    RequestLeaveComponent
-=======
+    RequestLeaveComponent,
     SharedMemberLeaveDetailsComponent
->>>>>>> 448128afdba5ca2b1923a96cec37ab52e5be661c
   ],
   imports: [
     BrowserModule,
