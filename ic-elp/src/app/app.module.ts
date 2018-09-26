@@ -6,6 +6,8 @@ import { AccordionModule } from 'primeng/accordion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CardModule } from 'primeng/card';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { FormsModule } from '@angular/forms';
+import { ChartModule } from 'primeng/chart';
 
 
 import { AppComponent } from './app.component';
@@ -47,7 +49,9 @@ import { SharedDashboardMenuComponent } from './shared-dashboard-menu/shared-das
     AccordionModule,
     BrowserAnimationsModule,
     CardModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    FormsModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

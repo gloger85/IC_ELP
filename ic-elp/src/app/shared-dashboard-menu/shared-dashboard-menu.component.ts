@@ -9,12 +9,12 @@ import { MenuItem } from 'primeng/components/common/menuitem';
 
 export class SharedDashboardMenuComponent implements OnInit {
 
-  private _mainMenuItems: MenuItem[];
+  private mainMenuItems: MenuItem[];
 
   constructor() { }
 
   ngOnInit() {
-      this._mainMenuItems = [
+      this.mainMenuItems = [
         {
             label: 'Manager Inbox (new: 5)', icon: 'fa fa-fw fa-check',
             items: [
