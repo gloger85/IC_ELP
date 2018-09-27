@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-shared-team-viewer',
@@ -11,5 +11,4 @@ export class SharedTeamViewerComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

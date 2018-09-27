@@ -7,7 +7,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
-
 import { AppComponent } from './app.component';
 import { AboutComponent } from './about/about.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -26,7 +25,6 @@ import { SharedDashboardMenuComponent } from './shared-dashboard-menu/shared-das
 import { SharedTeamViewerComponent } from './shared-team-viewer/shared-team-viewer.component';
 import { SharedMemberLeaveDetailsComponent } from './shared-member-leave-details/shared-member-leave-details.component';
 
-
 import { AccordionModule } from 'primeng/accordion';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
@@ -37,6 +35,8 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { PanelModule } from 'primeng/panel';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TreeModule } from 'primeng/tree';
+
 
 
 @NgModule({
@@ -44,8 +44,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     AppComponent,
     AboutComponent,
     DashboardComponent,
-    HrDashboardComponent,
     EventLogComponent,
+    HrDashboardComponent,
     LoginComponent,
     LogoutComponent,
     ManagerDashboardComponent,
@@ -72,9 +72,10 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     MessagesModule,
     MessageModule,
     ProgressSpinnerModule,
-    PanelModule
+    PanelModule,
+    TreeModule
   ],
-  providers: [],
+  providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
