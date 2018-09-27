@@ -8,7 +8,6 @@ import { CardModule } from 'primeng/card';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { FormsModule } from '@angular/forms';
 import { ChartModule } from 'primeng/chart';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -26,6 +25,11 @@ import { SharedDashboardMenuComponent } from './shared-dashboard-menu/shared-das
 import { SharedCalendarComponent } from './shared-calendar/shared-calendar.component';
 import { RequestLeaveComponent } from './request-leave/request-leave.component';
 import { SharedMemberLeaveDetailsComponent } from './shared-member-leave-details/shared-member-leave-details.component';
+import { CalendarModule } from 'primeng/calendar';
+import { PanelModule } from 'primeng/panel';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+
 
 @NgModule({
   declarations: [
@@ -56,7 +60,7 @@ import { SharedMemberLeaveDetailsComponent } from './shared-member-leave-details
     CardModule,
     ProgressSpinnerModule,
     FormsModule,
-    ChartModule
+    ChartModule,
     CalendarModule,
     PanelModule,
     MessagesModule,
