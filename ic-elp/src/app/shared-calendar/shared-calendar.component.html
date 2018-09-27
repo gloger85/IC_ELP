@@ -1,0 +1,27 @@
+<p class="lead" style="margin-top: 20px;">
+  Click calendar to choose time period
+</p>
+<div class="row">
+    <div class="col-md-8" >
+        <p-calendar [locale]="pl" [numberOfMonths]="2" inline="true" selectionMode="range" [disabledDays]="[0,6]" [disabledDates]="invalidDates"></p-calendar>
+    </div>
+
+    <div class="col-md-3">
+        <p-button icon="pi pi-plus-circle" label="Save" (onClick)="saveLeave($event)"></p-button>
+    </div>
+
+</div>
+<div class="row" *ngFor="let item of leave">
+    <div class="col-md-8">
+        <div class="ui-inputgroup" >
+            <input type="text" placeholder={{item}} pInputText  readonly>
+            <button pButton type="button" icon="pi pi-times" class="ui-button-danger" ></button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

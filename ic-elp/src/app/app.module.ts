@@ -9,7 +9,6 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { FormsModule } from '@angular/forms';
 import { ChartModule } from 'primeng/chart';
 
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -24,6 +23,9 @@ import { PasswordCreateNewComponent } from './password-create-new/password-creat
 import { SharedDetailInfoBarComponent } from './shared-detail-info-bar/shared-detail-info-bar.component';
 import { SharedTeamViewerComponent } from './shared-team-viewer/shared-team-viewer.component';
 import { SharedDashboardMenuComponent } from './shared-dashboard-menu/shared-dashboard-menu.component';
+import { SharedCalendarComponent } from './shared-calendar/shared-calendar.component';
+import { RequestLeaveComponent } from './request-leave/request-leave.component';
+import { SharedMemberLeaveDetailsComponent } from './shared-member-leave-details/shared-member-leave-details.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,10 @@ import { SharedDashboardMenuComponent } from './shared-dashboard-menu/shared-das
     PasswordCreateNewComponent,
     SharedDetailInfoBarComponent,
     SharedTeamViewerComponent,
-    SharedDashboardMenuComponent
+    SharedDashboardMenuComponent,
+    SharedCalendarComponent,
+    RequestLeaveComponent,
+    SharedMemberLeaveDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +57,10 @@ import { SharedDashboardMenuComponent } from './shared-dashboard-menu/shared-das
     ProgressSpinnerModule,
     FormsModule,
     ChartModule
+    CalendarModule,
+    PanelModule,
+    MessagesModule,
+    MessageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
