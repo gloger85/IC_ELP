@@ -13,6 +13,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EventLogComponent } from './event-log/event-log.component';
 import { HrDashboardComponent } from './hr-dashboard/hr-dashboard.component';
+import { LeaveRequestsListComponent } from './leave-requests-list/leave-requests-list.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard.component';
@@ -35,7 +36,9 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { PanelModule } from 'primeng/panel';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import {TableModule} from 'primeng/table';
 import { TreeModule } from 'primeng/tree';
+
 
 
 
@@ -46,6 +49,7 @@ import { TreeModule } from 'primeng/tree';
     DashboardComponent,
     EventLogComponent,
     HrDashboardComponent,
+    LeaveRequestsListComponent,
     LoginComponent,
     LogoutComponent,
     ManagerDashboardComponent,
@@ -56,7 +60,7 @@ import { TreeModule } from 'primeng/tree';
     SharedTeamViewerComponent,
     SharedDashboardMenuComponent,
     SharedCalendarComponent,
-    SharedMemberLeaveDetailsComponent,
+    SharedMemberLeaveDetailsComponent
   ],
   imports: [
     AppRoutingModule,
@@ -73,6 +77,7 @@ import { TreeModule } from 'primeng/tree';
     MessageModule,
     ProgressSpinnerModule,
     PanelModule,
+    TableModule,
     TreeModule
   ],
   providers: [ ],
