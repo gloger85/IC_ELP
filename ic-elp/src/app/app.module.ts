@@ -1,4 +1,3 @@
-
 /**
  * PLEASE KEEP IMPORTS IN A CORRECT ORDER, THANK YOU!
  */
@@ -25,6 +24,7 @@ import { SharedDetailInfoBarComponent } from './shared-detail-info-bar/shared-de
 import { SharedDashboardMenuComponent } from './shared-dashboard-menu/shared-dashboard-menu.component';
 import { SharedTeamViewerComponent } from './shared-team-viewer/shared-team-viewer.component';
 import { SharedMemberLeaveDetailsComponent } from './shared-member-leave-details/shared-member-leave-details.component';
+import { TreeTestComponent } from './tree-test/tree-test.component';
 
 import { AccordionModule } from 'primeng/accordion';
 import { ButtonModule } from 'primeng/button';
@@ -36,10 +36,8 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { PanelModule } from 'primeng/panel';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import {TableModule} from 'primeng/table';
+import { TableModule } from 'primeng/table';
 import { TreeModule } from 'primeng/tree';
-
-
 
 
 @NgModule({
@@ -60,7 +58,8 @@ import { TreeModule } from 'primeng/tree';
     SharedTeamViewerComponent,
     SharedDashboardMenuComponent,
     SharedCalendarComponent,
-    SharedMemberLeaveDetailsComponent
+    SharedMemberLeaveDetailsComponent,
+    TreeTestComponent
   ],
   imports: [
     AppRoutingModule,

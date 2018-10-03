@@ -1,0 +1,3 @@
+<h3>Multiple Selection with Metakey</h3>
+<p-tree [value]="files" selectionMode="checkbox" [(selection)]="selectedFiles"></p-tree>
+<div>Selected Nodes: <span *ngFor="let file of selectedFiles">{{file.label}} </span></div>
