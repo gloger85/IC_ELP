@@ -3,7 +3,7 @@
     <p-table [value]="leaves">
         <ng-template pTemplate="header">
             <tr>
-                <th>Number</th>
+                <th>Leave number</th>
                 <th>Start date</th>
                 <th>End date</th>
                 <th>Status</th>
@@ -11,11 +11,53 @@
         </ng-template>
         <ng-template pTemplate="body" let-leave>
             <tr>
-                <td>{{leave.id}}</td>
+                <td>
+                    <a class="btn btn-info" data-toggle="collapse" href="#leave{{leave.id}}" role="button" aria-expanded="false">
+                        <i class="pi pi-bars"></i>
+                    </a>&nbsp;
+                    {{leave.id}}</td>
                 <td>{{leave.startDate}}</td>
                 <td>{{leave.endDate}}</td>
                 <td>{{leave.status}} &nbsp;
                     <p-button icon="pi pi-trash" styleClass="ui-button-warning" label="Cancel" *ngIf="leave.status=='Pending'"></p-button>
+                </td>
+            </tr>
+            <tr class="collapse" [attr.id]="'leave'+leave.id">
+                <td colspan="4">
+                    <p-card title="Leave details">
+                        <div class="ui-g">
+                            <div class="ui-g-1">
+                                <b>Requested by:</b>
+                            </div>
+                            <div class="ui-g-2">
+                                Andrzej Jabcon
+                            </div>
+                            <div class="ui-g-1">
+                                <b>Requested for:</b>
+                            </div>
+                            <div class="ui-g-2">
+                                Andrzej Jabcon
+                            </div>
+                            <div class="ui-g-1">
+                                <b>Requested date:</b>
+                            </div>
+                            <div class="ui-g-2">
+                                2018-10-05 10:19:18
+                            </div>
+                            <div class="ui-g-1">
+                                <b>Approver:</b>
+                            </div>
+                            <div class="ui-g-2">
+                                Grzegorz Wasylow
+                            </div>
+                            <div class="ui-g-1">
+                                <b>Number of days:</b>
+                            </div>
+                            <div class="ui-g-2">
+                                10
+                            </div>                                
+                        </div>
+                    </p-card>
                 </td>
             </tr>
         </ng-template>
