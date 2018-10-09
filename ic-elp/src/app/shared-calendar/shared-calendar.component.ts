@@ -13,6 +13,7 @@ export class SharedCalendarComponent implements OnInit {
   leave: Array<Date>;
   en: any;
   pl: any;
+  dateFormat: string = "dd/MM/yyyy";
   ngOnInit() {
     this.en = {
       firstDayOfWeek: 1,
@@ -34,23 +35,11 @@ export class SharedCalendarComponent implements OnInit {
       monthNames: [ 'Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec',
                     'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień' ],
       monthNamesShort: [ 'Sty', 'Lut', 'Mar', 'Kwi', 'Maj', 'Cze', 'Lip', 'Sie', 'Wrz', 'Paź', 'Lis', 'Gru' ],
-      today: 'Today',
-      clear: 'Clear'
+      today: 'Dziś',
+      clear: 'Wyczyść'
 
     };
-    const today = new Date();
-    const invalidDate = new Date();
-    const date1 = new Date();
-    const date2 = new Date();
-    date1.setDate(today.getDate() + 1);
-    date2.setDate(today.getDate() + 1);
-    invalidDate.setDate(today.getDate() - 1);
-    this.invalidDates = [today, invalidDate];
-    this.leave = [today, date1, date2]; // mock
 
-  }
-
-  saveLeave() {
-    window.alert('Are you sure?');
+    this.invalidDates = [new Date(), new Date('2018-11-01'), new Date('2018-11-11')];
   }
 }

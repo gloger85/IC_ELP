@@ -1,21 +1,17 @@
 <p class="lead" style="margin-top: 20px;">
   Click calendar to choose time period
 </p>
-<div class="row">
-    <div class="col-md-8" >
-        <p-calendar [locale]="pl" [numberOfMonths]="2" inline="true" selectionMode="range" [disabledDays]="[0,6]" [disabledDates]="invalidDates"></p-calendar>
+<div class="ui-g">
+    <div class="ui-g-12" >
+        <p-calendar [(ngModel)]="rangeDates" [locale]="pl" [numberOfMonths]="3" selectionMode="range" [disabledDays]="[0,6]" [disabledDates]="invalidDates" [readonlyInput]="true" inline="true"></p-calendar>
     </div>
 
-    <div class="col-md-3">
-        <p-button icon="pi pi-plus-circle" label="Save" (onClick)="saveLeave($event)"></p-button>
-    </div>
-
-</div>
-<div class="row" *ngFor="let item of leave">
-    <div class="col-md-8">
-        <div class="ui-inputgroup" >
-            <input type="text" placeholder={{item}} pInputText  readonly>
-            <button pButton type="button" icon="pi pi-times" class="ui-button-danger" ></button>
+    <div class="ui-g-10" *ngIf="rangeDates">
+        <div class="ui-g-4">
+            Start date: <b>{{rangeDates[0] | date:'dd/MM/yyyy'}}</b>
+        </div>
+        <div class="ui-g-4">
+            End date: <b>{{rangeDates[1] | date:'dd/MM/yyyy'}}</b>
         </div>
     </div>
 </div>
