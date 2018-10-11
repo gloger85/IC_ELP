@@ -17,7 +17,7 @@ export class LeaveRequestsListComponent implements OnInit {
     ngOnInit() {
         this.leaves = [
           { id: '132', startDate: '2018-12-03', endDate: '2018-12-03', status: 'Pending'},
-          { id: '342', startDate: '2018-10-01', endDate: '2018-10-01', status: 'Taken'},
+          { id: '342', startDate: '2018-10-01', endDate: '2018-10-01', status: 'Approved'},
           { id: '112', startDate: '2018-10-03', endDate: '2018-10-03', status: 'Canceled'},
           { id: '345', startDate: '2018-11-15', endDate: '2018-11-15', status: 'Approved'},
         ];

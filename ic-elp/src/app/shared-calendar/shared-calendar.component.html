@@ -3,7 +3,7 @@
 </p>
 <div class="ui-g">
     <div class="ui-g-12" >
-        <p-calendar [(ngModel)]="rangeDates" [locale]="pl" [numberOfMonths]="3" selectionMode="range" [disabledDays]="[0,6]" [disabledDates]="invalidDates" [readonlyInput]="true" inline="true"></p-calendar>
+        <p-calendar (onSelect) = "CountNumberOfWorkingDays()"  [showOtherMonths]="false" [(ngModel)]="rangeDates" [locale]="pl" [numberOfMonths]="3" selectionMode="range" [disabledDays]="[0,6]" [disabledDates]="invalidDates" [readonlyInput]="true" [inline]="true"></p-calendar>
     </div>
 
     <div class="ui-g-10" *ngIf="rangeDates">
@@ -13,6 +13,12 @@
         <div class="ui-g-4">
             End date: <b>{{rangeDates[1] | date:'dd/MM/yyyy'}}</b>
         </div>
+        <div class="ui-g-4">
+            Requested: <b>{{requestedDays}}</b> day(s)
+        </div>
+    </div>
+    <div class="ui-g-12">
+        <p-button (click)="Confirm()" icon="pi pi-check" label="Send request"></p-button>
     </div>
 </div>
 
