@@ -12,8 +12,8 @@
         <ng-template pTemplate="body" let-leave>
             <tr>
                 <td>
-                    <a class="btn btn-info" data-toggle="collapse" href="#leave{{leave.id}}" role="button" aria-expanded="false">
-                        <i class="pi pi-bars"></i>
+                    <a data-toggle="collapse" href="#leave{{leave.id}}" role="button" aria-expanded="false">
+                        <p-button icon="pi pi-bars" styleClass="ui-button-primary" label="Details"></p-button>
                     </a>&nbsp;
                     {{leave.id}}</td>
                 <td>{{leave.startDate}}</td>
