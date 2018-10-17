@@ -1,13 +1,12 @@
 <p-card>
-  <p-header>
-    <h6><b>Dear Test below you can see your leave and compensation details:</b></h6>
-  </p-header>
   <div class="ui-g">
       <div class="ui-g-10">
-          <h4><b>Leaves:</b></h4>
+          <h4>Your <b>leaves</b> details:</h4>
       </div>
       <div class="ui-g-2">
+        <div *ngIf = "this.router.url != '/request-leave'">
           <p-button routerLink="/request-leave" icon="pi pi-plus-circle" label="Request leave ..."></p-button>
+        </div>
       </div>
     <div class="ui-g-3">
         <div class="ui-g-4">Allocated </div>
@@ -30,32 +29,4 @@
       <div class="ui-g-4"></div>
     </div>
   </div>
-  
-  <hr>
-  
-  <div class="ui-g">
-    <div class="ui-g-10">
-        <h4><b>Compensation:</b></h4>
-    </div>
-    <div class="ui-g-2">
-        <p-button icon="pi pi-plus-circle" label="Request compensation ..."></p-button>
-    </div>
-    <div class="ui-g-4">
-        <div class="ui-g-4">Approved </div>
-        <div class="ui-g-4">40 hours</div>
-        <div class="ui-g-4"></div>
-    </div>
-    <div class="ui-g-4">
-      <div class="ui-g-4">Taken </div>
-      <div class="ui-g-4">20 hours</div>
-      <div class="ui-g-4"></div>
-    </div>
-    <div class="ui-g-4">
-      <div class="ui-g-4">Left to take</div>
-      <div class="ui-g-4">20 hours</div>
-      <div class="ui-g-4"></div>
-    </div>
-  </div>
-    <p-footer>
-  </p-footer>
 </p-card>

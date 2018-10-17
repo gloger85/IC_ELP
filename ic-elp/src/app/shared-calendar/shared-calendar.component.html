@@ -1,6 +1,9 @@
 <p class="lead" style="margin-top: 20px;">
-  Click calendar to choose time period
+  Select type of request leave
+  &nbsp;<p-dropdown [options]="cities"></p-dropdown>&nbsp;
+  and click calendar to choose time period
 </p>
+
 <div class="ui-g">
     <div class="ui-g-12" >
         <p-calendar (onSelect) = "CountNumberOfWorkingDays()" (onMonthChange)="DisablePublicpublicHolidaysInCalendar($event.month, $event.year)"  [showOtherMonths]="false" [(ngModel)]="rangeDates" [locale]="pl" [numberOfMonths]="3" selectionMode="range" [disabledDays]="[0,6]" [disabledDates]="invalidDates" [readonlyInput]="true" [inline]="true"></p-calendar>
@@ -19,6 +22,8 @@
     </div>
     <div class="ui-g-12">
         <p-button (click)="SendRequest()" icon="pi pi-check" label="Send request"></p-button>
+        &nbsp;
+        <p-button (click)="GoBack()" icon="pi pi-trash" label="Cancel" styleClass="ui-button-warning"></p-button>
     </div>
 </div>
 
