@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+
+import {SelectItem} from 'primeng/api';
 
 @Component({
   selector: 'app-shared-calendar',
@@ -11,6 +14,20 @@ export class SharedCalendarComponent implements OnInit {
   en: any;
   pl: any;
   requestedDays : number;
+  cities: SelectItem[];
+
+  constructor(
+    private location: Location
+  ) {
+    this.cities = [
+      {label:'Select request type', value:null},
+      {label:'Holidays', value:{id:1, name: 'Holidays'}},
+      {label:'Sick leave', value:{id:2, name: 'SickLeave'}},
+      {label:'Parental leave', value:{id:3, name: 'ParentalLeave'}},
+      {label:'Other leave', value:{id:4, name: 'OtherLeave'}},
+  ];
+  }
+
   ngOnInit() {
     this.en = {
       firstDayOfWeek: 1,
@@ -118,6 +135,10 @@ export class SharedCalendarComponent implements OnInit {
     publicHolidays.push([bozeCialo.getMonth(), bozeCialo.getDate()]);  
 
     return publicHolidays;
+  }
+
+  GoBack() : void {
+    this.location.back();
   }
 
   IsPublicHoliday(date : Date) : boolean{

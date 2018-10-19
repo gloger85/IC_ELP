@@ -1,10 +1,23 @@
 <div class="ui-g">
   <div class="ui-g-12" style="padding-top: 20px;">
-    <app-shared-member-leave-details></app-shared-member-leave-details>
+      <p-tabView>
+          <p-tabPanel header="Leaves">
+            <br>  
+            <app-shared-member-leave-details></app-shared-member-leave-details>
+            <br>
+            <app-leave-requests-list></app-leave-requests-list>
+          </p-tabPanel>
+          <p-tabPanel header="Compensations">
+            <br>  
+            <app-shared-member-compensation-details></app-shared-member-compensation-details>
+            <br>
+          </p-tabPanel>
+      </p-tabView>
+    
   </div>
   <br/>
   
   <div class="ui-g-12" style="padding-top: 20px;">
-    <app-leave-requests-list></app-leave-requests-list>
+    
   </div>
 </div>
