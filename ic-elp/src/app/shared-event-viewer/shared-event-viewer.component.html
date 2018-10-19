@@ -2,11 +2,15 @@
 
 <h3 style="margin-top: 20px;">Event log</h3>
 
-    <p-dataTable [value]="events">
-      <p-column field="id" header="ID" [style]="{width: '50px', 'text-align': 'center'}"></p-column>
-      <p-column field="date" header="DATE" [style]="{'text-align': 'center'}"></p-column>
-      <p-column field="user" header="USER" [style]="{'text-align': 'center'}"></p-column>
-      <p-column field="typeOfAction" header="TYpE OF ACTION" [style]="{'text-align': 'center'}"></p-column>
-      <p-column field="change" header="CHANGE" [style]="{'text-align': 'center'}"></p-column>
+    <p-dataTable [value]="events" [rows]='2' [paginator]='true' [rowsPerPageOptions]='[2,4,6,8,10]'>
+      <p-column field="id" header="ID" [style]="{width: '50px', 'text-align': 'center'}" [sortable]='true'></p-column>
+      <p-column field="date" header="DATE" [style]="{'text-align': 'center'}" [sortable]='true'>
+        <ng-template let-row="rowData" pTemplate="body">
+          {{row.date | date:'dd/MM/yyyy'}}
+      </ng-template>
+      </p-column>
+      <p-column field="user" header="USER" [style]="{'text-align': 'center'}" [sortable]='true'></p-column>
+      <p-column field="typeOfAction" header="TYPE OF ACTION" [style]="{'text-align': 'center'}" [sortable]='true'></p-column>
+      <p-column field="change" header="CHANGE" [style]="{'text-align': 'center'}" [sortable]='true'></p-column>
     </p-dataTable>
 
