@@ -16,7 +16,7 @@ export class SharedDashboardMenuComponent implements OnInit {
   ngOnInit() {
       this.mainMenuItems = [
         {
-            label: 'Manager Inbox (new: 5)', icon: 'fa fa-fw fa-check',
+            label: 'Manager Inbox (new: 4)', icon: 'fa fa-fw fa-check',
             items: [
                 [
                   {
