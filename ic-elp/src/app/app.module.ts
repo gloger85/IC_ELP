@@ -32,6 +32,7 @@ import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { CardModule } from 'primeng/card';
 import { ChartModule } from 'primeng/chart';
+import { DataTableModule } from 'primeng/datatable';
 import { DropdownModule } from 'primeng/dropdown';
 import { MegaMenuModule } from 'primeng/megamenu';
 import { MessagesModule } from 'primeng/messages';
@@ -41,6 +42,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TableModule } from 'primeng/table';
 import {TabViewModule} from 'primeng/tabview';
 import { TreeModule } from 'primeng/tree';
+import { SharedEventViewerComponent } from './shared-event-viewer/shared-event-viewer.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import { TreeModule } from 'primeng/tree';
     SharedCalendarComponent,
     SharedMemberCompensationDetailsComponent,
     SharedMemberLeaveDetailsComponent,
-    TreeTestComponent
+    TreeTestComponent,
+    SharedEventViewerComponent
   ],
   imports: [
     AppRoutingModule,
@@ -73,6 +76,7 @@ import { TreeModule } from 'primeng/tree';
     CardModule,
     ChartModule,
     CalendarModule,
+    DataTableModule,
     DropdownModule,
     FormsModule,
     MegaMenuModule,
