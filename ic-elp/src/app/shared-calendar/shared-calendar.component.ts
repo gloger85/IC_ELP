@@ -14,12 +14,12 @@ export class SharedCalendarComponent implements OnInit {
   en: any;
   pl: any;
   requestedDays : number;
-  cities: SelectItem[];
+  requestTypes: SelectItem[];
 
   constructor(
     private location: Location
   ) {
-    this.cities = [
+    this.requestTypes = [
       {label:'Select request type', value:null},
       {label:'Holidays', value:{id:1, name: 'Holidays'}},
       {label:'Sick leave', value:{id:2, name: 'SickLeave'}},
