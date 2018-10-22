@@ -29,7 +29,19 @@ C:\Angular>set HOME=C:
 Type: C:\Angular>set HOME [enter]
 Type: C:\Angular>set HOMEDRIVE=C: [enter]
 
+How to update angular 6 to 7.0.2
+0/ Run cmd as Administraor
+1/ Go to local repository folder in cmd
 
+2/ Execute below commands to uninstall current version of angular:
+npm uninstall -g angular-cli
+npm uninstall --save-dev angular-cli
 
+3/ Remove node_modules folder
 
-
+4/ Execut below commands to install new version of angular (7.0.2)
+npm cache verify
+npm install -g @angular/cli@7.0.2
+use rmdir /S/Q node_modules dist
+npm install --save-dev @angular/cli@7.0.2
+npm install
