@@ -16,66 +16,17 @@ export class SharedDashboardMenuComponent implements OnInit {
   ngOnInit() {
       this.mainMenuItems = [
         {
-            label: 'Manager Inbox (new: 4)', icon: 'fa fa-fw fa-check',
-            items: [
-                [
-                  {
-                      label: 'Team: Aon360',
-                      items: [{label: 'TV 1.1'}, {label: 'TV 1.2'}]
-                  },
-                  {
-                      label: 'Team: Luxemburg',
-                      items: [{label: 'TV 2.1'}, {label: 'TV 2.2'}]
-                  }
-                ],
-                [
-                  {
-                      label: 'Team: Nordics',
-                      items: [{label: 'TV 3.1'}, {label: 'TV 3.2'}]
-                  },
-                  {
-                      label: 'Team: South Africa',
-                      items: [{label: 'TV 4.1'}, {label: 'TV 4.2'}]
-                  }
-                ],
-                [
-                  {
-                      label: 'Team: UK',
-                      items: [{label: 'TV 3.1'}, {label: 'TV 3.2'}]
-                  },
-                  {
-                      label: '- - -',
-                      items: null
-                  }
-              ]
-            ]
+          label: 'Manager Dashboard', icon: 'fa fa-fw fa-home', routerLink: ['/manager-dashboard']
         },
         {
-            label: 'HR Inbox (new: 0)', icon: 'fa fa-fw fa-soccer-ball-o',
-            items: [
-                [
-                    {
-                        label: 'Sports 1',
-                        items: [{label: 'Sports 1.1'}, {label: 'Sports 1.2'}]
-                    }
-                ],
-                [
-                    {
-                        label: 'Sports 3',
-                        items: [{label: 'Sports 3.1'}, {label: 'Sports 3.2'}]
-                    }
-                ],
-                [
-                    {
-                        label: 'Sports 5',
-                        items: [{label: 'Sports 5.1'}, {label: 'Sports 5.2'}]
-                    }
-                ]
-            ]
+          label: 'Manager Inbox (4)', icon: 'fa fa-fw fa-inbox', routerLink: ['/manager-inbox']
+        },
+        {
+          label: 'HR Admin', icon: 'fa fa-fw fa-stack-overflow', routerLink: ['/hr-settings']
         },
         {
           label: 'Event log', icon: 'fa fa-fw fa-gears', routerLink: ['/event-log']
-      }
+        }
     ];
   }
 }

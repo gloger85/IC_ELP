@@ -43,6 +43,8 @@ import { TableModule } from 'primeng/table';
 import {TabViewModule} from 'primeng/tabview';
 import { TreeModule } from 'primeng/tree';
 import { SharedEventViewerComponent } from './shared-event-viewer/shared-event-viewer.component';
+import { HrSettingsComponent } from './hr-settings/hr-settings.component';
+import { ManagerInboxComponent } from './manager-inbox/manager-inbox.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import { SharedEventViewerComponent } from './shared-event-viewer/shared-event-v
     SharedMemberCompensationDetailsComponent,
     SharedMemberLeaveDetailsComponent,
     TreeTestComponent,
-    SharedEventViewerComponent
+    SharedEventViewerComponent,
+    HrSettingsComponent,
+    ManagerInboxComponent
   ],
   imports: [
     AppRoutingModule,

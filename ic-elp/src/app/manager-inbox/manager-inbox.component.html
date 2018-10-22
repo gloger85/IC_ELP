@@ -1,0 +1,30 @@
+<div class="ui-g">
+  <div class="ui-g-12">
+    <div style="padding-top: 20px;">
+      <app-shared-detail-info-bar></app-shared-detail-info-bar>
+    </div>
+  </div>
+
+
+
+    <div class="ui-g-3">
+        <app-shared-dashboard-menu></app-shared-dashboard-menu>
+        <div style="padding-top: 20px;">
+            <p-chart type="pie" [data]="requestStateData"></p-chart>
+        </div>
+    </div>
+    <div class="ui-g-1">
+    </div>
+    <div class="ui-g-8">
+
+      <h3 style="margin-top: 20px;">Current requests</h3>
+
+      <p-accordion [multiple]="true">
+          <p-accordionTab header="Aon360" [selected]="true">
+            <app-tree-test></app-tree-test>
+          </p-accordionTab>
+      </p-accordion>
+
+    </div>
+
+</div>

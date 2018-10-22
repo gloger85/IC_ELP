@@ -1,8 +1,12 @@
 
 
-<h3 style="margin-top: 20px;">Event log</h3>
 
-    <p-dataTable [value]="events" [rows]='2' [paginator]='true' [rowsPerPageOptions]='[2,4,6,8,10]'>
+<h3 style="margin-top: 20px;">Event Log</h3>
+
+<p-accordion [multiple]="true">
+    <p-accordionTab header="Recent system entries" [selected]="true">
+
+    <p-dataTable [value]="events" [rows]='8' [paginator]='true' [rowsPerPageOptions]='[2,4,6,8,10]'>
       <p-column field="id" header="ID" [style]="{width: '50px', 'text-align': 'center'}" [sortable]='true'></p-column>
       <p-column field="date" header="DATE" [style]="{'text-align': 'center'}" [sortable]='true'>
         <ng-template let-row="rowData" pTemplate="body">
@@ -13,4 +17,7 @@
       <p-column field="typeOfAction" header="TYPE OF ACTION" [style]="{'text-align': 'center'}" [sortable]='true'></p-column>
       <p-column field="change" header="CHANGE" [style]="{'text-align': 'center'}" [sortable]='true'></p-column>
     </p-dataTable>
+
+    </p-accordionTab>
+</p-accordion>
 
