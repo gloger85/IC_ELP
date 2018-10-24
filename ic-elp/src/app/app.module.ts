@@ -12,20 +12,25 @@ import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EventLogComponent } from './event-log/event-log.component';
 import { HrDashboardComponent } from './hr-dashboard/hr-dashboard.component';
+import { HrSettingsComponent } from './hr-settings/hr-settings.component';
 import { LeaveRequestsListComponent } from './leave-requests-list/leave-requests-list.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard.component';
+import { ManagerInboxComponent } from './manager-inbox/manager-inbox.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { PasswordCreateNewComponent } from './password-create-new/password-create-new.component';
 import { RequestLeaveComponent } from './request-leave/request-leave.component';
 import { SharedCalendarComponent } from './shared-calendar/shared-calendar.component';
 import { SharedDetailInfoBarComponent } from './shared-detail-info-bar/shared-detail-info-bar.component';
 import { SharedDashboardMenuComponent } from './shared-dashboard-menu/shared-dashboard-menu.component';
+import { SharedEventViewerComponent } from './shared-event-viewer/shared-event-viewer.component';
 import { SharedMemberCompensationDetailsComponent } from './shared-member-compensation-details/shared-member-compensation-details.component';
 import { SharedMemberLeaveDetailsComponent } from './shared-member-leave-details/shared-member-leave-details.component';
 import { SharedTeamViewerComponent } from './shared-team-viewer/shared-team-viewer.component';
 import { TreeTestComponent } from './tree-test/tree-test.component';
+import { UserAdministrationComponent } from './user-administration/user-administration.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 import { AccordionModule } from 'primeng/accordion';
 import { ButtonModule } from 'primeng/button';
@@ -40,11 +45,8 @@ import { MessageModule } from 'primeng/message';
 import { PanelModule } from 'primeng/panel';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TableModule } from 'primeng/table';
-import {TabViewModule} from 'primeng/tabview';
+import { TabViewModule } from 'primeng/tabview';
 import { TreeModule } from 'primeng/tree';
-import { SharedEventViewerComponent } from './shared-event-viewer/shared-event-viewer.component';
-import { HrSettingsComponent } from './hr-settings/hr-settings.component';
-import { ManagerInboxComponent } from './manager-inbox/manager-inbox.component';
 
 @NgModule({
   declarations: [
@@ -53,41 +55,43 @@ import { ManagerInboxComponent } from './manager-inbox/manager-inbox.component';
     DashboardComponent,
     EventLogComponent,
     HrDashboardComponent,
+    HrSettingsComponent,
     LeaveRequestsListComponent,
     LoginComponent,
     LogoutComponent,
     ManagerDashboardComponent,
+    ManagerInboxComponent,
     PasswordResetComponent,
     PasswordCreateNewComponent,
     RequestLeaveComponent,
-    SharedDetailInfoBarComponent,
-    SharedTeamViewerComponent,
-    SharedDashboardMenuComponent,
     SharedCalendarComponent,
+    SharedDashboardMenuComponent,
+    SharedDetailInfoBarComponent,
+    SharedEventViewerComponent, 
     SharedMemberCompensationDetailsComponent,
-    SharedMemberLeaveDetailsComponent,
-    TreeTestComponent,
-    SharedEventViewerComponent,
-    HrSettingsComponent,
-    ManagerInboxComponent
+    SharedMemberLeaveDetailsComponent,   
+    SharedTeamViewerComponent,    
+    TreeTestComponent,    
+    UserAdministrationComponent,
+    UserListComponent
   ],
   imports: [
-    AppRoutingModule,
     AccordionModule,
-    BrowserModule,
+    AppRoutingModule,    
     BrowserAnimationsModule,
+    BrowserModule,    
     ButtonModule,
-    CardModule,
-    ChartModule,
     CalendarModule,
+    CardModule,
+    ChartModule,    
     DataTableModule,
     DropdownModule,
     FormsModule,
     MegaMenuModule,
-    MessagesModule,
     MessageModule,
-    ProgressSpinnerModule,
+    MessagesModule,
     PanelModule,
+    ProgressSpinnerModule,
     TableModule,
     TabViewModule,
     TreeModule

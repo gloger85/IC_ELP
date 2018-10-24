@@ -5,11 +5,11 @@
 </p>
 
 <div class="ui-g">
-    <div class="ui-g-12" >
-        <p-calendar (onSelect) = "CountNumberOfWorkingDays()" (onMonthChange)="DisablePublicpublicHolidaysInCalendar($event.month, $event.year)"  [showOtherMonths]="false" [(ngModel)]="rangeDates" [locale]="pl" [numberOfMonths]="3" selectionMode="range" [disabledDays]="[0,6]" [disabledDates]="invalidDates" [readonlyInput]="true" [inline]="true"></p-calendar>
+    <div style="margin: 0 auto;">
+        <p-calendar (onSelect) = "CountNumberOfWorkingDays()" (onMonthChange)="DisablePublicpublicHolidaysInCalendar($event.month, $event.year)" [showOtherMonths]="false" [(ngModel)]="rangeDates" [locale]="pl" [numberOfMonths]="3" selectionMode="range" [disabledDays]="[0,6]" [disabledDates]="invalidDates" [readonlyInput]="true" [inline]="true"></p-calendar>
     </div>
 
-    <div class="ui-g-10" *ngIf="rangeDates">
+    <div class="ui-g-12" *ngIf="rangeDates">
         <div class="ui-g-4">
             Start date: <b>{{rangeDates[0] | date:'dd/MM/yyyy'}}</b>
         </div>

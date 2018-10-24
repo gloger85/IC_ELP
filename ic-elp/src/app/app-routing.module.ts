@@ -14,6 +14,7 @@ import { ManagerInboxComponent } from './manager-inbox/manager-inbox.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { PasswordCreateNewComponent } from './password-create-new/password-create-new.component';
 import { RequestLeaveComponent } from './request-leave/request-leave.component';
+import { UserAdministrationComponent } from './user-administration/user-administration.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: 'manager-inbox', component: ManagerInboxComponent },
   { path: 'password-reset', component: PasswordResetComponent },
   { path: 'password-create-new', component: PasswordCreateNewComponent },
-  { path: 'request-leave', component: RequestLeaveComponent }
+  { path: 'request-leave', component: RequestLeaveComponent },
+  { path: 'user-administration', component: UserAdministrationComponent}
 ];
 
 @NgModule({

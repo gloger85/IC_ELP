@@ -1,0 +1,92 @@
+<div>
+  <h3 class="first">List of users:</h3>
+  <p-table [value]="users">
+      <ng-template pTemplate="header">
+          <tr>
+              <th>Id</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Team</th>
+              <th>Active</th>
+              <th>Edit</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user>
+          <tr>
+              <td>{{user.id}}</td>
+              <td>{{user.firstName}}</td>
+              <td>{{user.lastName}}</td>
+              <td>{{user.team}}</td>
+              <td>{{user.active}}</td>
+              <td><p-button icon="pi pi-pencil" styleClass="ui-button-success" label="Edit" data-toggle="modal" data-target="#userDeailsModal"></p-button></td>
+          </tr>
+      </ng-template>
+  </p-table>
+</div>
+  
+<div class="modal fade" id="userDeailsModal" tabindex="-1" role="dialog" aria-labelledby="userDeailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="userDeailsModalLabel">User datails</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="ui-g">
+                <p-card class="ui-g-2">
+                    <div class="ui-g">
+                        <div class="ui-g-5"><b>Id:</b></div>
+                        <div class="ui-g-7"><input #id type="text" pInputText value="123" [disabled]="true"></div>
+                    </div>
+                </p-card>   
+                <p-card class="ui-g-5">
+                    <div class="ui-g">
+                        <div class="ui-g-5"><b>First name:</b></div>
+                        <div class="ui-g-7"><input #firstName type="text" pInputText value="Andrzej"></div>
+                    </div>
+                </p-card>
+                <p-card class="ui-g-5">
+                    <div class="ui-g">
+                        <div class="ui-g-5"><b>Last name:</b></div>
+                        <div class="ui-g-7"><input #lastName type="text" pInputText value="Dzabkon"></div>
+                    </div>
+                </p-card>
+                <p-card class="ui-g-5">
+                    <div class="ui-g">
+                        <div class="ui-g-4"><b>Team:</b></div>
+                        <div class="ui-g-8"><p-dropdown [options]="[
+                            {label:'Select team', value:null},
+                            {label:'South Africa', value:{id:1, name: 'South Africa'}},                    
+                            {label:'Nordics', value:{id:2, name: 'Nordics'}},                    
+                            {label:'United Kingdom', value:{id:3, name: 'United Kingdom'}},                    
+                            {label:'Luxemburg', value:{id:4, name: 'Luxemburg'}},                    
+                            {label:'France', value:{id:5, name: 'France'}}                    
+                        ]"></p-dropdown></div>
+                    </div>
+                </p-card>
+                <p-card class="ui-g-7">
+                    <div class="ui-g">
+                        <div class="ui-g-3"><b>Email:</b></div>
+                        <div class="ui-g-9"><input #email type="text" pInputText value="andrzej.dzabkon@infosys.com"></div>
+                    </div>
+                </p-card>
+                <p-card class="ui-g-4">
+                    <div class="ui-g">
+                        <div class="ui-g-6"><b>Active:</b></div>
+                        <div class="ui-g-6"><p-dropdown [options]="[
+                            {label:'Yes', value:1},
+                            {label:'No', value:0}
+                        ]"></p-dropdown></div>
+                    </div>
+                </p-card>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
