@@ -39,6 +39,8 @@ import { CardModule } from 'primeng/card';
 import { ChartModule } from 'primeng/chart';
 import { DataTableModule } from 'primeng/datatable';
 import { DropdownModule } from 'primeng/dropdown';
+import { HttpModule } from '@angular/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MegaMenuModule } from 'primeng/megamenu';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
@@ -67,26 +69,28 @@ import { TreeModule } from 'primeng/tree';
     SharedCalendarComponent,
     SharedDashboardMenuComponent,
     SharedDetailInfoBarComponent,
-    SharedEventViewerComponent, 
+    SharedEventViewerComponent,
     SharedMemberCompensationDetailsComponent,
-    SharedMemberLeaveDetailsComponent,   
-    SharedTeamViewerComponent,    
-    TreeTestComponent,    
+    SharedMemberLeaveDetailsComponent,
+    SharedTeamViewerComponent,
+    TreeTestComponent,
     UserAdministrationComponent,
     UserListComponent
   ],
   imports: [
     AccordionModule,
-    AppRoutingModule,    
+    AppRoutingModule,
     BrowserAnimationsModule,
-    BrowserModule,    
+    BrowserModule,
     ButtonModule,
     CalendarModule,
     CardModule,
-    ChartModule,    
+    ChartModule,
     DataTableModule,
     DropdownModule,
     FormsModule,
+    HttpModule,
+    HttpClientModule,
     MegaMenuModule,
     MessageModule,
     MessagesModule,

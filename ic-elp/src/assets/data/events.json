@@ -1,0 +1,46 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "date": "2018-01-01",
+      "user": "Yoda",
+      "typeOfAction": "APPROVAL",
+      "change": "Holiday has been approved"
+    },
+    {
+      "id": "2",
+      "date": "2018-01-02",
+      "user": "ROBOCOP",
+      "typeOfAction": "ADD",
+      "change": "Holiday has been ADDED"
+    },
+    {
+      "id": "3",
+      "date": "2018-01-03",
+      "user": "ANTMAN",
+      "typeOfAction": "INSERT",
+      "change": "Holiday has been INSERTED"
+    },
+    {
+      "id": "4",
+      "date": "2018-01-04",
+      "user": "THOR",
+      "typeOfAction": "added",
+      "change": "Holiday has been ADDED"
+    },
+    {
+      "id": "5",
+      "date": "2018-01-05",
+      "user": "HULK",
+      "typeOfAction": "INSERT",
+      "change": "Holiday has been INSERTED"
+    },
+    {
+      "id": "6",
+      "date": "2018-01-06",
+      "user": "IRON MAN",
+      "typeOfAction": "update",
+      "change": "Holiday has been UPDATED"
+    }
+  ]
+}
