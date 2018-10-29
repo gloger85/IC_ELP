@@ -38,6 +38,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { CardModule } from 'primeng/card';
 import { ChartModule } from 'primeng/chart';
 import { DataTableModule } from 'primeng/datatable';
+import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { HttpModule } from '@angular/http';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -93,6 +94,7 @@ import { HrViewerComponent } from './hr-viewer/hr-viewer.component';
     CardModule,
     ChartModule,
     DataTableModule,
+    DialogModule,
     DropdownModule,
     FormsModule,
     HttpModule,
