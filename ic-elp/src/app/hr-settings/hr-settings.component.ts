@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HrSettingsComponent implements OnInit {
 
+  public display: Boolean = false;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  showDialog(role: String) {
+    if (role === 'Team-Group') {
+      this.display = true;
+    }
+  }
 }

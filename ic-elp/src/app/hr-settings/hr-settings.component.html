@@ -20,19 +20,32 @@
     <p-accordion [multiple]="true">
         <p-accordionTab header="User Mapping" [selected]="true">
           <ul>
-            <li><a href="">Aon 360 (2 Members)</a></li>
-            <li><a href="">Luxemburg (2 Members)</a></li>
-            <li><a href="">Nordics (4 Members)</a></li>
-            <li><a href="">South Africa (5 Members)</a></li>
-            <li><a href="">United Kingdom (15 Members)</a></li>
+            <li (click)="showDialog('Team-Group')">Aon 360 (2 Members)</li>
+            <li (click)="showDialog('Team-Group')">Luxemburg (2 Members)</li>
+            <li (click)="showDialog('Team-Group')">Nordics (4 Members)</li>
+            <li (click)="showDialog('Team-Group')">South Africa (5 Members)</li>
+            <li (click)="showDialog('Team-Group')">United Kingdom (15 Members)</li>
           </ul>
 
           <ul>
-            <li><a href="">Not assigned Members (3 Members)</a></li>
+            <li (click)="showDialog('Team-Group')">Not assigned Members (3 Members)</li>
           </ul>
 
+          <p-dialog header="Members management" [(visible)]="display" [contentStyle]="{'overflow':'visible'}">
+            <p-header>
+              Members management
+            </p-header>
+              Add new user: [[drop down list]]
+            <p-footer>
+              <div style="margin-top: 20px;">
+                <p-button (click)="approveRequests()" icon="pi pi-check" styleClass="ui-button-info" label="Save Members"></p-button>&nbsp;&nbsp;
+                <p-button data-dismiss="modal" icon="pi pi-minus-circle" styleClass="ui-button-warning" label="Cancel"></p-button>
+              </div>
+            </p-footer>
+          </p-dialog>
+
           <div style="margin-top: 20px;">
-            <p-button (click)="registerNewMember()" icon="pi pi-plus-circle" styleClass="ui-button-info" label="Add new member"></p-button>&nbsp;&nbsp;
+            <p-button (click)="showDialog('Team-Group')" icon="pi pi-plus-circle" styleClass="ui-button-info" label="Add new member"></p-button>&nbsp;&nbsp;
             <p-button routerLink="/user-administration" icon="pi pi-pencil" styleClass="ui-button-info" label="Manage members"></p-button>&nbsp;&nbsp;
         </div>
         </p-accordionTab>
