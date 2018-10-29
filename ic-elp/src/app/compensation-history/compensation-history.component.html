@@ -1,0 +1,27 @@
+<div>
+    <h3 class="first">Compensation reqeusts history:</h3>
+    <p-table [value]="compensations">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Compensation number</th>
+                <th>Number of hours</th>
+                <th>Start date</th>
+                <th>End date</th>
+                <th>Status</th>
+                <th>Description</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-compensation>
+            <tr>
+                <td>{{compensation.id}}</td>
+                <td>{{compensation.numberOfHours}}</td>
+                <td>{{compensation.startDate}}</td>
+                <td>{{compensation.endDate}}</td>
+                <td>{{compensation.status}} &nbsp;
+                    <p-button icon="pi pi-trash" styleClass="ui-button-warning" label="Cancel" *ngIf="compensation.status=='Pending'"></p-button>
+                </td>
+                <td>{{compensation.description}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

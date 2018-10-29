@@ -9,10 +9,14 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './about/about.component';
 import { AppRoutingModule } from './/app-routing.module';
+import { CompensationHistoryComponent } from './compensation-history/compensation-history.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EventLogComponent } from './event-log/event-log.component';
 import { HrDashboardComponent } from './hr-dashboard/hr-dashboard.component';
+import { HrDashboardMenuComponent } from './hr-dashboard-menu/hr-dashboard-menu.component';
+import { HrDetailInfoBarComponent } from './hr-detail-info-bar/hr-detail-info-bar.component';
 import { HrSettingsComponent } from './hr-settings/hr-settings.component';
+import { HrViewerComponent } from './hr-viewer/hr-viewer.component';
 import { LeaveRequestsListComponent } from './leave-requests-list/leave-requests-list.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -41,7 +45,7 @@ import { DataTableModule } from 'primeng/datatable';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { HttpModule } from '@angular/http';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { MegaMenuModule } from 'primeng/megamenu';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
@@ -50,18 +54,19 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { TreeModule } from 'primeng/tree';
-import { HrDetailInfoBarComponent } from './hr-detail-info-bar/hr-detail-info-bar.component';
-import { HrDashboardMenuComponent } from './hr-dashboard-menu/hr-dashboard-menu.component';
-import { HrViewerComponent } from './hr-viewer/hr-viewer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
+    CompensationHistoryComponent,
     DashboardComponent,
     EventLogComponent,
     HrDashboardComponent,
+    HrDashboardMenuComponent,
+    HrDetailInfoBarComponent,
     HrSettingsComponent,
+    HrViewerComponent,
     LeaveRequestsListComponent,
     LoginComponent,
     LogoutComponent,
@@ -79,10 +84,7 @@ import { HrViewerComponent } from './hr-viewer/hr-viewer.component';
     SharedTeamViewerComponent,
     TreeTestComponent,
     UserAdministrationComponent,
-    UserListComponent,
-    HrDetailInfoBarComponent,
-    HrDashboardMenuComponent,
-    HrViewerComponent
+    UserListComponent
   ],
   imports: [
     AccordionModule,
