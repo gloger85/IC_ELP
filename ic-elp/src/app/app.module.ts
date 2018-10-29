@@ -49,6 +49,9 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { TreeModule } from 'primeng/tree';
+import { HrDetailInfoBarComponent } from './hr-detail-info-bar/hr-detail-info-bar.component';
+import { HrDashboardMenuComponent } from './hr-dashboard-menu/hr-dashboard-menu.component';
+import { HrViewerComponent } from './hr-viewer/hr-viewer.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +78,10 @@ import { TreeModule } from 'primeng/tree';
     SharedTeamViewerComponent,
     TreeTestComponent,
     UserAdministrationComponent,
-    UserListComponent
+    UserListComponent,
+    HrDetailInfoBarComponent,
+    HrDashboardMenuComponent,
+    HrViewerComponent
   ],
   imports: [
     AccordionModule,
