@@ -1,4 +1,14 @@
 <div>
+    <p-dialog [(visible)]="displayDialog" [modal]="true">
+        <p-header>
+            <b>Delete confirmation</b>
+        </p-header>
+        Are you sure that you want to delete this record?
+        <p-footer>
+            <p-button (click)="displayDialog=false" icon="pi pi-check-circle" styleClass="ui-button-primary" label="Yes"></p-button>
+            <p-button (click)="displayDialog=false" icon="pi pi-times-circle" styleClass="ui-button-primary" label="No"></p-button>
+        </p-footer>
+    </p-dialog>
     <h3 class="first">Compensation reqeusts history:</h3>
     <p-table [value]="compensations">
         <ng-template pTemplate="header">
@@ -18,7 +28,7 @@
                 <td>{{compensation.startDate}}</td>
                 <td>{{compensation.endDate}}</td>
                 <td>{{compensation.status}} &nbsp;
-                    <p-button icon="pi pi-trash" styleClass="ui-button-warning" label="Cancel" *ngIf="compensation.status=='Pending'"></p-button>
+                    <p-button (click)="showDialog()" icon="pi pi-trash" styleClass="ui-button-warning" label="Cancel" *ngIf="compensation.status=='Pending'"></p-button>
                 </td>
                 <td>{{compensation.description}}</td>
             </tr>

@@ -41,6 +41,7 @@ import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { CardModule } from 'primeng/card';
 import { ChartModule } from 'primeng/chart';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DataTableModule } from 'primeng/datatable';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
@@ -95,6 +96,7 @@ import { TreeModule } from 'primeng/tree';
     CalendarModule,
     CardModule,
     ChartModule,
+    ConfirmDialogModule,
     DataTableModule,
     DialogModule,
     DropdownModule,
