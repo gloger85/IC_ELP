@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SharedMemberCompensationDetailsComponent implements OnInit {
 
+  display: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  showDialog() {
+    this.display = true;
+  }
 }
+
+

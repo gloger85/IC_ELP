@@ -54,6 +54,7 @@ import { PanelModule } from 'primeng/panel';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
+import { TooltipModule } from 'primeng/tooltip';
 import { TreeModule } from 'primeng/tree';
 
 @NgModule({
@@ -110,6 +111,7 @@ import { TreeModule } from 'primeng/tree';
     ProgressSpinnerModule,
     TableModule,
     TabViewModule,
+    TooltipModule,
     TreeModule
   ],
   providers: [ ],
