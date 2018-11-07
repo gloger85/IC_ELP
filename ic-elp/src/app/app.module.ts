@@ -54,6 +54,7 @@ import { PanelModule } from 'primeng/panel';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
+import { TooltipModule } from 'primeng/tooltip';
 import { TreeModule } from 'primeng/tree';
 import { HrHolidayPlannerComponent } from './hr-holiday-planner/hr-holiday-planner.component';
 import { HrHolidayPlannerCalendarComponent } from './hr-holiday-planner-calendar/hr-holiday-planner-calendar.component';
@@ -114,6 +115,7 @@ import { HrHolidayPlannerCalendarComponent } from './hr-holiday-planner-calendar
     ProgressSpinnerModule,
     TableModule,
     TabViewModule,
+    TooltipModule,
     TreeModule
   ],
   providers: [ ],
