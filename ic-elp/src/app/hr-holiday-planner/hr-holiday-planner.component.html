@@ -1,0 +1,23 @@
+<div class="ui-g">
+  <div class="ui-g-12">
+    <div style="padding-top: 20px;">
+      <app-hr-detail-info-bar></app-hr-detail-info-bar>
+    </div>
+  </div>
+
+  <div class="ui-g-3">
+    <app-hr-dashboard-menu></app-hr-dashboard-menu>
+  </div>
+
+  <div class="ui-g-8">
+    <p-accordion [multiple]="true">
+      <p-accordionTab header="Compensation Day Management" [selected]="true">
+        <app-hr-holiday-planner-calendar></app-hr-holiday-planner-calendar>
+      </p-accordionTab>
+    </p-accordion>
+  </div>
+
+</div>
+
+
+

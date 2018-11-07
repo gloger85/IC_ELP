@@ -55,6 +55,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { TreeModule } from 'primeng/tree';
+import { HrHolidayPlannerComponent } from './hr-holiday-planner/hr-holiday-planner.component';
+import { HrHolidayPlannerCalendarComponent } from './hr-holiday-planner-calendar/hr-holiday-planner-calendar.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +87,9 @@ import { TreeModule } from 'primeng/tree';
     SharedTeamViewerComponent,
     TreeTestComponent,
     UserAdministrationComponent,
-    UserListComponent
+    UserListComponent,
+    HrHolidayPlannerComponent,
+    HrHolidayPlannerCalendarComponent
   ],
   imports: [
     AccordionModule,

@@ -1,0 +1,68 @@
+<p-dialog [(visible)]="displayDialog" [modal]="true">
+    <p-header>
+        <b>Delete confirmation</b>
+    </p-header>
+    Are you sure that you want to delete this record?
+    <p-footer>
+        <p-button (click)="displayDialog=false" icon="pi pi-check-circle" styleClass="ui-button-primary" label="Yes"></p-button>
+        <p-button (click)="displayDialog=false"icon="pi pi-times-circle" styleClass="ui-button-primary" label="No"></p-button>
+    </p-footer>
+</p-dialog>
+<p class="lead" style="margin-top: 20px auto;">
+  Type the name of Compensation Day and click calendar to choose time period
+
+</p>
+
+<div class="ui-g">
+    <div style="margin: 0 auto;">
+        <p-calendar (onSelect) = "CountNumberOfWorkingDays()" (onMonthChange)="DisablePublicpublicHolidaysInCalendar($event.month, $event.year)" [showOtherMonths]="false" [(ngModel)]="rangeDates" [locale]="pl" [numberOfMonths]="2" selectionMode="range" [disabledDays]="[0,6]" [disabledDates]="invalidDates" [readonlyInput]="true" [inline]="true"></p-calendar>
+    </div>
+
+    <div class="ui-g-12" *ngIf="rangeDates">
+        <div class="ui-g-4">
+            Start date: <b>{{rangeDates[0] | date:'dd/MM/yyyy'}}</b>
+        </div>
+        <div class="ui-g-4">
+            End date: <b>{{rangeDates[1] | date:'dd/MM/yyyy'}}</b>
+        </div>
+        <div class="ui-g-4">
+            Added: <b>{{addedDays}}</b> day(s)
+        </div>
+    </div>
+    <div class="ui-g-12">
+        <input type="text" style="width:70%" pInputText #compensationName>&nbsp;
+        <p-button (click)="SendRequest()" icon="pi pi-check" label="Add"></p-button>
+        &nbsp;
+        <p-button (click)="GoBack()" icon="pi pi-trash" label="Cancel" styleClass="ui-button-warning"></p-button>
+    </div>
+    <div class="ui-g-12">
+    <h3 class="first">List of Compensation Days:</h3>
+    <p-table [value]="compensations">
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="text-center">Compensation name</th>
+                <th class="text-center">Start date</th>
+                <th class="text-center">End date</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-leave>
+            <tr>
+                <td class="text-center">{{leave.name}}</td>
+                <td class="text-center">{{leave.startDate}}</td>
+                <td class="text-center">{{leave.endDate}}</td>
+                <td class="text-center"><p-button  icon="fa fa-fw fa-edit" label="Edit" ></p-button></td>
+                <td class="text-center"><p-button (click)="showDialog()" icon="pi pi-trash" styleClass="ui-button-warning" label="Delete" ></p-button></td>
+            </tr>
+
+        </ng-template>
+    </p-table>
+    </div>
+</div>
+
+
+
+
+
+

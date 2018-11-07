@@ -19,10 +19,10 @@ export class HrDashboardMenuComponent implements OnInit {
           label: 'HR Dashboard', icon: 'fa fa-fw fa-home', routerLink: ['/hr-dashboard']
         },
         {
-          label: 'HR Inbox (7)', icon: 'fa fa-fw fa-inbox', routerLink: ['/hr-inbox']
+          label: 'HR Inbox (7)', icon: 'fa fa-fw fa-inbox', routerLink: ['/hr-dashboard']
         },
         {
-          label: 'Holiday Planner', icon: 'fa fa-fw fa-calendar', routerLink: ['/hr-dashboard']
+          label: 'Holiday Planner', icon: 'fa fa-fw fa-calendar', routerLink: ['/hr-holiday-planner']
         }
     ];
   }
