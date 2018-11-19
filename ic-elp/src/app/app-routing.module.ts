@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EventLogComponent } from './event-log/event-log.component';
 import { HrDashboardComponent } from './hr-dashboard/hr-dashboard.component';
 import { HrHolidayPlannerComponent } from './hr-holiday-planner/hr-holiday-planner.component';
+import { HrReportsDashboardComponent } from './hr-reports-dashboard/hr-reports-dashboard.component';
 import { HrSettingsComponent } from './hr-settings/hr-settings.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'event-log', component: EventLogComponent },
   { path: 'hr-dashboard', component: HrDashboardComponent },
   { path: 'hr-holiday-planner', component: HrHolidayPlannerComponent },
+  { path: 'hr-reports-dashboard', component: HrReportsDashboardComponent },
   { path: 'hr-settings', component: HrSettingsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },

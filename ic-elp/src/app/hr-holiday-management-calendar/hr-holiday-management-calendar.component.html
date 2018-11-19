@@ -9,39 +9,32 @@
     </p-footer>
 </p-dialog>
 <p class="lead" style="margin-top: 20px auto;">
-  Type the name of Compensation Day and click calendar to choose time period
-
+  Type the name of Holiday and click calendar to choose day
 </p>
 
 <div class="ui-g">
     <div style="margin: 0 auto;">
-        <p-calendar (onSelect) = "CountNumberOfWorkingDays()" (onMonthChange)="DisablePublicpublicHolidaysInCalendar($event.month, $event.year)" [showOtherMonths]="false" [(ngModel)]="rangeDates" [locale]="pl" [numberOfMonths]="2" selectionMode="range" [disabledDays]="[0,6]" [disabledDates]="invalidDates" [readonlyInput]="true" [inline]="true"></p-calendar>
+        <p-calendar (onSelect) = "CountNumberOfWorkingDays()" (onMonthChange)="DisablePublicpublicHolidaysInCalendar($event.month, $event.year)" [showOtherMonths]="false" [(ngModel)]="rangeDates" [locale]="pl" [numberOfMonths]="1" [disabledDays]="[0,6]" [disabledDates]="invalidDates" [readonlyInput]="true" [inline]="true"></p-calendar>
     </div>
     <div class="ui-g-12" *ngIf="rangeDates">
-        <div class="ui-g-12">
-            <div class="ui-g-4">
-                Start date: <b>{{rangeDates[0] | date:'dd/MM/yyyy'}}</b>
-            </div>
-            <div class="ui-g-4">
-                End date: <b>{{rangeDates[1] | date:'dd/MM/yyyy'}}</b>
-            </div>
-            <div class="ui-g-4">
-                Added: <b>{{addedDays}}</b> day(s)
-            </div>
-        </div>
-        <div class="ui-g-12">
-            <input type="text" style="width:70%" [(ngModel)]="compensationName">&nbsp;
-            <p-button (click)="SendRequest()" icon="pi pi-check" label="Add"></p-button>
-            &nbsp;
-            <p-button (click)="GoBack()" icon="pi pi-trash" label="Cancel" styleClass="ui-button-warning"></p-button>
-        </div>
+      <div class="ui-g-12">
+          <div class="ui-g-4">
+              Choosen date: <b>{{rangeDates | date:'dd/MM/yyyy'}}</b>
+          </div>
+      </div>
+      <div class="ui-g-12">
+          <input type="text" style="width:70%" [(ngModel)]="compensationName">&nbsp;
+          <p-button (click)="SendRequest()" icon="pi pi-check" label="Add"></p-button>
+          &nbsp;
+          <p-button (click)="GoBack()" icon="pi pi-trash" label="Cancel" styleClass="ui-button-warning"></p-button>
+      </div>
     </div>
     <div class="ui-g-12">
-    <h3 class="first">List of Compensation Days:</h3>
+    <h3 class="first">List of Added Holidays:</h3>
     <p-table [value]="compensations">
         <ng-template pTemplate="header">
             <tr>
-                <th class="text-center">Compensation name</th>
+                <th class="text-center">Holiday name</th>
                 <th class="text-center">Start date</th>
                 <th class="text-center">End date</th>
                 <th></th>

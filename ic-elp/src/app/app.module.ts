@@ -58,6 +58,9 @@ import { TooltipModule } from 'primeng/tooltip';
 import { TreeModule } from 'primeng/tree';
 import { HrHolidayPlannerComponent } from './hr-holiday-planner/hr-holiday-planner.component';
 import { HrHolidayPlannerCalendarComponent } from './hr-holiday-planner-calendar/hr-holiday-planner-calendar.component';
+import { HrReportsComponent } from './hr-reports/hr-reports.component';
+import { HrReportsDashboardComponent } from './hr-reports-dashboard/hr-reports-dashboard.component';
+import { HrHolidayManagementCalendarComponent } from './hr-holiday-management-calendar/hr-holiday-management-calendar.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +93,10 @@ import { HrHolidayPlannerCalendarComponent } from './hr-holiday-planner-calendar
     UserAdministrationComponent,
     UserListComponent,
     HrHolidayPlannerComponent,
-    HrHolidayPlannerCalendarComponent
+    HrHolidayPlannerCalendarComponent,
+    HrReportsComponent,
+    HrReportsDashboardComponent,
+    HrHolidayManagementCalendarComponent
   ],
   imports: [
     AccordionModule,

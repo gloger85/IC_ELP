@@ -8,12 +8,14 @@
   <div class="ui-g-3">
     <app-hr-dashboard-menu></app-hr-dashboard-menu>
   </div>
-
   <div class="ui-g-8">
     <p-accordion [multiple]="true">
-      <p-accordionTab header="Compensation Day Management" [selected]="true">
-        <app-hr-holiday-planner-calendar></app-hr-holiday-planner-calendar>
+      <p-accordionTab header="Holiday Management" >
+        <app-hr-holiday-management-calendar></app-hr-holiday-management-calendar>
       </p-accordionTab>
+      <p-accordionTab header="Compensation Day Management" >
+          <app-hr-holiday-planner-calendar></app-hr-holiday-planner-calendar>
+        </p-accordionTab>
     </p-accordion>
   </div>
 

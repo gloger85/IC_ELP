@@ -4,12 +4,12 @@ import { Location } from '@angular/common';
 import {SelectItem} from 'primeng/api';
 
 @Component({
-  selector: 'app-hr-holiday-planner-calendar',
-  templateUrl: './hr-holiday-planner-calendar.component.html',
-  styleUrls: ['./hr-holiday-planner-calendar.component.css']
+  selector: 'app-hr-holiday-management-calendar',
+  templateUrl: './hr-holiday-management-calendar.component.html',
+  styleUrls: ['./hr-holiday-management-calendar.component.css']
 })
-export class HrHolidayPlannerCalendarComponent implements OnInit {
-  rangeDates: Date[];
+export class HrHolidayManagementCalendarComponent implements OnInit {
+  rangeDates: Date;
   invalidDates: Array<Date>;
   en: any;
   pl: any;
@@ -48,9 +48,9 @@ export class HrHolidayPlannerCalendarComponent implements OnInit {
     };
 
     this.compensations = [
-      { name: 'for 12.11', startDate: '2018-12-03', endDate: '2018-12-03'},
-      { name: 'for 01.05', startDate: '2018-10-01', endDate: '2018-12-01'},
-      { name: 'for 03.05', startDate: '2018-10-03', endDate: '2018-12-03'},
+      { name: 'StarWars Day', startDate: '2018-05-04', endDate: '2018-05-04'},
+      { name: 'Halloween', startDate: '2018-10-31', endDate: '2018-10-31'},
+      { name: 'OctoberFest', startDate: '2018-10-01', endDate: '2018-10-01'},
     ];
 
     this.DisablePublicpublicHolidaysInCalendar(new Date().getMonth(), new Date().getFullYear());
@@ -166,8 +166,7 @@ export class HrHolidayPlannerCalendarComponent implements OnInit {
   }
 
   editCompensation() {
-    this.compensationName = 'for 12.11';
-    this.rangeDates[0] = new Date('03/12/2018');
-    this.rangeDates[1] = new Date('03/12/2018');
+    this.compensationName = 'StarWars Day';
+    this.rangeDates = new Date('04/05/2018');
   }
 }
