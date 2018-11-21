@@ -8,11 +8,17 @@ import { Router } from '@angular/router';
 })
 export class SharedMemberLeaveDetailsComponent implements OnInit {
 
+  display: boolean = false;
+  
   constructor(
     private router : Router
   ) { }
 
   ngOnInit() {
+  }
+
+  showDialog() {
+    this.display = true;
   }
 
 }

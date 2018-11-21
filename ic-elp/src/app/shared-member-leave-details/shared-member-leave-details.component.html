@@ -5,7 +5,7 @@
       </div>
       <div class="ui-g-2">
         <div style="float: right;" *ngIf = "this.router.url != '/request-leave'">
-          <p-button routerLink="/request-leave" icon="pi pi-plus-circle" label="Request leave ..."></p-button>
+          <p-button icon="pi pi-plus-circle" label="Request leave ..." (click)="showDialog()"></p-button>  
         </div>
       </div>
     <div class="ui-g-3">
@@ -30,3 +30,17 @@
     </div>
   </div>
 </p-card>
+
+<p-dialog [(visible)]="display" modal="true" [width]="1060">
+  <p-header>
+    <b>Request leave datails</b>
+  </p-header>
+
+  <app-shared-calendar></app-shared-calendar>
+  
+  <p-footer>      
+    <p-button (click)="display=false" icon="pi pi-check" label="Send request"></p-button>
+    &nbsp;
+    <p-button (click)="display=false" label="Close" styleClass="ui-button-secondary"></p-button>
+  </p-footer>
+</p-dialog>
