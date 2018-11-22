@@ -18,15 +18,7 @@ export class SharedCalendarComponent implements OnInit {
 
   constructor(
     private location: Location
-  ) {
-    this.requestTypes = [
-      {label:'Select request type', value:null},
-      {label:'Holidays', value:{id:1, name: 'Holidays'}},
-      {label:'Sick leave', value:{id:2, name: 'SickLeave'}},
-      {label:'Parental leave', value:{id:3, name: 'ParentalLeave'}},
-      {label:'Other leave', value:{id:4, name: 'OtherLeave'}},
-  ];
-  }
+  ) {}
 
   ngOnInit() {
     this.en = {
@@ -55,6 +47,21 @@ export class SharedCalendarComponent implements OnInit {
     };
 
     this.DisablePublicpublicHolidaysInCalendar(new Date().getMonth(), new Date().getFullYear());
+
+    this.requestTypes = [
+      {label:'Select request type', value:null},
+      {label:'Personal Leave', value:{id:1, name: 'Personal Leave'}},
+      {label:'On demand leave', value:{id:2, name: 'On demand leave'}},
+      {label:'Occassional leave', value:{id:3, name: 'Occassional leave'}},
+      {label:'Excused paid absence', value:{id:4, name: 'Excused paid absence'}},
+      {label:'Excused unpaid absence', value:{id:5, name: 'Excused unpaid absence'}},
+      {label:'Unpaid leave', value:{id:6, name: 'Unpaid leave'}},
+      {label:'Child care', value:{id:7, name: 'Child care'}},
+      {label:'Maternity leave', value:{id:8, name: 'Maternity leave'}},
+      {label:'Parental leave', value:{id:9, name: 'Parental leave'}},
+      {label:'Paternity leave', value:{id:10, name: 'Paternity leave'}},
+      {label:'Unpaid childcare leave', value:{id:11, name: 'Unpaid childcare leave'}},
+  ];
   }
 
   CountNumberOfWorkingDays() : number {
