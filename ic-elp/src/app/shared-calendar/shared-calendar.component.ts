@@ -13,7 +13,7 @@ export class SharedCalendarComponent implements OnInit {
   invalidDates: Array<Date>;
   en: any;
   pl: any;
-  requestedDays : number;
+  requestedNumberOfDays : number;
   requestTypes: SelectItem[];
 
   constructor(
@@ -66,7 +66,7 @@ export class SharedCalendarComponent implements OnInit {
 
   CountNumberOfWorkingDays() : number {
     if(!this.rangeDates[1]){
-      this.requestedDays = 1;
+      this.requestedNumberOfDays = 1;
       return 1;
     } 
 
@@ -80,7 +80,7 @@ export class SharedCalendarComponent implements OnInit {
       date.setDate(date.getDate() + 1);
     }
 
-    this.requestedDays = workingDaysCount;
+    this.requestedNumberOfDays = workingDaysCount;
     return workingDaysCount;
   }
 
