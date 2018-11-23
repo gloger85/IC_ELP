@@ -31,16 +31,5 @@
   </div>
 </p-card>
 
-<p-dialog [(visible)]="display" modal="true" [width]="1060">
-  <p-header>
-    <b>Request leave datails</b>
-  </p-header>
+<app-shared-calendar></app-shared-calendar>
 
-  <app-shared-calendar></app-shared-calendar>
-  
-  <p-footer>      
-    <p-button (click)="display=false" icon="pi pi-check" label="Send request"></p-button>
-    &nbsp;
-    <p-button (click)="display=false" label="Close" styleClass="ui-button-secondary"></p-button>
-  </p-footer>
-</p-dialog>

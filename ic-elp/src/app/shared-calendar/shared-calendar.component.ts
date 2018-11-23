@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 
 import {SelectItem} from 'primeng/api';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-shared-calendar',
@@ -15,12 +15,22 @@ export class SharedCalendarComponent implements OnInit {
   pl: any;
   requestedNumberOfDays : number;
   requestTypes: SelectItem[];
+  display: boolean;
+  requestForm: FormGroup;
 
   constructor(
-    private location: Location
+    private fb: FormBuilder
   ) {}
 
   ngOnInit() {
+
+    this.display = false;
+
+    this.requestForm = this.fb.group({
+      requestType: [''],
+      calendar: this.rangeDates
+    });
+
     this.en = {
       firstDayOfWeek: 1,
       dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -65,7 +75,7 @@ export class SharedCalendarComponent implements OnInit {
   }
 
   CountNumberOfWorkingDays() : number {
-    if(!this.rangeDates[1]){
+    if(!this.rangeDates || !this.rangeDates[1]){
       this.requestedNumberOfDays = 1;
       return 1;
     } 
@@ -142,10 +152,6 @@ export class SharedCalendarComponent implements OnInit {
     publicHolidays.push([bozeCialo.getMonth(), bozeCialo.getDate()]);  
 
     return publicHolidays;
-  }
-
-  GoBack() : void {
-    this.location.back();
   }
 
   IsPublicHoliday(date : Date) : boolean{

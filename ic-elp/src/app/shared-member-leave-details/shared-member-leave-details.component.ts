@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { SharedCalendarComponent } from '../shared-calendar/shared-calendar.component';
 
 @Component({
   selector: 'app-shared-member-leave-details',
@@ -7,9 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./shared-member-leave-details.component.css']
 })
 export class SharedMemberLeaveDetailsComponent implements OnInit {
-
-  display: boolean = false;
   
+  @ViewChild(SharedCalendarComponent)
+  private sharedCalendar: SharedCalendarComponent;
+
   constructor(
     private router : Router
   ) { }
@@ -18,7 +20,7 @@ export class SharedMemberLeaveDetailsComponent implements OnInit {
   }
 
   showDialog() {
-    this.display = true;
+    this.sharedCalendar.display = true;
   }
 
 }
