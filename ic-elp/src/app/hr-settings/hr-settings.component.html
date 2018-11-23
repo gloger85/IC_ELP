@@ -6,7 +6,8 @@
   </div>
 
   <div class="ui-g-3">
-      <app-shared-dashboard-menu></app-shared-dashboard-menu>
+    <app-hr-dashboard-menu></app-hr-dashboard-menu>
+
       <div style="padding-top: 20px;">
           <p-chart type="pie" [data]="requestStateData"></p-chart>
       </div>
@@ -35,7 +36,7 @@
             <p-header>
               Members management
             </p-header>
-              Add new user: [[drop down list]]
+              Add new user: <p-dropdown [options]="members" [(ngModel)]="selectedMember" placeholder="Select Member" optionLabel="name" [showClear]="true"></p-dropdown>
             <p-footer>
               <div style="margin-top: 20px;">
                 <p-button (click)="approveRequests()" icon="pi pi-check" styleClass="ui-button-info" label="Save Members"></p-button>&nbsp;&nbsp;
