@@ -1,19 +1,47 @@
 <p-dialog [(visible)]="display" modal="true" [width]="1060">
-    <form [formGroup]="requestForm">
-
-        <p-header>
-            <b>Request leave datails</b>
-        </p-header>
     
-        <div>
-            <p class="lead" style="margin-top: 20px;">
-            Select type of request leave
-            &nbsp;<p-dropdown formControlName="requestType" [options]="requestTypes"></p-dropdown>&nbsp;
-            and click calendar to choose time period
-            </p>
-        </div><br>
-
+    <p-header>
+        <b>Request leave datails</b>
+    </p-header>
+    
+    <form [formGroup]="requestForm">    
         <div class="ui-g">
+            <div class="ui-g-2">
+                Request date:
+            </div>
+            <div class="ui-g-10">
+                <b>{{requestDate | date:'dd/MM/yyyy'}}</b>
+            </div>
+
+            <div class="ui-g-2">
+                Employee’s full name:
+            </div>
+            <div class="ui-g-10">
+                <b>Test Teściński</b>
+            </div>
+        
+            <div class="ui-g-2">
+                Select type of request leave:
+            </div>            
+            <div class="ui-g-10">
+                <p-dropdown formControlName="requestType" [options]="requestTypes"></p-dropdown>
+            </div>            
+
+            <div class="ui-g-2">
+                Agreed with:
+            </div>
+            <div class="ui-g-10">
+                <p-autoComplete formControlName="agreedWithUser" [suggestions]="filteredUsers" (completeMethod)="filterUsers($event)" 
+                placeholder="Type to search..." [forceSelection]="true" field="fullName"></p-autoComplete>
+            </div>
+            <div class="ui-g-2">
+                Replacement:
+            </div>
+            <div class="ui-g-10">
+                <p-autoComplete formControlName="replacementUser" [suggestions]="filteredUsers" (completeMethod)="filterUsers($event)" 
+                placeholder="Type to search..." [forceSelection]="true" field="fullName"></p-autoComplete>
+            </div>
+
             <div style="margin: 0 auto;">
                 <p-calendar formControlName="calendar" [(ngModel)]="rangeDates" (onSelect) = "CountNumberOfWorkingDays()" (onMonthChange)="DisablePublicpublicHolidaysInCalendar($event.month, $event.year)" [showOtherMonths]="false"  [locale]="en" [numberOfMonths]="3" selectionMode="range" [disabledDays]="[0,6]" [disabledDates]="invalidDates" [readonlyInput]="true" [inline]="true"></p-calendar>
             </div>

@@ -42,6 +42,7 @@ import { UserAdministrationComponent } from './user-administration/user-administ
 import { UserListComponent } from './user-list/user-list.component';
 
 import { AccordionModule } from 'primeng/accordion';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { CardModule } from 'primeng/card';
@@ -100,6 +101,7 @@ import { TreeModule } from 'primeng/tree';
   ],
   imports: [
     AccordionModule,
+    AutoCompleteModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,

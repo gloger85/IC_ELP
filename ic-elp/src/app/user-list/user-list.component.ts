@@ -14,10 +14,10 @@ export class UserListComponent implements OnInit {
 
   ngOnInit() {
     this.users = [
-      { id: '123', firstName: 'Andrzej', lastName: 'Dzabkon', team: 'South Africa', email: 'ab@cd.ed', active: 'Yes'},
-      { id: '124', firstName: 'Grzegorz', lastName: 'Sylow', team: 'Aon 360', email: 'ab@cd.ed', active: 'Yes'},
-      { id: '125', firstName: 'Bartosz', lastName: 'Granda', team: 'South Africa', email: 'ab@cd.ed', active: 'Yes'},
-      { id: '126', firstName: 'Joanna', lastName: 'Kopacz', team: 'South Africa', email: 'ab@cd.ed', active: 'Yes'},
+      { id: '123', firstName: 'Andrzej', lastName: 'Dzabkon', fullName: 'Andrzej Dzabkon', team: 'South Africa', email: 'ab@cd.ed', active: 'Yes'},
+      { id: '124', firstName: 'Grzegorz', lastName: 'Sylow', fullName: 'Grzegorz Sylow', team: 'Aon 360', email: 'ab@cd.ed', active: 'Yes'},
+      { id: '125', firstName: 'Bartosz', lastName: 'Granda', fullName: 'Bartosz Granda', team: 'South Africa', email: 'ab@cd.ed', active: 'Yes'},
+      { id: '126', firstName: 'Joanna', lastName: 'Kopacz', fullName: 'Joanna Kopacz', team: 'South Africa', email: 'ab@cd.ed', active: 'Yes'},
     ];
   }
 

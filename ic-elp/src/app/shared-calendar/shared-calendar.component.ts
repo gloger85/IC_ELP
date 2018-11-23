@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {SelectItem} from 'primeng/api';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { User } from '../domain/user';
 
 @Component({
   selector: 'app-shared-calendar',
@@ -9,6 +10,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./shared-calendar.component.css']
 })
 export class SharedCalendarComponent implements OnInit {
+  requestDate: Date = new Date();
   rangeDates: Date[];
   invalidDates: Array<Date>;
   en: any;
@@ -17,6 +19,30 @@ export class SharedCalendarComponent implements OnInit {
   requestTypes: SelectItem[];
   display: boolean;
   requestForm: FormGroup;
+
+  agreedWithUser: User;
+  replacementUser: User;
+
+  users: User[] = [
+    { id: '123', firstName: 'Andrzej', lastName: 'Dzabkon', fullName: 'Andrzej Dzabkon', team: 'South Africa', email: 'ab@cd.ed', active: 'Yes'},
+    { id: '124', firstName: 'Grzegorz', lastName: 'Sylow', fullName: 'Grzegorz Sylow', team: 'Aon 360', email: 'ab@cd.ed', active: 'Yes'},
+    { id: '125', firstName: 'Bartosz', lastName: 'Granda', fullName: 'Bartosz Granda', team: 'South Africa', email: 'ab@cd.ed', active: 'Yes'},
+    { id: '126', firstName: 'Joanna', lastName: 'Kopacz', fullName: 'Joanna Kopacz', team: 'South Africa', email: 'ab@cd.ed', active: 'Yes'},
+  ];
+
+  filteredUsers: User[];
+
+  filterUsers(event) {
+    let query = event.query;
+    let filtered : any[] = [];
+    for(let i = 0; i < this.users.length; i++) {
+        let user = this.users[i];
+        if(user.fullName.toLowerCase().indexOf(query.toLowerCase()) != -1) {
+          filtered.push(user);
+        }
+    }
+    this.filteredUsers = filtered;
+  }
 
   constructor(
     private fb: FormBuilder
@@ -27,6 +53,10 @@ export class SharedCalendarComponent implements OnInit {
     this.display = false;
 
     this.requestForm = this.fb.group({
+      requestDate: [''],
+      employeeFullName: [''],
+      agreedWithUser: this.agreedWithUser,
+      replacementUser: this.replacementUser,
       requestType: [''],
       calendar: this.rangeDates
     });
@@ -170,5 +200,7 @@ export class SharedCalendarComponent implements OnInit {
   }
 
   SendRequest() : void {
+    console.log(this.requestForm.controls.requestType.value);
+    console.log(this.requestForm.controls.calendar.value);
   }
 }
