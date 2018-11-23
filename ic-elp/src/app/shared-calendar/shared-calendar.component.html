@@ -15,7 +15,7 @@
 
         <div class="ui-g">
             <div style="margin: 0 auto;">
-                <p-calendar formControlName="calendar" [(ngModel)]="rangeDates" (onSelect) = "CountNumberOfWorkingDays()" (onMonthChange)="DisablePublicpublicHolidaysInCalendar($event.month, $event.year)" [showOtherMonths]="false"  [locale]="pl" [numberOfMonths]="3" selectionMode="range" [disabledDays]="[0,6]" [disabledDates]="invalidDates" [readonlyInput]="true" [inline]="true"></p-calendar>
+                <p-calendar formControlName="calendar" [(ngModel)]="rangeDates" (onSelect) = "CountNumberOfWorkingDays()" (onMonthChange)="DisablePublicpublicHolidaysInCalendar($event.month, $event.year)" [showOtherMonths]="false"  [locale]="en" [numberOfMonths]="3" selectionMode="range" [disabledDays]="[0,6]" [disabledDates]="invalidDates" [readonlyInput]="true" [inline]="true"></p-calendar>
             </div>
 
             <div class="ui-g-12" *ngIf="rangeDates">
