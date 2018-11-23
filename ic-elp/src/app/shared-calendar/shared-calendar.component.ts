@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 
 import {SelectItem} from 'primeng/api';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-shared-calendar',
@@ -13,22 +13,24 @@ export class SharedCalendarComponent implements OnInit {
   invalidDates: Array<Date>;
   en: any;
   pl: any;
-  requestedDays : number;
+  requestedNumberOfDays : number;
   requestTypes: SelectItem[];
+  display: boolean;
+  requestForm: FormGroup;
 
   constructor(
-    private location: Location
-  ) {
-    this.requestTypes = [
-      {label:'Select request type', value:null},
-      {label:'Holidays', value:{id:1, name: 'Holidays'}},
-      {label:'Sick leave', value:{id:2, name: 'SickLeave'}},
-      {label:'Parental leave', value:{id:3, name: 'ParentalLeave'}},
-      {label:'Other leave', value:{id:4, name: 'OtherLeave'}},
-  ];
-  }
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
+
+    this.display = false;
+
+    this.requestForm = this.fb.group({
+      requestType: [''],
+      calendar: this.rangeDates
+    });
+
     this.en = {
       firstDayOfWeek: 1,
       dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -55,11 +57,26 @@ export class SharedCalendarComponent implements OnInit {
     };
 
     this.DisablePublicpublicHolidaysInCalendar(new Date().getMonth(), new Date().getFullYear());
+
+    this.requestTypes = [
+      {label:'Select request type', value:null},
+      {label:'Personal Leave', value:{id:1, name: 'Personal Leave'}},
+      {label:'On demand leave', value:{id:2, name: 'On demand leave'}},
+      {label:'Occassional leave', value:{id:3, name: 'Occassional leave'}},
+      {label:'Excused paid absence', value:{id:4, name: 'Excused paid absence'}},
+      {label:'Excused unpaid absence', value:{id:5, name: 'Excused unpaid absence'}},
+      {label:'Unpaid leave', value:{id:6, name: 'Unpaid leave'}},
+      {label:'Child care', value:{id:7, name: 'Child care'}},
+      {label:'Maternity leave', value:{id:8, name: 'Maternity leave'}},
+      {label:'Parental leave', value:{id:9, name: 'Parental leave'}},
+      {label:'Paternity leave', value:{id:10, name: 'Paternity leave'}},
+      {label:'Unpaid childcare leave', value:{id:11, name: 'Unpaid childcare leave'}},
+  ];
   }
 
   CountNumberOfWorkingDays() : number {
-    if(!this.rangeDates[1]){
-      this.requestedDays = 1;
+    if(!this.rangeDates || !this.rangeDates[1]){
+      this.requestedNumberOfDays = 1;
       return 1;
     } 
 
@@ -73,7 +90,7 @@ export class SharedCalendarComponent implements OnInit {
       date.setDate(date.getDate() + 1);
     }
 
-    this.requestedDays = workingDaysCount;
+    this.requestedNumberOfDays = workingDaysCount;
     return workingDaysCount;
   }
 
@@ -135,10 +152,6 @@ export class SharedCalendarComponent implements OnInit {
     publicHolidays.push([bozeCialo.getMonth(), bozeCialo.getDate()]);  
 
     return publicHolidays;
-  }
-
-  GoBack() : void {
-    this.location.back();
   }
 
   IsPublicHoliday(date : Date) : boolean{

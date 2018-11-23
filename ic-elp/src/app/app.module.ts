@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AboutComponent } from './about/about.component';
@@ -15,6 +16,11 @@ import { EventLogComponent } from './event-log/event-log.component';
 import { HrDashboardComponent } from './hr-dashboard/hr-dashboard.component';
 import { HrDashboardMenuComponent } from './hr-dashboard-menu/hr-dashboard-menu.component';
 import { HrDetailInfoBarComponent } from './hr-detail-info-bar/hr-detail-info-bar.component';
+import { HrHolidayManagementCalendarComponent } from './hr-holiday-management-calendar/hr-holiday-management-calendar.component';
+import { HrHolidayPlannerCalendarComponent } from './hr-holiday-planner-calendar/hr-holiday-planner-calendar.component';
+import { HrHolidayPlannerComponent } from './hr-holiday-planner/hr-holiday-planner.component';
+import { HrReportsComponent } from './hr-reports/hr-reports.component';
+import { HrReportsDashboardComponent } from './hr-reports-dashboard/hr-reports-dashboard.component';
 import { HrSettingsComponent } from './hr-settings/hr-settings.component';
 import { HrViewerComponent } from './hr-viewer/hr-viewer.component';
 import { LeaveRequestsListComponent } from './leave-requests-list/leave-requests-list.component';
@@ -24,7 +30,6 @@ import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard
 import { ManagerInboxComponent } from './manager-inbox/manager-inbox.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { PasswordCreateNewComponent } from './password-create-new/password-create-new.component';
-import { RequestLeaveComponent } from './request-leave/request-leave.component';
 import { SharedCalendarComponent } from './shared-calendar/shared-calendar.component';
 import { SharedDetailInfoBarComponent } from './shared-detail-info-bar/shared-detail-info-bar.component';
 import { SharedDashboardMenuComponent } from './shared-dashboard-menu/shared-dashboard-menu.component';
@@ -56,11 +61,7 @@ import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { TooltipModule } from 'primeng/tooltip';
 import { TreeModule } from 'primeng/tree';
-import { HrHolidayPlannerComponent } from './hr-holiday-planner/hr-holiday-planner.component';
-import { HrHolidayPlannerCalendarComponent } from './hr-holiday-planner-calendar/hr-holiday-planner-calendar.component';
-import { HrReportsComponent } from './hr-reports/hr-reports.component';
-import { HrReportsDashboardComponent } from './hr-reports-dashboard/hr-reports-dashboard.component';
-import { HrHolidayManagementCalendarComponent } from './hr-holiday-management-calendar/hr-holiday-management-calendar.component';
+
 
 @NgModule({
   declarations: [
@@ -72,6 +73,11 @@ import { HrHolidayManagementCalendarComponent } from './hr-holiday-management-ca
     HrDashboardComponent,
     HrDashboardMenuComponent,
     HrDetailInfoBarComponent,
+    HrHolidayManagementCalendarComponent,
+    HrHolidayPlannerCalendarComponent,
+    HrHolidayPlannerComponent,
+    HrReportsComponent,
+    HrReportsDashboardComponent,
     HrSettingsComponent,
     HrViewerComponent,
     LeaveRequestsListComponent,
@@ -81,7 +87,6 @@ import { HrHolidayManagementCalendarComponent } from './hr-holiday-management-ca
     ManagerInboxComponent,
     PasswordResetComponent,
     PasswordCreateNewComponent,
-    RequestLeaveComponent,
     SharedCalendarComponent,
     SharedDashboardMenuComponent,
     SharedDetailInfoBarComponent,
@@ -91,12 +96,7 @@ import { HrHolidayManagementCalendarComponent } from './hr-holiday-management-ca
     SharedTeamViewerComponent,
     TreeTestComponent,
     UserAdministrationComponent,
-    UserListComponent,
-    HrHolidayPlannerComponent,
-    HrHolidayPlannerCalendarComponent,
-    HrReportsComponent,
-    HrReportsDashboardComponent,
-    HrHolidayManagementCalendarComponent
+    UserListComponent
   ],
   imports: [
     AccordionModule,
@@ -119,6 +119,7 @@ import { HrHolidayManagementCalendarComponent } from './hr-holiday-management-ca
     MessagesModule,
     PanelModule,
     ProgressSpinnerModule,
+    ReactiveFormsModule,
     TableModule,
     TabViewModule,
     TooltipModule,
