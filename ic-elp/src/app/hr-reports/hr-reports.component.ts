@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 
 interface Team {
   name: string;
@@ -19,7 +18,7 @@ export class HrReportsComponent implements OnInit {
   selectedTeam: Team;
   showProgressSpinner: boolean;
 
-  constructor(private location: Location) {
+  constructor() {
     this.teams = [
       {name: '--All--'},
       {name: 'Germany'},
@@ -39,9 +38,5 @@ export class HrReportsComponent implements OnInit {
 
   SendRequest(): void {
     this.showProgressSpinner = true;
-  }
-
-  GoBack(): void {
-    this.location.back();
   }
 }

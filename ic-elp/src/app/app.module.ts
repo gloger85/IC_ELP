@@ -13,11 +13,11 @@ import { AppRoutingModule } from './/app-routing.module';
 import { CompensationHistoryComponent } from './compensation-history/compensation-history.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EventLogComponent } from './event-log/event-log.component';
+import { HrAddHolidayComponent } from './hr-add-holiday/hr-add-holiday.component';
 import { HrDashboardComponent } from './hr-dashboard/hr-dashboard.component';
 import { HrDashboardMenuComponent } from './hr-dashboard-menu/hr-dashboard-menu.component';
 import { HrDetailInfoBarComponent } from './hr-detail-info-bar/hr-detail-info-bar.component';
 import { HrHolidayManagementCalendarComponent } from './hr-holiday-management-calendar/hr-holiday-management-calendar.component';
-import { HrHolidayPlannerCalendarComponent } from './hr-holiday-planner-calendar/hr-holiday-planner-calendar.component';
 import { HrHolidayPlannerComponent } from './hr-holiday-planner/hr-holiday-planner.component';
 import { HrReportsComponent } from './hr-reports/hr-reports.component';
 import { HrReportsDashboardComponent } from './hr-reports-dashboard/hr-reports-dashboard.component';
@@ -64,6 +64,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { TreeModule } from 'primeng/tree';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,11 +72,11 @@ import { TreeModule } from 'primeng/tree';
     CompensationHistoryComponent,
     DashboardComponent,
     EventLogComponent,
+    HrAddHolidayComponent,
     HrDashboardComponent,
     HrDashboardMenuComponent,
     HrDetailInfoBarComponent,
     HrHolidayManagementCalendarComponent,
-    HrHolidayPlannerCalendarComponent,
     HrHolidayPlannerComponent,
     HrReportsComponent,
     HrReportsDashboardComponent,

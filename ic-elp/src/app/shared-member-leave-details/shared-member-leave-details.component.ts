@@ -8,7 +8,7 @@ import { SharedCalendarComponent } from '../shared-calendar/shared-calendar.comp
   styleUrls: ['./shared-member-leave-details.component.css']
 })
 export class SharedMemberLeaveDetailsComponent implements OnInit {
-  
+
   @ViewChild(SharedCalendarComponent)
   private sharedCalendar: SharedCalendarComponent;
 

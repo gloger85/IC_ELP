@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import {SelectItem} from 'primeng/api';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { User } from '../domain/user';
@@ -108,7 +107,7 @@ export class SharedCalendarComponent implements OnInit {
     if(!this.rangeDates || !this.rangeDates[1]){
       this.requestedNumberOfDays = 1;
       return 1;
-    } 
+    }
 
     let workingDaysCount : number = 0;
     let startDate : Date = this.rangeDates[0];
@@ -139,7 +138,7 @@ export class SharedCalendarComponent implements OnInit {
   }
 
   GetPublicHolidaysByYear(year : number) : Array<number[]>{
-    
+
     let publicHolidays : Array<number[]> = [ // [month][day]
       [0,1],  // Nowy Rok
       [0,6],  // Trzech Króli
@@ -151,7 +150,7 @@ export class SharedCalendarComponent implements OnInit {
       [11,25],// Boże Narodzenie
       [11,26] // Boże Narodzenie
     ];
-  
+
     // Obliczanie Wielkanocy
     let a = year % 19;
     let b = Math.floor(year / 100);
@@ -169,7 +168,7 @@ export class SharedCalendarComponent implements OnInit {
     let easterDay = p + 1;
     let easterMonth = Math.floor((h + l - 7 * m + 114) / 31);
 
-    easterMonth--; // W JavaScript miesiące zaczynają się od 0 
+    easterMonth--; // W JavaScript miesiące zaczynają się od 0
 
     let wielkanoc = new Date(year, easterMonth, easterDay);
     let wielkanocnyPoniedzialek = new Date(year, easterMonth, easterDay+1);
@@ -179,17 +178,17 @@ export class SharedCalendarComponent implements OnInit {
     publicHolidays.push([wielkanoc.getMonth(), wielkanoc.getDate()]);
     publicHolidays.push([wielkanocnyPoniedzialek.getMonth(), wielkanocnyPoniedzialek.getDate()]);
     publicHolidays.push([zeslanieDuchaSwietego.getMonth(), zeslanieDuchaSwietego.getDate()]);
-    publicHolidays.push([bozeCialo.getMonth(), bozeCialo.getDate()]);  
+    publicHolidays.push([bozeCialo.getMonth(), bozeCialo.getDate()]);
 
     return publicHolidays;
   }
 
   IsPublicHoliday(date : Date) : boolean{
-    
+
     let publicHolidays : Array<number[]> = this.GetPublicHolidaysByYear(date.getFullYear());
 
     let month : number = date.getMonth();
-    let day : number = date.getDate();     
+    let day : number = date.getDate();
 
     for(let publicHoliday of publicHolidays)
     {

@@ -1,10 +1,10 @@
 <p-dialog [(visible)]="display" modal="true" [width]="1060">
-    
+
     <p-header>
         <b>Request leave datails</b>
     </p-header>
-    
-    <form [formGroup]="requestForm">    
+
+    <form [formGroup]="requestForm">
         <div class="ui-g">
             <div class="ui-g-2">
                 Request date:
@@ -19,26 +19,26 @@
             <div class="ui-g-10">
                 <b>Test Teściński</b>
             </div>
-        
+
             <div class="ui-g-2">
                 Select type of request leave:
-            </div>            
+            </div>
             <div class="ui-g-10">
                 <p-dropdown formControlName="requestType" [options]="requestTypes"></p-dropdown>
-            </div>            
+            </div>
 
             <div class="ui-g-2">
                 Agreed with:
             </div>
             <div class="ui-g-10">
-                <p-autoComplete formControlName="agreedWithUser" [suggestions]="filteredUsers" (completeMethod)="filterUsers($event)" 
+                <p-autoComplete formControlName="agreedWithUser" [suggestions]="filteredUsers" (completeMethod)="filterUsers($event)"
                 placeholder="Type to search..." [forceSelection]="true" field="fullName"></p-autoComplete>
             </div>
             <div class="ui-g-2">
                 Replacement:
             </div>
             <div class="ui-g-10">
-                <p-autoComplete formControlName="replacementUser" [suggestions]="filteredUsers" (completeMethod)="filterUsers($event)" 
+                <p-autoComplete formControlName="replacementUser" [suggestions]="filteredUsers" (completeMethod)="filterUsers($event)"
                 placeholder="Type to search..." [forceSelection]="true" field="fullName"></p-autoComplete>
             </div>
 
@@ -60,7 +60,7 @@
         </div>
 
 
-        <p-footer>      
+        <p-footer>
             <p-button (click)="SendRequest()" icon="pi pi-check" label="Send request"></p-button>
             &nbsp;
             <p-button (click)="display=false" label="Close" styleClass="ui-button-secondary"></p-button>
