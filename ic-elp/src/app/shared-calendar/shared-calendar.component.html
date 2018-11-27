@@ -24,22 +24,19 @@
                 Select type of request leave:
             </div>
             <div class="ui-g-10">
-                <p-dropdown formControlName="requestType" [options]="requestTypes"></p-dropdown>
+                <p-dropdown formControlName="requestType" (onChange)="OnRequestTypeChange($event)" [options]="requestTypes"></p-dropdown>
             </div>
 
-            <div class="ui-g-2">
-                Agreed with:
-            </div>
-            <div class="ui-g-10">
-                <p-autoComplete formControlName="agreedWithUser" [suggestions]="filteredUsers" (completeMethod)="filterUsers($event)"
-                placeholder="Type to search..." [forceSelection]="true" field="fullName"></p-autoComplete>
-            </div>
-            <div class="ui-g-2">
-                Replacement:
-            </div>
-            <div class="ui-g-10">
-                <p-autoComplete formControlName="replacementUser" [suggestions]="filteredUsers" (completeMethod)="filterUsers($event)"
-                placeholder="Type to search..." [forceSelection]="true" field="fullName"></p-autoComplete>
+            <div class="ui-g-12" formArrayName="dynamicFormControls" *ngFor="let control of dynamicControls; let i = index">
+                <div [formGroupName]="i">
+                    <div class="ui-g-2">
+                        {{control.label}}
+                    </div>
+                    <div class="ui-g-10">
+                        <p-autoComplete [formControlName]="control.key" [suggestions]= "filteredUsers" (completeMethod)="filterUsers($event)"
+                            [placeholder]="control.placeholder" [forceSelection]="control.forceSelection" [field]="control.field"></p-autoComplete>
+                    </div>
+                </div>                
             </div>
 
             <div style="margin: 0 auto;">

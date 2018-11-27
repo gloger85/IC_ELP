@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {SelectItem} from 'primeng/api';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { User } from '../domain/user';
+import { DynamicControlAutocomplete } from '../dynamicControlAutocomplete';
 
 @Component({
   selector: 'app-shared-calendar',
@@ -31,6 +32,52 @@ export class SharedCalendarComponent implements OnInit {
 
   filteredUsers: User[];
 
+  dynamicControls: any[]=[];
+
+  AddFormGroup(formControlName): FormGroup{
+    return this.fb.group({
+      [formControlName]: ''
+    });
+  }
+
+  OnRequestTypeChange(event){
+    let requestType = event.value? event.value.name : null;
+    
+    this.dynamicControls=[];
+    (<FormArray>this.requestForm.get('dynamicFormControls')).controls = [];
+
+    switch(requestType) { 
+      case "Personal Leave": { 
+         this.dynamicControls.push(new DynamicControlAutocomplete({
+            key:"agreedWithUser",
+            label: "Agreed with:",
+            placeholder: "Type to search...",
+            forceSelection: "true",
+            field: "fullName"
+           }
+          ));
+          this.dynamicControls.push(new DynamicControlAutocomplete({
+            key:"replacementUser",
+            label: "Replacement:",
+            placeholder: "Type to search...",
+            forceSelection: "true",
+            field: "fullName"
+           }
+          ));
+         (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup("agreedWithUser"));
+         (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup("replacementUser"));
+         break; 
+      } 
+      case "On demand leave": { 
+        break; 
+     } 
+      default: { 
+         return; 
+         break; 
+      } 
+   }
+  }
+
   filterUsers(event) {
     let query = event.query;
     let filtered : any[] = [];
@@ -54,10 +101,9 @@ export class SharedCalendarComponent implements OnInit {
     this.requestForm = this.fb.group({
       requestDate: [''],
       employeeFullName: [''],
-      agreedWithUser: this.agreedWithUser,
-      replacementUser: this.replacementUser,
+      calendar: this.rangeDates,
       requestType: [''],
-      calendar: this.rangeDates
+      dynamicFormControls: this.fb.array([])
     });
 
     this.en = {
