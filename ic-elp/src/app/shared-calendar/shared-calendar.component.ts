@@ -3,6 +3,8 @@ import {SelectItem} from 'primeng/api';
 import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { User } from '../domain/user';
 import { DynamicControlAutocomplete } from '../dynamicControlAutocomplete';
+import { DynamicControlTextbox } from '../dynamicControlTextbox';
+import { DynamicControlCard } from '../dynamicControlCard';
 
 @Component({
   selector: 'app-shared-calendar',
@@ -35,9 +37,13 @@ export class SharedCalendarComponent implements OnInit {
   dynamicControls: any[]=[];
 
   AddFormGroup(formControlName): FormGroup{
-    return this.fb.group({
-      [formControlName]: ''
-    });
+    if(formControlName){
+      return this.fb.group({
+        [formControlName]: ''
+      });
+    }else{
+      return this.fb.group({});
+    }
   }
 
   OnRequestTypeChange(event){
@@ -71,6 +77,20 @@ export class SharedCalendarComponent implements OnInit {
       case "On demand leave": { 
         break; 
      } 
+     case "Excused paid absence":{
+      this.dynamicControls.push(new DynamicControlTextbox({
+        key:"reason",
+        label: "Reason:",
+        type: "text"
+       }));
+       this.dynamicControls.push(new DynamicControlCard({
+        label: "Important information!",
+        text: "THIS TYPE OF ABSENCE REQUIRES SUBMITTING IN HR DEPARTMENT FORMAL DOCUMENT STATING THE REASON OF EXCUSE IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL FILES (EG. BLOOD DONATION CERTIFICATE)."
+       }));
+       (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup("reason"));
+       (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup(""));
+      break;
+     }
       default: { 
          return; 
          break; 
