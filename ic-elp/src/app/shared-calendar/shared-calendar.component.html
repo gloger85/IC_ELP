@@ -3,7 +3,7 @@
     <p-header>
         <b>Request leave datails</b>
     </p-header>
-
+    <p-messages [(value)]="msgs"></p-messages>
     <form [formGroup]="requestForm">
         <div class="ui-g">
             <div class="ui-g-2">
@@ -36,15 +36,10 @@
                         <div [ngSwitch]="control.controlType">
 
                             <input *ngSwitchCase="'textbox'" [formControlName]="control.key"
-                                pInputText  [type]="control.type" class="ui-g-3">
+                                pInputText  [type]="control.type" [class]="control.class">
                             
                             <p-autoComplete *ngSwitchCase="'autocomplete'" [formControlName]="control.key" [suggestions]= "filteredUsers" (completeMethod)="filterUsers($event)"
                                 [placeholder]="control.placeholder" [forceSelection]="control.forceSelection" [field]="control.field"></p-autoComplete>
-                            
-                            <p-card *ngSwitchCase="'card'" class="ui-g-12">
-                                <b>{{control.text}}</b>
-                            </p-card>
-
                         </div>
                     </div>
                 </div>                

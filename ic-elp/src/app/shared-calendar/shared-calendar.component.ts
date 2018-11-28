@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {SelectItem} from 'primeng/api';
+import { SelectItem } from 'primeng/api';
 import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { User } from '../domain/user';
 import { DynamicControlAutocomplete } from '../dynamicControlAutocomplete';
 import { DynamicControlTextbox } from '../dynamicControlTextbox';
-import { DynamicControlCard } from '../dynamicControlCard';
+import { Message } from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-shared-calendar',
@@ -34,6 +34,9 @@ export class SharedCalendarComponent implements OnInit {
 
   filteredUsers: User[];
 
+  msgs: Message[] = [];
+  msg: string;
+
   dynamicControls: any[]=[];
 
   AddFormGroup(formControlName): FormGroup{
@@ -49,6 +52,7 @@ export class SharedCalendarComponent implements OnInit {
   OnRequestTypeChange(event){
     let requestType = event.value? event.value.name : null;
     
+    this.msgs = [];
     this.dynamicControls=[];
     (<FormArray>this.requestForm.get('dynamicFormControls')).controls = [];
 
@@ -78,23 +82,69 @@ export class SharedCalendarComponent implements OnInit {
         break; 
      } 
      case "Excused paid absence":{
+      this.msgs.push({severity:'warn', summary:'Important information!', detail:'THIS TYPE OF ABSENCE REQUIRES SUBMITTING IN HR DEPARTMENT FORMAL DOCUMENT STATING THE REASON OF EXCUSE IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL FILES (EG. BLOOD DONATION CERTIFICATE).'});
       this.dynamicControls.push(new DynamicControlTextbox({
         key:"reason",
         label: "Reason:",
-        type: "text"
-       }));
-       this.dynamicControls.push(new DynamicControlCard({
-        label: "Important information!",
-        text: "THIS TYPE OF ABSENCE REQUIRES SUBMITTING IN HR DEPARTMENT FORMAL DOCUMENT STATING THE REASON OF EXCUSE IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL FILES (EG. BLOOD DONATION CERTIFICATE)."
+        type: "text",
+        class: "ui-g-9"
        }));
        (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup("reason"));
-       (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup(""));
       break;
      }
-      default: { 
-         return; 
-         break; 
-      } 
+     case "Excused unpaid absence":{
+      this.msgs.push({severity:'warn', summary:'Important information!', detail:'THIS TYPE OF ABSENCE REQUIRES SUBMITTING IN HR DEPARTMENT FORMAL DOCUMENT STATING THE REASON OF EXCUSE IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL FILES (EG. CONFIRMATION FROM COURT/MILITARY COMMISSION).'});
+      this.dynamicControls.push(new DynamicControlTextbox({
+        key:"reason",
+        label: "Reason:",
+        type: "text",
+        class: "ui-g-9"
+       }));
+       (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup("reason"));
+      break;
+     }
+     case "Unpaid leave": { 
+      this.msgs.push({severity:'warn', summary:'Important information!', detail:'APPLYING FOR UNPAID LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL FILES.'});
+      this.dynamicControls.push(new DynamicControlAutocomplete({
+         key:"agreedWithUser",
+         label: "Agreed with:",
+         placeholder: "Type to search...",
+         forceSelection: "true",
+         field: "fullName"
+        }
+       ));
+       this.dynamicControls.push(new DynamicControlAutocomplete({
+         key:"replacementUser",
+         label: "Replacement:",
+         placeholder: "Type to search...",
+         forceSelection: "true",
+         field: "fullName"
+        }
+       ));
+      (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup("agreedWithUser"));
+      (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup("replacementUser"));
+      break; 
+    }
+    case "Maternity leave":{
+      this.msgs.push({severity:'warn', summary:'Important information!', detail:'APPLYING FOR MATERNITY LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL FILES AS WELL AS SUBMITTING BIRTH CERTIFICATE OF A CHILD.'});
+      break;
+     }
+     case "Parental leave":{
+      this.msgs.push({severity:'warn', summary:'Important information!', detail:'APPLYING FOR PARENTAL LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL FILES AS WELL AS SUBMITTING BIRTH CERTIFICATE OF A CHILD.'});
+     break;
+    }
+    case "Paternity leave":{
+      this.msgs.push({severity:'warn', summary:'Important information!', detail:'APPLYING FOR PATERNITY LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL FILES AS WELL AS SUBMITTING BIRTH CERTIFICATE OF A CHILD.'});
+     break;
+    }
+    case "Unpaid childcare leave":{
+      this.msgs.push({severity:'warn', summary:'Important information!', detail:'APPLYING FOR UNPAID CHILDCARE LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL FILES AS WELL AS SUBMITTING BIRTH CERTIFICATE OF A CHILD.'});
+     break;
+    }
+    default: { 
+        return; 
+        break; 
+    } 
    }
   }
 
