@@ -36,13 +36,20 @@
                         <div [ngSwitch]="control.controlType">
 
                             <input *ngSwitchCase="'textbox'" [formControlName]="control.key"
-                                pInputText  [type]="control.type" [class]="control.class">
-                            
+                              pInputText  [type]="control.type" [class]="control.class">
+
                             <p-autoComplete *ngSwitchCase="'autocomplete'" [formControlName]="control.key" [suggestions]= "filteredUsers" (completeMethod)="filterUsers($event)"
-                                [placeholder]="control.placeholder" [forceSelection]="control.forceSelection" [field]="control.field"></p-autoComplete>
+                              [placeholder]="control.placeholder" [forceSelection]="control.forceSelection" [field]="control.field"></p-autoComplete>
+
+                            <div *ngSwitchCase="'dropdown'">
+                                <p-dropdown *ngIf="control.onChange !== ''" [formControlName]="control.key" [options]="control.options"
+                                (onChange)="control.onChange($event,this.dynamicControls,this.requestForm)"></p-dropdown>
+
+                                <p-dropdown *ngIf="control.onChange ==''" [formControlName]="control.key" [options]="control.options"></p-dropdown>
+                            </div>
                         </div>
                     </div>
-                </div>                
+                </div>
             </div>
 
             <div style="margin: 0 auto;">

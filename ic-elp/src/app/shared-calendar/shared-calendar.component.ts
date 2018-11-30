@@ -1,3 +1,4 @@
+import { DynamicControlDropdown } from './../dynamicControlDropdown';
 import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
@@ -17,8 +18,12 @@ export class SharedCalendarComponent implements OnInit {
   invalidDates: Array<Date>;
   en: any;
   pl: any;
-  requestedNumberOfDays : number;
+  requestedNumberOfDays: number;
+
   requestTypes: SelectItem[];
+  occasions: SelectItem[];
+  degreesOfKinship: SelectItem[];
+
   display: boolean;
   requestForm: FormGroup;
 
@@ -26,10 +31,14 @@ export class SharedCalendarComponent implements OnInit {
   replacementUser: User;
 
   users: User[] = [
-    { id: '123', firstName: 'Andrzej', lastName: 'Dzabkon', fullName: 'Andrzej Dzabkon', team: 'South Africa', email: 'ab@cd.ed', active: 'Yes'},
-    { id: '124', firstName: 'Grzegorz', lastName: 'Sylow', fullName: 'Grzegorz Sylow', team: 'Aon 360', email: 'ab@cd.ed', active: 'Yes'},
-    { id: '125', firstName: 'Bartosz', lastName: 'Granda', fullName: 'Bartosz Granda', team: 'South Africa', email: 'ab@cd.ed', active: 'Yes'},
-    { id: '126', firstName: 'Joanna', lastName: 'Kopacz', fullName: 'Joanna Kopacz', team: 'South Africa', email: 'ab@cd.ed', active: 'Yes'},
+    { id: '123', firstName: 'Andrzej', lastName: 'Dzabkon',
+    fullName: 'Andrzej Dzabkon', team: 'South Africa', email: 'ab@cd.ed', active: 'Yes'},
+    { id: '124', firstName: 'Grzegorz', lastName: 'Sylow',
+    fullName: 'Grzegorz Sylow', team: 'Aon 360', email: 'ab@cd.ed', active: 'Yes'},
+    { id: '125', firstName: 'Bartosz', lastName: 'Granda',
+    fullName: 'Bartosz Granda', team: 'South Africa', email: 'ab@cd.ed', active: 'Yes'},
+    { id: '126', firstName: 'Joanna', lastName: 'Kopacz',
+    fullName: 'Joanna Kopacz', team: 'South Africa', email: 'ab@cd.ed', active: 'Yes'},
   ];
 
   filteredUsers: User[];
@@ -37,123 +46,185 @@ export class SharedCalendarComponent implements OnInit {
   msgs: Message[] = [];
   msg: string;
 
-  dynamicControls: any[]=[];
+  dynamicControls: any[] = [];
 
-  AddFormGroup(formControlName): FormGroup{
-    if(formControlName){
+  AddFormGroup(formControlName): FormGroup {
+    if (formControlName) {
       return this.fb.group({
         [formControlName]: ''
       });
-    }else{
+    } else {
       return this.fb.group({});
     }
   }
 
-  OnRequestTypeChange(event){
-    let requestType = event.value? event.value.name : null;
-    
+  OnOccasionChange(event, dynamicControls, requestForm) {
+    const occasion = event.value ? event.value.name : null;
+    const degreesOfKinship: SelectItem[] = [
+      {label: 'Select degree', value: null},
+      {label: 'Spouse', value: {id: 1, name: 'Spouse'}},
+      {label: 'Child', value: {id: 2, name: 'Child'}},
+      {label: 'Mother', value: {id: 3, name: 'Mother'}},
+      {label: 'Father', value: {id: 4, name: 'Father'}},
+      {label: 'Father-in-law', value: {id: 5, name: 'Father-in-law'}},
+      {label: 'Mother-in-law', value: {id: 6, name: 'Mother-in-law'}},
+      {label: 'Grandfather', value: {id: 7, name: 'Grandfather'}},
+      {label: 'Grandmother', value: {id: 8, name: 'Grandmother'}},
+      {label: 'Stepfather', value: {id: 9, name: 'Stepfather'}},
+      {label: 'Stepmother', value: {id: 10, name: 'Stepmother'}},
+      {label: 'Sister', value: {id: 11, name: 'Sister'}},
+      {label: 'Brother', value: {id: 12, name: 'Brother'}},
+      {label: 'Other dependent or person being under employee’s care',
+        value: {id: 13, name: 'Other dependent or person being under employee’s care'}},
+    ];
+    if (occasion === 'Death') {
+      dynamicControls.push(new DynamicControlDropdown({
+        key: 'degreeOfKinship',
+        label: 'Degree of kinship:',
+        options: degreesOfKinship
+      }));
+      (<FormArray>requestForm.get('dynamicFormControls')).push(new FormGroup({degreeOfKinship: new FormControl()}));
+    } else if (dynamicControls.length > 1 && dynamicControls[1].key === 'degreeOfKinship') {
+      dynamicControls.pop();
+      (<FormArray>requestForm.get('dynamicFormControls')).removeAt(1);
+    }
+  }
+  OnRequestTypeChange(event) {
+    const requestType = event.value ? event.value.name : null;
     this.msgs = [];
-    this.dynamicControls=[];
+    this.dynamicControls = [];
     (<FormArray>this.requestForm.get('dynamicFormControls')).controls = [];
 
-    switch(requestType) { 
-      case "Personal Leave": { 
+    switch (requestType) {
+      case 'Personal Leave': {
          this.dynamicControls.push(new DynamicControlAutocomplete({
-            key:"agreedWithUser",
-            label: "Agreed with:",
-            placeholder: "Type to search...",
-            forceSelection: "true",
-            field: "fullName"
+            key: 'agreedWithUser',
+            label: 'Agreed with:',
+            placeholder: 'Type to search...',
+            forceSelection: 'true',
+            field: 'fullName'
            }
           ));
           this.dynamicControls.push(new DynamicControlAutocomplete({
-            key:"replacementUser",
-            label: "Replacement:",
-            placeholder: "Type to search...",
-            forceSelection: "true",
-            field: "fullName"
+            key: 'replacementUser',
+            label: 'Replacement:',
+            placeholder: 'Type to search...',
+            forceSelection: 'true',
+            field: 'fullName'
            }
           ));
-         (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup("agreedWithUser"));
-         (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup("replacementUser"));
-         break; 
-      } 
-      case "On demand leave": { 
-        break; 
-     } 
-     case "Excused paid absence":{
-      this.msgs.push({severity:'warn', summary:'Important information!', detail:'THIS TYPE OF ABSENCE REQUIRES SUBMITTING IN HR DEPARTMENT FORMAL DOCUMENT STATING THE REASON OF EXCUSE IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL FILES (EG. BLOOD DONATION CERTIFICATE).'});
-      this.dynamicControls.push(new DynamicControlTextbox({
-        key:"reason",
-        label: "Reason:",
-        type: "text",
-        class: "ui-g-9"
-       }));
-       (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup("reason"));
+         (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup('agreedWithUser'));
+         (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup('replacementUser'));
+         break;
+      }
+      case 'On demand leave': {
+        break;
+      }
+      case 'Occassional leave': {
+        this.msgs.push({severity: 'warn', summary: 'Important information!',
+        detail: 'APPLYING FOR OCCASSIONAL LEAVE REQUIRES SUBMITTING DOCUMENT'
+        + 'CONFIRMING FORMALLY THE OCCASION (eg. birth/marriage/death certificate).'});
+        this.dynamicControls.push(new DynamicControlDropdown({
+          key: 'occasion',
+          label: 'Occasion:',
+          options: this.occasions,
+          onChange: this.OnOccasionChange
+        }));
+        (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup('occasion'));
+        break;
+      }
+      case 'Excused paid absence': {
+        this.msgs.push({severity: 'warn', summary: 'Important information!',
+        detail: 'THIS TYPE OF ABSENCE REQUIRES SUBMITTING IN HR DEPARTMENT FORMAL DOCUMENT'
+        + 'STATING THE REASON OF EXCUSE IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL FILES (EG. BLOOD DONATION CERTIFICATE).'});
+        this.dynamicControls.push(new DynamicControlTextbox({
+          key: 'reason',
+          label: 'Reason:',
+          type: 'text',
+          class: 'ui-g-9'
+        }));
+        (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup('reason'));
+        break;
+      }
+      case 'Excused unpaid absence': {
+        this.msgs.push({severity: 'warn', summary: 'Important information!',
+        detail: 'THIS TYPE OF ABSENCE REQUIRES SUBMITTING IN HR DEPARTMENT'
+        + 'FORMAL DOCUMENT STATING THE REASON OF EXCUSE IN ORDER TO ATTACH'
+        + 'IT TO EMPLOYEE’S PERSONAL FILES (EG. CONFIRMATION FROM COURT/MILITARY COMMISSION).'});
+        this.dynamicControls.push(new DynamicControlTextbox({
+          key: 'reason',
+          label: 'Reason:',
+          type: 'text',
+          class: 'ui-g-9'
+        }));
+        (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup('reason'));
+        break;
+      }
+      case 'Unpaid leave': {
+        this.msgs.push({severity: 'warn', summary: 'Important information!',
+        detail: 'APPLYING FOR UNPAID LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT'
+        + 'PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL FILES.'});
+        this.dynamicControls.push(new DynamicControlAutocomplete({
+          key: 'agreedWithUser',
+          label: 'Agreed with:',
+          placeholder: 'Type to search...',
+          forceSelection: 'true',
+          field: 'fullName'
+          }
+        ));
+        this.dynamicControls.push(new DynamicControlAutocomplete({
+          key: 'replacementUser',
+          label: 'Replacement:',
+          placeholder: 'Type to search...',
+          forceSelection: 'true',
+          field: 'fullName'
+          }
+        ));
+        (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup('agreedWithUser'));
+        (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup('replacementUser'));
+        break;
+      }
+      case 'Maternity leave': {
+        this.msgs.push({severity: 'warn', summary: 'Important information!',
+        detail: 'APPLYING FOR MATERNITY LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT'
+        + 'PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL'
+        + 'FILES AS WELL AS SUBMITTING BIRTH CERTIFICATE OF A CHILD.'});
+        break;
+      }
+      case 'Parental leave': {
+        this.msgs.push({severity: 'warn', summary: 'Important information!',
+        detail: 'APPLYING FOR PARENTAL LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT'
+        + 'PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL'
+        + 'FILES AS WELL AS SUBMITTING BIRTH CERTIFICATE OF A CHILD.'});
       break;
-     }
-     case "Excused unpaid absence":{
-      this.msgs.push({severity:'warn', summary:'Important information!', detail:'THIS TYPE OF ABSENCE REQUIRES SUBMITTING IN HR DEPARTMENT FORMAL DOCUMENT STATING THE REASON OF EXCUSE IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL FILES (EG. CONFIRMATION FROM COURT/MILITARY COMMISSION).'});
-      this.dynamicControls.push(new DynamicControlTextbox({
-        key:"reason",
-        label: "Reason:",
-        type: "text",
-        class: "ui-g-9"
-       }));
-       (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup("reason"));
+      }
+      case 'Paternity leave': {
+        this.msgs.push({severity: 'warn', summary: 'Important information!',
+        detail: 'APPLYING FOR PATERNITY LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT'
+        + 'PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL'
+        + 'FILES AS WELL AS SUBMITTING BIRTH CERTIFICATE OF A CHILD.'});
       break;
-     }
-     case "Unpaid leave": { 
-      this.msgs.push({severity:'warn', summary:'Important information!', detail:'APPLYING FOR UNPAID LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL FILES.'});
-      this.dynamicControls.push(new DynamicControlAutocomplete({
-         key:"agreedWithUser",
-         label: "Agreed with:",
-         placeholder: "Type to search...",
-         forceSelection: "true",
-         field: "fullName"
-        }
-       ));
-       this.dynamicControls.push(new DynamicControlAutocomplete({
-         key:"replacementUser",
-         label: "Replacement:",
-         placeholder: "Type to search...",
-         forceSelection: "true",
-         field: "fullName"
-        }
-       ));
-      (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup("agreedWithUser"));
-      (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup("replacementUser"));
-      break; 
-    }
-    case "Maternity leave":{
-      this.msgs.push({severity:'warn', summary:'Important information!', detail:'APPLYING FOR MATERNITY LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL FILES AS WELL AS SUBMITTING BIRTH CERTIFICATE OF A CHILD.'});
+      }
+      case 'Unpaid childcare leave': {
+        this.msgs.push({severity: 'warn', summary: 'Important information!',
+        detail: 'APPLYING FOR UNPAID CHILDCARE LEAVE REQUIRES SUBMITTING IN HR'
+        + 'DEPARTMENT PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S'
+        + 'PERSONAL FILES AS WELL AS SUBMITTING BIRTH CERTIFICATE OF A CHILD.'});
       break;
-     }
-     case "Parental leave":{
-      this.msgs.push({severity:'warn', summary:'Important information!', detail:'APPLYING FOR PARENTAL LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL FILES AS WELL AS SUBMITTING BIRTH CERTIFICATE OF A CHILD.'});
-     break;
+      }
+      default: {
+          return;
+          break;
+      }
     }
-    case "Paternity leave":{
-      this.msgs.push({severity:'warn', summary:'Important information!', detail:'APPLYING FOR PATERNITY LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL FILES AS WELL AS SUBMITTING BIRTH CERTIFICATE OF A CHILD.'});
-     break;
-    }
-    case "Unpaid childcare leave":{
-      this.msgs.push({severity:'warn', summary:'Important information!', detail:'APPLYING FOR UNPAID CHILDCARE LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL FILES AS WELL AS SUBMITTING BIRTH CERTIFICATE OF A CHILD.'});
-     break;
-    }
-    default: { 
-        return; 
-        break; 
-    } 
-   }
   }
 
   filterUsers(event) {
-    let query = event.query;
-    let filtered : any[] = [];
-    for(let i = 0; i < this.users.length; i++) {
-        let user = this.users[i];
-        if(user.fullName.toLowerCase().indexOf(query.toLowerCase()) != -1) {
+    const query = event.query;
+    const filtered: any[] = [];
+    for (let i = 0; i < this.users.length; i++) {
+        const user = this.users[i];
+        if (user.fullName.toLowerCase().indexOf(query.toLowerCase()) !== -1) {
           filtered.push(user);
         }
     }
@@ -204,34 +275,42 @@ export class SharedCalendarComponent implements OnInit {
     this.DisablePublicpublicHolidaysInCalendar(new Date().getMonth(), new Date().getFullYear());
 
     this.requestTypes = [
-      {label:'Select request type', value:null},
-      {label:'Personal Leave', value:{id:1, name: 'Personal Leave'}},
-      {label:'On demand leave', value:{id:2, name: 'On demand leave'}},
-      {label:'Occassional leave', value:{id:3, name: 'Occassional leave'}},
-      {label:'Excused paid absence', value:{id:4, name: 'Excused paid absence'}},
-      {label:'Excused unpaid absence', value:{id:5, name: 'Excused unpaid absence'}},
-      {label:'Unpaid leave', value:{id:6, name: 'Unpaid leave'}},
-      {label:'Child care', value:{id:7, name: 'Child care'}},
-      {label:'Maternity leave', value:{id:8, name: 'Maternity leave'}},
-      {label:'Parental leave', value:{id:9, name: 'Parental leave'}},
-      {label:'Paternity leave', value:{id:10, name: 'Paternity leave'}},
-      {label:'Unpaid childcare leave', value:{id:11, name: 'Unpaid childcare leave'}},
-  ];
+      {label: 'Select request type', value: null},
+      {label: 'Personal Leave', value: {id: 1, name: 'Personal Leave'}},
+      {label: 'On demand leave', value: {id: 2, name: 'On demand leave'}},
+      {label: 'Occassional leave', value: {id: 3, name: 'Occassional leave'}},
+      {label: 'Excused paid absence', value: {id: 4, name: 'Excused paid absence'}},
+      {label: 'Excused unpaid absence', value: {id: 5, name: 'Excused unpaid absence'}},
+      {label: 'Unpaid leave', value: {id: 6, name: 'Unpaid leave'}},
+      {label: 'Child care', value: {id: 7, name: 'Child care'}},
+      {label: 'Maternity leave', value: {id: 8, name: 'Maternity leave'}},
+      {label: 'Parental leave', value: {id: 9, name: 'Parental leave'}},
+      {label: 'Paternity leave', value: {id: 10, name: 'Paternity leave'}},
+      {label: 'Unpaid childcare leave', value: {id: 11, name: 'Unpaid childcare leave'}},
+    ];
+
+    this.occasions = [
+      {label: 'Select occasion', value: null},
+      {label: 'Employee’s wedding', value: {id: 1, name: 'Employee’s wedding'}},
+      {label: 'Emploee’s child wedding', value: {id: 2, name: 'Emploee’s child wedding'}},
+      {label: 'Death', value: {id: 3, name: 'Death'}},
+      {label: 'Child birth', value: {id: 4, name: 'Child birth'}}
+    ];
   }
 
-  CountNumberOfWorkingDays() : number {
-    if(!this.rangeDates || !this.rangeDates[1]){
+  CountNumberOfWorkingDays(): number {
+    if (!this.rangeDates || !this.rangeDates[1]) {
       this.requestedNumberOfDays = 1;
       return 1;
     }
 
-    let workingDaysCount : number = 0;
-    let startDate : Date = this.rangeDates[0];
-    let endDate : Date = this.rangeDates[1];
-    let date : Date = new Date(startDate);
+    let workingDaysCount = 0;
+    const startDate: Date = this.rangeDates[0];
+    const endDate: Date = this.rangeDates[1];
+    const date: Date = new Date(startDate);
 
-    while(date <= endDate){
-      if(!(date.getDay() == 0 || date.getDay() == 6 || this.IsPublicHoliday(date))) workingDaysCount++;
+    while (date <= endDate) {
+      if (!(date.getDay() === 0 || date.getDay() === 6 || this.IsPublicHoliday(date))) { workingDaysCount++; }
       date.setDate(date.getDate() + 1);
     }
 
@@ -239,57 +318,57 @@ export class SharedCalendarComponent implements OnInit {
     return workingDaysCount;
   }
 
-  DisablePublicpublicHolidaysInCalendar(month : number, year : number) : void{
+  DisablePublicpublicHolidaysInCalendar(month: number, year: number): void {
     this.invalidDates = [];
 
-    for(let publicHoliday of this.GetPublicHolidaysByYear(year)){
+    for (const publicHoliday of this.GetPublicHolidaysByYear(year)) {
       this.invalidDates.push(new Date(year, publicHoliday[0], publicHoliday[1]));
     }
 
-    if(month >= 11){ // Kalendarz wyswietlany na przelomie roku
-      for(let publicHoliday of this.GetPublicHolidaysByYear(year + 1)){
+    if (month >= 11) { // Kalendarz wyswietlany na przelomie roku
+      for (const publicHoliday of this.GetPublicHolidaysByYear(year + 1)) {
         this.invalidDates.push(new Date(year + 1, publicHoliday[0], publicHoliday[1]));
       }
     }
   }
 
-  GetPublicHolidaysByYear(year : number) : Array<number[]>{
+  GetPublicHolidaysByYear(year: number): Array<number[]> {
 
-    let publicHolidays : Array<number[]> = [ // [month][day]
-      [0,1],  // Nowy Rok
-      [0,6],  // Trzech Króli
-      [4,1],  // Święto Pracy
-      [4,3],  // Święto Konstytucji 3 Maja
-      [7,15], // Wniebowzięcie Najświętszej Maryi Panny
-      [10,1], // Wszystkich Świętych
-      [10,11],// Święto Niepodległości
-      [11,25],// Boże Narodzenie
-      [11,26] // Boże Narodzenie
+    const publicHolidays: Array<number[]> = [ // [month][day]
+      [0, 1],  // Nowy Rok
+      [0, 6],  // Trzech Króli
+      [4, 1],  // Święto Pracy
+      [4, 3],  // Święto Konstytucji 3 Maja
+      [7, 15], // Wniebowzięcie Najświętszej Maryi Panny
+      [10, 1], // Wszystkich Świętych
+      [10, 11], // Święto Niepodległości
+      [11, 25], // Boże Narodzenie
+      [11, 26] // Boże Narodzenie
     ];
 
     // Obliczanie Wielkanocy
-    let a = year % 19;
-    let b = Math.floor(year / 100);
-    let c = year % 100;
-    let d = Math.floor(b / 4);
-    let e = b % 4;
-    let f = Math.floor((b + 8) / 25);
-    let g = Math.floor((b - f + 1) / 3);
-    let h = (19 * a + b - d - g + 15) % 30;
-    let i = Math.floor(c / 4);
-    let k = c % 4;
-    let l= (32+2*e+2*i-h-k)%7;
-    let m = Math.floor((a+11*h+22*l)/451);
-    let p = (h + l - 7 * m + 114) % 31;
-    let easterDay = p + 1;
+    const a = year % 19;
+    const b = Math.floor(year / 100);
+    const c = year % 100;
+    const d = Math.floor(b / 4);
+    const e = b % 4;
+    const f = Math.floor((b + 8) / 25);
+    const g = Math.floor((b - f + 1) / 3);
+    const h = (19 * a + b - d - g + 15) % 30;
+    const i = Math.floor(c / 4);
+    const k = c % 4;
+    const l = (32 + 2 * e + 2 * i - h - k) % 7;
+    const m = Math.floor((a + 11 * h + 22 * l) / 451);
+    const p = (h + l - 7 * m + 114) % 31;
+    const easterDay = p + 1;
     let easterMonth = Math.floor((h + l - 7 * m + 114) / 31);
 
     easterMonth--; // W JavaScript miesiące zaczynają się od 0
 
-    let wielkanoc = new Date(year, easterMonth, easterDay);
-    let wielkanocnyPoniedzialek = new Date(year, easterMonth, easterDay+1);
-    let zeslanieDuchaSwietego = new Date(year, easterMonth, easterDay+49);
-    let bozeCialo = new Date(year, easterMonth, easterDay+60);
+    const wielkanoc = new Date(year, easterMonth, easterDay);
+    const wielkanocnyPoniedzialek = new Date(year, easterMonth, easterDay + 1);
+    const zeslanieDuchaSwietego = new Date(year, easterMonth, easterDay + 49);
+    const bozeCialo = new Date(year, easterMonth, easterDay + 60);
 
     publicHolidays.push([wielkanoc.getMonth(), wielkanoc.getDate()]);
     publicHolidays.push([wielkanocnyPoniedzialek.getMonth(), wielkanocnyPoniedzialek.getDate()]);
@@ -299,22 +378,21 @@ export class SharedCalendarComponent implements OnInit {
     return publicHolidays;
   }
 
-  IsPublicHoliday(date : Date) : boolean{
+  IsPublicHoliday(date: Date): boolean {
 
-    let publicHolidays : Array<number[]> = this.GetPublicHolidaysByYear(date.getFullYear());
+    const publicHolidays: Array<number[]> = this.GetPublicHolidaysByYear(date.getFullYear());
 
-    let month : number = date.getMonth();
-    let day : number = date.getDate();
+    const month: number = date.getMonth();
+    const day: number = date.getDate();
 
-    for(let publicHoliday of publicHolidays)
-    {
-      if(month == publicHoliday[0] && day == publicHoliday[1]) return true;
+    for (const publicHoliday of publicHolidays) {
+      if (month === publicHoliday[0] && day === publicHoliday[1]) { return true; }
     }
 
     return false;
   }
 
-  SendRequest() : void {
+  SendRequest(): void {
     console.log(this.requestForm.controls.requestType.value);
     console.log(this.requestForm.controls.calendar.value);
   }
