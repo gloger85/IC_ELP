@@ -48,6 +48,10 @@ export class SharedCalendarComponent implements OnInit {
 
   dynamicControls: any[] = [];
 
+  filteredUsersBroker(__this): User[] {
+    return __this.filteredUsers;
+  }
+
   AddFormGroup(formControlName): FormGroup {
     if (formControlName) {
       return this.fb.group({
@@ -58,35 +62,19 @@ export class SharedCalendarComponent implements OnInit {
     }
   }
 
-  OnOccasionChange(event, dynamicControls, requestForm) {
+  OnOccasionChange(event, __this) {
     const occasion = event.value ? event.value.name : null;
-    const degreesOfKinship: SelectItem[] = [
-      {label: 'Select degree', value: null},
-      {label: 'Spouse', value: {id: 1, name: 'Spouse'}},
-      {label: 'Child', value: {id: 2, name: 'Child'}},
-      {label: 'Mother', value: {id: 3, name: 'Mother'}},
-      {label: 'Father', value: {id: 4, name: 'Father'}},
-      {label: 'Father-in-law', value: {id: 5, name: 'Father-in-law'}},
-      {label: 'Mother-in-law', value: {id: 6, name: 'Mother-in-law'}},
-      {label: 'Grandfather', value: {id: 7, name: 'Grandfather'}},
-      {label: 'Grandmother', value: {id: 8, name: 'Grandmother'}},
-      {label: 'Stepfather', value: {id: 9, name: 'Stepfather'}},
-      {label: 'Stepmother', value: {id: 10, name: 'Stepmother'}},
-      {label: 'Sister', value: {id: 11, name: 'Sister'}},
-      {label: 'Brother', value: {id: 12, name: 'Brother'}},
-      {label: 'Other dependent or person being under employee’s care',
-        value: {id: 13, name: 'Other dependent or person being under employee’s care'}},
-    ];
+
     if (occasion === 'Death') {
-      dynamicControls.push(new DynamicControlDropdown({
+      __this.dynamicControls.push(new DynamicControlDropdown({
         key: 'degreeOfKinship',
         label: 'Degree of kinship:',
-        options: degreesOfKinship
+        options: __this.degreesOfKinship
       }));
-      (<FormArray>requestForm.get('dynamicFormControls')).push(new FormGroup({degreeOfKinship: new FormControl()}));
-    } else if (dynamicControls.length > 1 && dynamicControls[1].key === 'degreeOfKinship') {
-      dynamicControls.pop();
-      (<FormArray>requestForm.get('dynamicFormControls')).removeAt(1);
+      (<FormArray>__this.requestForm.get('dynamicFormControls')).push(new FormGroup({degreeOfKinship: new FormControl()}));
+    } else if (__this.dynamicControls.length > 1 && __this.dynamicControls[1].key === 'degreeOfKinship') {
+      __this.dynamicControls.pop();
+      (<FormArray>__this.requestForm.get('dynamicFormControls')).removeAt(1);
     }
   }
   OnRequestTypeChange(event) {
@@ -102,7 +90,9 @@ export class SharedCalendarComponent implements OnInit {
             label: 'Agreed with:',
             placeholder: 'Type to search...',
             forceSelection: 'true',
-            field: 'fullName'
+            field: 'fullName',
+            suggestions: this.filteredUsersBroker,
+            completeMethod: this.filterUsersBroker
            }
           ));
           this.dynamicControls.push(new DynamicControlAutocomplete({
@@ -110,7 +100,9 @@ export class SharedCalendarComponent implements OnInit {
             label: 'Replacement:',
             placeholder: 'Type to search...',
             forceSelection: 'true',
-            field: 'fullName'
+            field: 'fullName',
+            suggestions: this.filteredUsersBroker,
+            completeMethod: this.filterUsersBroker
            }
           ));
          (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup('agreedWithUser'));
@@ -169,7 +161,9 @@ export class SharedCalendarComponent implements OnInit {
           label: 'Agreed with:',
           placeholder: 'Type to search...',
           forceSelection: 'true',
-          field: 'fullName'
+          field: 'fullName',
+          suggestions: this.filteredUsersBroker,
+          completeMethod: this.filterUsersBroker
           }
         ));
         this.dynamicControls.push(new DynamicControlAutocomplete({
@@ -177,7 +171,9 @@ export class SharedCalendarComponent implements OnInit {
           label: 'Replacement:',
           placeholder: 'Type to search...',
           forceSelection: 'true',
-          field: 'fullName'
+          field: 'fullName',
+          suggestions: this.filteredUsersBroker,
+          completeMethod: this.filterUsersBroker
           }
         ));
         (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup('agreedWithUser'));
@@ -217,6 +213,10 @@ export class SharedCalendarComponent implements OnInit {
           break;
       }
     }
+  }
+
+  filterUsersBroker(event, __this) {
+    __this.filterUsers(event);
   }
 
   filterUsers(event) {
@@ -295,6 +295,24 @@ export class SharedCalendarComponent implements OnInit {
       {label: 'Emploee’s child wedding', value: {id: 2, name: 'Emploee’s child wedding'}},
       {label: 'Death', value: {id: 3, name: 'Death'}},
       {label: 'Child birth', value: {id: 4, name: 'Child birth'}}
+    ];
+
+    this.degreesOfKinship = [
+      {label: 'Select degree', value: null},
+      {label: 'Spouse', value: {id: 1, name: 'Spouse'}},
+      {label: 'Child', value: {id: 2, name: 'Child'}},
+      {label: 'Mother', value: {id: 3, name: 'Mother'}},
+      {label: 'Father', value: {id: 4, name: 'Father'}},
+      {label: 'Father-in-law', value: {id: 5, name: 'Father-in-law'}},
+      {label: 'Mother-in-law', value: {id: 6, name: 'Mother-in-law'}},
+      {label: 'Grandfather', value: {id: 7, name: 'Grandfather'}},
+      {label: 'Grandmother', value: {id: 8, name: 'Grandmother'}},
+      {label: 'Stepfather', value: {id: 9, name: 'Stepfather'}},
+      {label: 'Stepmother', value: {id: 10, name: 'Stepmother'}},
+      {label: 'Sister', value: {id: 11, name: 'Sister'}},
+      {label: 'Brother', value: {id: 12, name: 'Brother'}},
+      {label: 'Other dependent or person being under employee’s care',
+        value: {id: 13, name: 'Other dependent or person being under employee’s care'}},
     ];
   }
 

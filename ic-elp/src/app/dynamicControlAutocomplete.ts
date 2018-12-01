@@ -2,8 +2,8 @@ import { DynamicControlBase } from './dynamicControlBase';
 
 export class DynamicControlAutocomplete extends DynamicControlBase<string> {
   controlType = 'autocomplete';
-  suggestions?: string;
-  completeMethod?: any[];
+  suggestions?: Function;
+  completeMethod?: Function;
   placeholder?: string;
   forceSelection?: string;
   field?: string;
