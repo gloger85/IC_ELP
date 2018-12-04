@@ -19,12 +19,18 @@ export class SharedCalendarComponent implements OnInit {
   en: any;
   pl: any;
   requestedNumberOfDays: number;
+  requestedNumberOfHours: number;
 
+  requestType: string;
   requestTypes: SelectItem[];
   occasions: SelectItem[];
   degreesOfKinship: SelectItem[];
+  daysOrHoursOptions: SelectItem[];
+  daysOrHours: string;
 
   display: boolean;
+  displayRequestSummary: boolean;
+  displayHoursInputs: boolean;
   requestForm: FormGroup;
 
   agreedWithUser: User;
@@ -62,6 +68,15 @@ export class SharedCalendarComponent implements OnInit {
     }
   }
 
+  OnCalendarSelect() {
+    if (this.daysOrHours === 'Hours' && this.rangeDates && this.rangeDates[1]) {
+      this.rangeDates[0] = this.rangeDates[1];
+      this.rangeDates[1] = null;
+    }
+    this.CountNumberOfWorkingDays();
+    this.displayRequestSummary = true;
+  }
+
   OnOccasionChange(event, __this) {
     const occasion = event.value ? event.value.name : null;
 
@@ -78,12 +93,20 @@ export class SharedCalendarComponent implements OnInit {
     }
   }
   OnRequestTypeChange(event) {
-    const requestType = event.value ? event.value.name : null;
+    this.requestType = event.value ? event.value.name : null;
     this.msgs = [];
+    this.daysOrHours = null;
+    if (this.rangeDates) {
+      for (var i = 0; i < this.rangeDates.length; i++) {
+        if (this.rangeDates[i]) this.rangeDates[i].setDate(null);
+      }
+    }
+    this.displayRequestSummary = false;
+    this.displayHoursInputs = false;
     this.dynamicControls = [];
     (<FormArray>this.requestForm.get('dynamicFormControls')).controls = [];
 
-    switch (requestType) {
+    switch (this.requestType) {
       case 'Personal Leave': {
          this.dynamicControls.push(new DynamicControlAutocomplete({
             key: 'agreedWithUser',
@@ -180,6 +203,12 @@ export class SharedCalendarComponent implements OnInit {
         (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup('replacementUser'));
         break;
       }
+      case 'Child care': {
+        this.msgs.push({severity: 'error', summary: 'Important information!',
+        detail: 'NO CHILD CARE ALLOWANCE FOR THE CURRENT YEAR. IT IS NECESSARY'
+        + 'TO SUBMIT SIGNED FORM ENTITLING THE EMPLOYE TO CHILD CARE.'});
+        break;
+      }
       case 'Maternity leave': {
         this.msgs.push({severity: 'warn', summary: 'Important information!',
         detail: 'APPLYING FOR MATERNITY LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT'
@@ -215,6 +244,22 @@ export class SharedCalendarComponent implements OnInit {
     }
   }
 
+  OnDaysOrHoursChange(event) {
+    if (this.rangeDates) {
+      for (var i = 0; i < this.rangeDates.length; i++) {
+        if (this.rangeDates[i]) this.rangeDates[i].setDate(null);
+      }
+    }
+    this.displayRequestSummary = false;
+    this.daysOrHours = event.value ? event.value.name : null;
+    if (this.daysOrHours === 'Days') {
+      this.displayHoursInputs = false;
+    } else if (this.daysOrHours === 'Hours') {
+      this.displayHoursInputs = true;
+    }
+
+  }
+
   filterUsersBroker(event, __this) {
     __this.filterUsers(event);
   }
@@ -236,14 +281,16 @@ export class SharedCalendarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
+    this.daysOrHours = null;
     this.display = false;
+    this.displayRequestSummary = false;
 
     this.requestForm = this.fb.group({
       requestDate: [''],
       employeeFullName: [''],
       calendar: this.rangeDates,
-      requestType: [''],
+      requestType: this.requestType,
+      daysOrHours: this.daysOrHours,
       dynamicFormControls: this.fb.array([])
     });
 
@@ -314,6 +361,12 @@ export class SharedCalendarComponent implements OnInit {
       {label: 'Other dependent or person being under employee’s care',
         value: {id: 13, name: 'Other dependent or person being under employee’s care'}},
     ];
+
+    this.daysOrHoursOptions = [
+      {label: 'Select days or hours', value: null},
+      {label: 'Days', value: {id: 1, name: 'Days'}},
+      {label: 'Hours', value: {id: 2, name: 'Hours'}},
+    ];
   }
 
   CountNumberOfWorkingDays(): number {
@@ -334,6 +387,10 @@ export class SharedCalendarComponent implements OnInit {
 
     this.requestedNumberOfDays = workingDaysCount;
     return workingDaysCount;
+  }
+
+  CountNumberOfHours() {
+    
   }
 
   DisablePublicpublicHolidaysInCalendar(month: number, year: number): void {
