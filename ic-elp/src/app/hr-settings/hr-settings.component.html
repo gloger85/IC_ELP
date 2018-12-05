@@ -20,27 +20,17 @@
 
     <p-accordion [multiple]="true">
         <p-accordionTab header="User Mapping" [selected]="true">
-          <ul>
-            <li (click)="showDialog('Team-Group')">Aon 360 (2 Members)</li>
-            <li (click)="showDialog('Team-Group')">Luxemburg (2 Members)</li>
-            <li (click)="showDialog('Team-Group')">Nordics (4 Members)</li>
-            <li (click)="showDialog('Team-Group')">South Africa (5 Members)</li>
-            <li (click)="showDialog('Team-Group')">United Kingdom (15 Members)</li>
-          </ul>
+            <p-tree [value]="members" [style]="{'width':'100%'}" selectionMode="single" [(selection)]="selectedMembers" ></p-tree>
 
-          <ul>
-            <li (click)="showDialog('Team-Group')">Not assigned Members (3 Members)</li>
-          </ul>
-
-          <p-dialog header="Members management" [(visible)]="display" [contentStyle]="{'overflow':'visible'}">
-            <p-header>
-              Members management
-            </p-header>
-              Add new user: <p-dropdown [options]="members" [(ngModel)]="selectedMember" placeholder="Select Member" optionLabel="name" [showClear]="true"></p-dropdown>
+          <p-dialog header="Manage members" [(visible)]="display" [contentStyle]="{'overflow':'visible'}" [width]="280">
+            <div class="ui-g">
+              User name: <input type="text" pInputText pTooltip="Enter user name">
+              Team: <p-dropdown [options]="team" [(ngModel)]="teams" placeholder="Select team" optionLabel="name" [showClear]="true"></p-dropdown>
+            </div>
             <p-footer>
               <div style="margin-top: 20px;">
-                <p-button (click)="approveRequests()" icon="pi pi-check" styleClass="ui-button-info" label="Save Members"></p-button>&nbsp;&nbsp;
-                <p-button data-dismiss="modal" icon="pi pi-minus-circle" styleClass="ui-button-warning" label="Cancel"></p-button>
+                <p-button (click)="approveRequests()" icon="pi pi-check" styleClass="ui-button-info" label="Add"></p-button>&nbsp;&nbsp;
+                <p-button (click)="display=false" data-dismiss="modal" icon="pi pi-minus-circle" styleClass="ui-button-warning" label="Cancel"></p-button>
               </div>
             </p-footer>
           </p-dialog>

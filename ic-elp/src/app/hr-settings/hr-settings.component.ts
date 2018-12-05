@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {TreeNode} from 'primeng/api';
 
-interface MemberItem {
+interface Teams {
   name: string;
 }
 
@@ -13,17 +14,111 @@ interface MemberItem {
 export class HrSettingsComponent implements OnInit {
 
   public display: Boolean = false;
-  public members: MemberItem[];
-  public selectedMeber: MemberItem;
+  public members: TreeNode[];
+  public selectedMembers: TreeNode[];
+  public team: Teams[];
+  public teams: Teams[];
 
   constructor() {
     this.members = [
-      {name: 'Janusz Andrzejczak'},
-      {name: 'Marek Kondrat'},
-      {name: 'Marlin Janowska'},
-      {name: 'Norbert Wieckowski'},
-      {name: 'Zofia Stasiak'}
+      {
+        'label': 'Aon 360 (2 Members)',
+        'data': 'Aon 360 (2 Members)',
+        'expandedIcon': 'fa fa-folder-open',
+        'collapsedIcon': 'fa fa-folder',
+        'children': [
+              {
+                'label': 'Deepfak Pai',
+                'data': 'Deepfak Pai',
+                'expandedIcon': 'fa fa-chevron-down',
+                'collapsedIcon': 'fa fa-chevron-right'
+              },
+              {
+                'label': 'Lord Vater',
+                'data': 'Lord Vater',
+                'expandedIcon': 'fa fa-chevron-down',
+                'collapsedIcon': 'fa fa-chevron-right'
+              }
+              ]
+      },
+      {
+      'label': 'Nordicks (4 Members)',
+      'data': 'Nordicks (4 Members)',
+      'expandedIcon': 'fa fa-folder-open',
+      'collapsedIcon': 'fa fa-folder',
+      'children': [
+            {
+              'label': 'Greg Wasylow',
+              'data': 'Greg Wasylow',
+              'expandedIcon': 'fa fa-chevron-down',
+              'collapsedIcon': 'fa fa-chevron-right'
+            },
+            {
+              'label': 'Andrzej Jabcok',
+              'data': 'Andrzej Jabcok',
+              'expandedIcon': 'fa fa-chevron-down',
+              'collapsedIcon': 'fa fa-chevron-right'
+            },
+            {
+              'label': 'Bartek Szu',
+              'data': 'Bartek Szu',
+              'expandedIcon': 'fa fa-chevron-down',
+              'collapsedIcon': 'fa fa-chevron-right'
+            },
+            {
+              'label': 'Joanna K',
+              'data': 'Joanna K',
+              'expandedIcon': 'fa fa-chevron-down',
+              'collapsedIcon': 'fa fa-chevron-right'
+            }
+            ]
+    },
+    {
+      'label': 'Germany (3 Members)',
+      'data': 'Germany (3 Members)',
+      'expandedIcon': 'fa fa-folder-open',
+      'collapsedIcon': 'fa fa-folder',
+      'children': [
+            {
+              'label': 'Blady Kris',
+              'data': 'Blady Kris',
+              'expandedIcon': 'fa fa-chevron-down',
+              'collapsedIcon': 'fa fa-chevron-right'
+            },
+            {
+              'label': 'Andrzej Glogier',
+              'data': 'Andrzej Glogier',
+              'expandedIcon': 'fa fa-chevron-down',
+              'collapsedIcon': 'fa fa-chevron-right'
+            },
+            {
+              'label': 'Marcin Pijakowski',
+              'data': 'Marcin Pijakowski',
+              'expandedIcon': 'fa fa-chevron-down',
+              'collapsedIcon': 'fa fa-chevron-right'
+            }
+            ]
+      },
+      {
+        'label': 'Not Assigned Members (1 Member)',
+        'data': 'Not Assigned Members (1 Members)',
+        'expandedIcon': 'fa fa-folder-open',
+        'collapsedIcon': 'fa fa-folder',
+        'children': [
+              {
+                'label': 'Mikita Ujwanienko',
+                'data': 'Mikita Ujwanienko',
+                'expandedIcon': 'fa fa-chevron-down',
+                'collapsedIcon': 'fa fa-chevron-right'
+              }
+            ]
+        }
     ];
+    this.team = [
+      {name: 'Germany'},
+      {name: 'Aon360'},
+      {name: 'Nordicks'},
+      {name: 'France'}];
   }
 
   ngOnInit() {
@@ -33,5 +128,9 @@ export class HrSettingsComponent implements OnInit {
     if (role === 'Team-Group') {
       this.display = true;
     }
+  }
+
+  approveRequests() {
+    this.display = false;
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../domain/user';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-user-list',
@@ -10,7 +11,7 @@ export class UserListComponent implements OnInit {
 
   public users: User[];
 
-  constructor() { }
+  constructor(private location: Location) { }
 
   ngOnInit() {
     this.users = [
@@ -20,5 +21,7 @@ export class UserListComponent implements OnInit {
       { id: '126', firstName: 'Joanna', lastName: 'Kopacz', fullName: 'Joanna Kopacz', team: 'South Africa', email: 'ab@cd.ed', active: 'Yes'},
     ];
   }
-
+  GoBack(): void {
+    this.location.back();
+  }
 }
