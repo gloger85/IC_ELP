@@ -45,3 +45,10 @@ npm install -g @angular/cli@7.0.2
 use rmdir /S/Q node_modules dist
 npm install --save-dev @angular/cli@7.0.2
 npm install
+
+How to enable debugging in VS Code for Chrome:
+0/ Install extension "Debugger for Chrome"
+1/ Set up configuration file "launch.json"
+2/ Enable debugging panel from left menu - shortcut: Ctrl+Shift+D
+3/ Execute serve application command: ng s
+4/ Start debugging (recompiling is enabled so it is possible to make changes in code in real time)
