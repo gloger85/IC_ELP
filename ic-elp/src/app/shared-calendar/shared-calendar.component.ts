@@ -97,8 +97,8 @@ export class SharedCalendarComponent implements OnInit {
     this.msgs = [];
     this.daysOrHours = null;
     if (this.rangeDates) {
-      for (var i = 0; i < this.rangeDates.length; i++) {
-        if (this.rangeDates[i]) this.rangeDates[i].setDate(null);
+      for (let i = 0; i < this.rangeDates.length; i++) {
+        if (this.rangeDates[i]) { this.rangeDates[i].setDate(null); }
       }
     }
     this.displayRequestSummary = false;
@@ -121,7 +121,7 @@ export class SharedCalendarComponent implements OnInit {
           this.dynamicControls.push(new DynamicControlAutocomplete({
             key: 'replacementUser',
             label: 'Replacement:',
-            placeholder: 'Type to search...',
+            placeholder: 'N/A',
             forceSelection: 'true',
             field: 'fullName',
             suggestions: this.filteredUsersBroker,
@@ -137,7 +137,7 @@ export class SharedCalendarComponent implements OnInit {
       }
       case 'Occassional leave': {
         this.msgs.push({severity: 'warn', summary: 'Important information!',
-        detail: 'APPLYING FOR OCCASSIONAL LEAVE REQUIRES SUBMITTING DOCUMENT'
+        detail: 'APPLYING FOR OCCASSIONAL LEAVE REQUIRES SUBMITTING DOCUMENT '
         + 'CONFIRMING FORMALLY THE OCCASION (eg. birth/marriage/death certificate).'});
         this.dynamicControls.push(new DynamicControlDropdown({
           key: 'occasion',
@@ -150,7 +150,7 @@ export class SharedCalendarComponent implements OnInit {
       }
       case 'Excused paid absence': {
         this.msgs.push({severity: 'warn', summary: 'Important information!',
-        detail: 'THIS TYPE OF ABSENCE REQUIRES SUBMITTING IN HR DEPARTMENT FORMAL DOCUMENT'
+        detail: 'THIS TYPE OF ABSENCE REQUIRES SUBMITTING IN HR DEPARTMENT FORMAL DOCUMENT '
         + 'STATING THE REASON OF EXCUSE IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL FILES (EG. BLOOD DONATION CERTIFICATE).'});
         this.dynamicControls.push(new DynamicControlTextbox({
           key: 'reason',
@@ -163,8 +163,8 @@ export class SharedCalendarComponent implements OnInit {
       }
       case 'Excused unpaid absence': {
         this.msgs.push({severity: 'warn', summary: 'Important information!',
-        detail: 'THIS TYPE OF ABSENCE REQUIRES SUBMITTING IN HR DEPARTMENT'
-        + 'FORMAL DOCUMENT STATING THE REASON OF EXCUSE IN ORDER TO ATTACH'
+        detail: 'THIS TYPE OF ABSENCE REQUIRES SUBMITTING IN HR DEPARTMENT '
+        + 'FORMAL DOCUMENT STATING THE REASON OF EXCUSE IN ORDER TO ATTACH '
         + 'IT TO EMPLOYEE’S PERSONAL FILES (EG. CONFIRMATION FROM COURT/MILITARY COMMISSION).'});
         this.dynamicControls.push(new DynamicControlTextbox({
           key: 'reason',
@@ -177,7 +177,7 @@ export class SharedCalendarComponent implements OnInit {
       }
       case 'Unpaid leave': {
         this.msgs.push({severity: 'warn', summary: 'Important information!',
-        detail: 'APPLYING FOR UNPAID LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT'
+        detail: 'APPLYING FOR UNPAID LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT '
         + 'PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL FILES.'});
         this.dynamicControls.push(new DynamicControlAutocomplete({
           key: 'agreedWithUser',
@@ -192,7 +192,7 @@ export class SharedCalendarComponent implements OnInit {
         this.dynamicControls.push(new DynamicControlAutocomplete({
           key: 'replacementUser',
           label: 'Replacement:',
-          placeholder: 'Type to search...',
+          placeholder: 'N/A',
           forceSelection: 'true',
           field: 'fullName',
           suggestions: this.filteredUsersBroker,
@@ -205,35 +205,35 @@ export class SharedCalendarComponent implements OnInit {
       }
       case 'Child care': {
         this.msgs.push({severity: 'error', summary: 'Important information!',
-        detail: 'NO CHILD CARE ALLOWANCE FOR THE CURRENT YEAR. IT IS NECESSARY'
+        detail: 'NO CHILD CARE ALLOWANCE FOR THE CURRENT YEAR. IT IS NECESSARY '
         + 'TO SUBMIT SIGNED FORM ENTITLING THE EMPLOYE TO CHILD CARE.'});
         break;
       }
       case 'Maternity leave': {
         this.msgs.push({severity: 'warn', summary: 'Important information!',
-        detail: 'APPLYING FOR MATERNITY LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT'
-        + 'PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL'
+        detail: 'APPLYING FOR MATERNITY LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT '
+        + 'PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL '
         + 'FILES AS WELL AS SUBMITTING BIRTH CERTIFICATE OF A CHILD.'});
         break;
       }
       case 'Parental leave': {
         this.msgs.push({severity: 'warn', summary: 'Important information!',
-        detail: 'APPLYING FOR PARENTAL LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT'
-        + 'PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL'
+        detail: 'APPLYING FOR PARENTAL LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT '
+        + 'PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL '
         + 'FILES AS WELL AS SUBMITTING BIRTH CERTIFICATE OF A CHILD.'});
       break;
       }
       case 'Paternity leave': {
         this.msgs.push({severity: 'warn', summary: 'Important information!',
-        detail: 'APPLYING FOR PATERNITY LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT'
-        + 'PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL'
+        detail: 'APPLYING FOR PATERNITY LEAVE REQUIRES SUBMITTING IN HR DEPARTMENT '
+        + 'PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S PERSONAL '
         + 'FILES AS WELL AS SUBMITTING BIRTH CERTIFICATE OF A CHILD.'});
       break;
       }
       case 'Unpaid childcare leave': {
         this.msgs.push({severity: 'warn', summary: 'Important information!',
-        detail: 'APPLYING FOR UNPAID CHILDCARE LEAVE REQUIRES SUBMITTING IN HR'
-        + 'DEPARTMENT PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S'
+        detail: 'APPLYING FOR UNPAID CHILDCARE LEAVE REQUIRES SUBMITTING IN HR '
+        + 'DEPARTMENT PRINTED AND SIGNED FORM IN ORDER TO ATTACH IT TO EMPLOYEE’S '
         + 'PERSONAL FILES AS WELL AS SUBMITTING BIRTH CERTIFICATE OF A CHILD.'});
       break;
       }
@@ -246,8 +246,8 @@ export class SharedCalendarComponent implements OnInit {
 
   OnDaysOrHoursChange(event) {
     if (this.rangeDates) {
-      for (var i = 0; i < this.rangeDates.length; i++) {
-        if (this.rangeDates[i]) this.rangeDates[i].setDate(null);
+      for (let i = 0; i < this.rangeDates.length; i++) {
+        if (this.rangeDates[i]) { this.rangeDates[i].setDate(null); }
       }
     }
     this.displayRequestSummary = false;
@@ -390,7 +390,7 @@ export class SharedCalendarComponent implements OnInit {
   }
 
   CountNumberOfHours() {
-    
+
   }
 
   DisablePublicpublicHolidaysInCalendar(month: number, year: number): void {

@@ -13,7 +13,7 @@ export class SharedMemberLeaveDetailsComponent implements OnInit {
   private sharedCalendar: SharedCalendarComponent;
 
   constructor(
-    private router : Router
+    private router: Router
   ) { }
 
   ngOnInit() {
