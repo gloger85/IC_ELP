@@ -6,7 +6,6 @@
   [blockScroll]="true"
   [contentStyle]="{ 'max-height': '90vh' }"
 >
-
   <p-header>
     <!-- <div class="ui-g"> -->
     <div class="ui-g-3" style="text-align:left;">
@@ -25,21 +24,23 @@
   <p-messages [(value)]="msgs"></p-messages>
   <form [formGroup]="requestForm">
     <div class="ui-g">
-      <div class="ui-g-2">Request date:</div>
-      <div class="ui-g-10">
-        <b>{{ requestDate | date: "dd/MM/yyyy" }}</b>
-      </div>
+      <div class="ui-g-12">
+        <div class="ui-g-2">Request date:</div>
+        <div class="ui-g-10">
+          <b>{{ requestDate | date: "dd/MM/yyyy" }}</b>
+        </div>
 
-      <div class="ui-g-2">Employee’s full name:</div>
-      <div class="ui-g-10"><b>Test Teściński</b></div>
+        <div class="ui-g-2">Employee’s full name:</div>
+        <div class="ui-g-10"><b>Test Teściński</b></div>
 
-      <div class="ui-g-2">Select type of request leave:</div>
-      <div class="ui-g-10">
-        <p-dropdown
-          formControlName="requestType"
-          (onChange)="OnRequestTypeChange($event)"
-          [options]="requestTypes"
-        ></p-dropdown>
+        <div class="ui-g-2">Select type of request leave:</div>
+        <div class="ui-g-10">
+          <p-dropdown
+            formControlName="requestType"
+            (onChange)="OnRequestTypeChange($event)"
+            [options]="requestTypes"
+          ></p-dropdown>
+        </div>
       </div>
 
       <div class="ui-g-12" *ngIf="requestType == 'Child care'">
