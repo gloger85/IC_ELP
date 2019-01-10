@@ -102,6 +102,39 @@
         </div>
       </div>
 
+      <div class="ui-g-12" *ngIf="displayRequestSummary">
+          <div class="ui-g-4">
+            Start date: <b>{{ rangeDates[0] | date: "dd/MM/yyyy" }}</b>
+          </div>
+
+          <div class="ui-g-4" *ngIf="displayHoursInputs">
+            Hour start:
+            <p-calendar stepMinute="60" [timeOnly]="true"></p-calendar>
+          </div>
+
+          <div class="ui-g-4" *ngIf="displayHoursInputs">
+            Hour end: <p-calendar stepMinute="60" [timeOnly]="true"></p-calendar>
+          </div>
+
+          <div class="ui-g-4" *ngIf="displayHoursInputs">
+            Requested: {{ requestedNumberOfHours }} hour(s)
+          </div>
+
+          <div
+            class="ui-g-4"
+            *ngIf="displayRequestSummary && !displayHoursInputs"
+          >
+            End date: <b>{{ rangeDates[1] | date: "dd/MM/yyyy" }}</b>
+          </div>
+          <div
+            class="ui-g-4"
+            *ngIf="displayRequestSummary && !displayHoursInputs"
+          >
+            Requested: <b>{{ requestedNumberOfDays }}</b> day(s)
+          </div>
+        </div>
+      </div>
+
       <div style="margin: 0 auto;">
         <p-calendar
           *ngIf="(requestType && requestType != 'Child care') || daysOrHours"
@@ -121,39 +154,6 @@
           [inline]="true"
         ></p-calendar>
       </div>
-
-      <div class="ui-g-12" *ngIf="displayRequestSummary">
-        <div class="ui-g-4">
-          Start date: <b>{{ rangeDates[0] | date: "dd/MM/yyyy" }}</b>
-        </div>
-
-        <div class="ui-g-4" *ngIf="displayHoursInputs">
-          Hour start:
-          <p-calendar stepMinute="60" [timeOnly]="true"></p-calendar>
-        </div>
-
-        <div class="ui-g-4" *ngIf="displayHoursInputs">
-          Hour end: <p-calendar stepMinute="60" [timeOnly]="true"></p-calendar>
-        </div>
-
-        <div class="ui-g-4" *ngIf="displayHoursInputs">
-          Requested: {{ requestedNumberOfHours }} hour(s)
-        </div>
-
-        <div
-          class="ui-g-4"
-          *ngIf="displayRequestSummary && !displayHoursInputs"
-        >
-          End date: <b>{{ rangeDates[1] | date: "dd/MM/yyyy" }}</b>
-        </div>
-        <div
-          class="ui-g-4"
-          *ngIf="displayRequestSummary && !displayHoursInputs"
-        >
-          Requested: <b>{{ requestedNumberOfDays }}</b> day(s)
-        </div>
-      </div>
-    </div>
 
     <div *ngIf="!requestType || (requestType === 'Child care' && !daysOrHours)">
       <!-- Additional space for request type dorpdown -->
