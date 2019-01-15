@@ -1,49 +1,57 @@
 <div class="ui-g">
   <div class="ui-g-4">
     <h3 class="first">List of users:</h3>
-</div>
-  <div class="ui-g">
-      <div class="ui-g-12">
-        <div style="float: right;">
-          Primary Approver:<p-dropdown [options]="[
+  </div>
+
+  <p-header>
+    <div class="ui-g-12" style="text-align:left;">
+      <p-button (click)="GoBack()" icon="pi pi-arrow-circle-left" label="Back to dashboard"></p-button>
+      Primary Approver: <p-dropdown [options]="[
             {label:'Greg Wasyl'},
             {label:'Andrzej Jabcok'},
             {label:'Bartek Szu'}
         ]"></p-dropdown>
-          Secondary Approver:<p-dropdown [options]="[
+      Secondary Approver: <p-dropdown [options]="[
           {label:'Andrzej Glogier'},
           {label:'Radek Owróblowski'},
-          {label:'Marcin Pyjak'}
+          {label:'Marcin Pyjak'},
+          {label:'--Not applicable--'}
     ]"></p-dropdown>
-        <p-button (click)="GoBack()" icon="pi pi-trash" label="Cancel" styleClass="ui-button-warning"></p-button>
-        </div>
-      </div>
-  </div>
-  <p-table [value]="users">
-      <ng-template pTemplate="header">
-          <tr>
-              <th style="text-align:center">Id</th>
-              <th style="text-align:center">First Name</th>
-              <th style="text-align:center">Last Name</th>
-              <th style="text-align:center">Team</th>
-              <th style="text-align:center">Active</th>
-              <th></th>
-          </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-user>
-          <tr>
-              <td align="center">{{user.id}}</td>
-              <td align="center">{{user.firstName}}</td>
-              <td align="center">{{user.lastName}}</td>
-              <td align="center">{{user.team}}</td>
-              <td align="center">{{user.active}}</td>
-              <td align="center"><p-button icon="pi pi-pencil" styleClass="ui-button-success" label="Edit" data-toggle="modal" data-target="#userDeailsModal"></p-button></td>
-          </tr>
-      </ng-template>
-  </p-table>
-</div>
+    </div>
+  </p-header>
 
-<div class="modal fade" id="userDeailsModal" tabindex="-1" role="dialog" aria-labelledby="userDeailsModalLabel" aria-hidden="true">
+  <p-table [value]="users" sortMode="multiple">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="text-align:center" [pSortableColumn]="'id'">Id<p-sortIcon [field]="'id'"></p-sortIcon>
+        </th>
+        <th style="text-align:center" [pSortableColumn]="'firstName'">First Name<p-sortIcon [field]="'firstName'"></p-sortIcon>
+        </th>
+        <th style="text-align:center" [pSortableColumn]="'lastName'">Last Name<p-sortIcon [field]="'lastName'"></p-sortIcon>
+        </th>
+        <th style="text-align:center" [pSortableColumn]="'team'">Team<p-sortIcon [field]="'team'"></p-sortIcon>
+        </th>
+        <th style="text-align:center" [pSortableColumn]="'active'">Active<p-sortIcon [field]="'active'"></p-sortIcon>
+        </th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td align="center">{{user.id}}</td>
+        <td align="center">{{user.firstName}}</td>
+        <td align="center">{{user.lastName}}</td>
+        <td align="center">{{user.team}}</td>
+        <td align="center">{{user.active}}</td>
+        <td align="center">
+          <p-button icon="pi pi-pencil" styleClass="ui-button-success" label="Edit" data-toggle="modal" data-target="#userDeailsModal"></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <div class="modal fade" id="userDeailsModal" tabindex="-1" role="dialog" aria-labelledby="userDeailsModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -53,54 +61,70 @@
           </button>
         </div>
         <div class="modal-body">
-            <div class="ui-g">
-                <p-card class="ui-g-2">
-                    <div class="ui-g">
-                        <div class="ui-g-5"><b>Id:</b></div>
-                        <div class="ui-g-7"><input #id type="text" pInputText value="123" [disabled]="true"></div>
-                    </div>
-                </p-card>
-                <p-card class="ui-g-5">
-                    <div class="ui-g">
-                        <div class="ui-g-5"><b>First name:</b></div>
-                        <div class="ui-g-7"><input #firstName type="text" pInputText value="Andrzej"></div>
-                    </div>
-                </p-card>
-                <p-card class="ui-g-5">
-                    <div class="ui-g">
-                        <div class="ui-g-5"><b>Last name:</b></div>
-                        <div class="ui-g-7"><input #lastName type="text" pInputText value="Dzabkon"></div>
-                    </div>
-                </p-card>
-                <p-card class="ui-g-5">
-                    <div class="ui-g">
-                        <div class="ui-g-4"><b>Team:</b></div>
-                        <div class="ui-g-8"><p-dropdown [options]="[
+          <div class="ui-g">
+            <p-card class="ui-g-2">
+              <div class="ui-g">
+                <div class="ui-g-5"><b>Id:</b></div>
+                <div class="ui-g-7"><input #id type="text" pInputText value="123" [disabled]="true"></div>
+              </div>
+            </p-card>
+            <p-card class="ui-g-5">
+              <div class="ui-g">
+                <div class="ui-g-5"><b>First name:</b></div>
+                <div class="ui-g-7"><input #firstName type="text" pInputText value="Andrzej"></div>
+              </div>
+            </p-card>
+            <p-card class="ui-g-5">
+              <div class="ui-g">
+                <div class="ui-g-5"><b>Last name:</b></div>
+                <div class="ui-g-7"><input #lastName type="text" pInputText value="Dzabkon"></div>
+              </div>
+            </p-card>
+            <p-card class="ui-g-5">
+              <div class="ui-g">
+                <div class="ui-g-4"><b>Team:</b></div>
+                <div class="ui-g-8">
+                  <p-dropdown [options]="[
                             {label:'Select team', value:null},
                             {label:'South Africa', value:{id:1, name: 'South Africa'}},
                             {label:'Nordics', value:{id:2, name: 'Nordics'}},
                             {label:'United Kingdom', value:{id:3, name: 'United Kingdom'}},
                             {label:'Luxemburg', value:{id:4, name: 'Luxemburg'}},
                             {label:'France', value:{id:5, name: 'France'}}
-                        ]"></p-dropdown></div>
-                    </div>
-                </p-card>
-                <p-card class="ui-g-7">
-                    <div class="ui-g">
-                        <div class="ui-g-3"><b>Email:</b></div>
-                        <div class="ui-g-9"><input #email type="text" pInputText value="andrzej.dzabkon@infosys.com"></div>
-                    </div>
-                </p-card>
-                <p-card class="ui-g-4">
-                    <div class="ui-g">
-                        <div class="ui-g-6"><b>Active:</b></div>
-                        <div class="ui-g-6"><p-dropdown [options]="[
+                        ]"></p-dropdown>
+                </div>
+              </div>
+            </p-card>
+            <p-card class="ui-g-7">
+              <div class="ui-g">
+                <div class="ui-g-3"><b>Email:</b></div>
+                <div class="ui-g-9"><input #email type="text" pInputText value="andrzej.dzabkon@infosys.com"></div>
+              </div>
+            </p-card>
+            <p-card class="ui-g-4">
+              <div class="ui-g">
+                <div class="ui-g-6"><b>Active:</b></div>
+                <div class="ui-g-6">
+                  <p-dropdown [options]="[
                             {label:'Yes', value:1},
                             {label:'No', value:0}
-                        ]"></p-dropdown></div>
-                    </div>
-                </p-card>
-            </div>
+                        ]"></p-dropdown>
+                </div>
+              </div>
+            </p-card>
+            <p-card class="ui-g-4">
+              <div class="ui-g">
+                <div class="ui-g-5"><b>Available number of holidays:</b></div>
+                <div class="ui-g-5"><input #nrOfHolidays type="text" pInputText value="123"></div>
+              </div>
+            </p-card>
+            <p-card class="ui-g-4">
+              <div class="ui-g">
+                <div class="ui-g-5"><b>Registered overhours:</b></div>
+                <div class="ui-g-5"><input #registeredOverhours type="text" pInputText value="123"></div>
+              </div>
+            </p-card>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

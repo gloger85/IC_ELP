@@ -14,6 +14,7 @@ interface Teams {
 export class HrSettingsComponent implements OnInit {
 
   public display: Boolean = false;
+  public displayTeam: Boolean = false;
   public members: TreeNode[];
   public selectedMembers: TreeNode[];
   public team: Teams[];
@@ -130,7 +131,17 @@ export class HrSettingsComponent implements OnInit {
     }
   }
 
+  showTeamAdd(role: String) {
+    if (role === 'Team-Group') {
+      this.displayTeam = true;
+    }
+  }
+
   approveRequests() {
     this.display = false;
+  }
+
+  approveTeamAddition() {
+    this.displayTeam = false;
   }
 }
