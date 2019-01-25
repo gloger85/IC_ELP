@@ -160,7 +160,8 @@ export class SharedCalendarComponent implements OnInit {
           key: 'reason',
           label: 'Reason:',
           type: 'text',
-          class: 'ui-g-9'
+          class: 'ui-g-9',
+          tooltip: 'This is mandatory field. Please provide description.'
         }));
         (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup('reason', [Validators.required]));
         break;
@@ -174,7 +175,8 @@ export class SharedCalendarComponent implements OnInit {
           key: 'reason',
           label: 'Reason:',
           type: 'text',
-          class: 'ui-g-9'
+          class: 'ui-g-9',
+          tooltip: 'This is mandatory field. Please provide description.'
         }));
         (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup('reason', [Validators.required]));
         break;
