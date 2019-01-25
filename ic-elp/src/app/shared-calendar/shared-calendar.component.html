@@ -22,7 +22,7 @@
   </p-header>
 
   <p-messages [(value)]="msgs"></p-messages>
-  <form [formGroup]="requestForm">
+  <form [formGroup]="requestForm" (ngSubmit)="SendRequest()">
     <div class="ui-g">
       <div class="ui-g-12">
         <div class="ui-g-2">Request date:</div>
@@ -40,6 +40,16 @@
             (onChange)="OnRequestTypeChange($event)"
             [options]="requestTypes"
           ></p-dropdown>
+          &nbsp;
+          <p-message
+            *ngIf="
+              !requestForm.controls['requestType'].valid &&
+              requestForm.controls['requestType'].dirty
+            "
+            severity="error"
+            text="This field is required"
+          >
+          </p-message>
         </div>
       </div>
 
@@ -65,13 +75,21 @@
           <div class="ui-g-2">{{ control.label }}</div>
           <div class="ui-g-10">
             <div [ngSwitch]="control.controlType">
-              <input
-                *ngSwitchCase="'textbox'"
-                [formControlName]="control.key"
-                pInputText
-                [type]="control.type"
-                [class]="control.class"
-              />
+              <div *ngSwitchCase="'textbox'">
+                <input
+                  [formControlName]="control.key"
+                  pInputText
+                  [type]="control.type"
+                  [class]="control.class"
+                /> &nbsp;
+                <p-message
+                *ngIf="
+                requestForm.controls['dynamicFormControls'].controls[i].get(control.key).invalid &&
+                requestForm.controls['dynamicFormControls'].controls[i].get(control.key).touched
+            "
+                severity="error" text="This field is required">
+                </p-message>
+              </div>
 
               <p-autoComplete
                 *ngSwitchCase="'autocomplete'"
@@ -103,57 +121,57 @@
       </div>
 
       <div class="ui-g-12" *ngIf="displayRequestSummary">
-          <div class="ui-g-4">
-            Start date: <b>{{ rangeDates[0] | date: "dd/MM/yyyy" }}</b>
-          </div>
+        <div class="ui-g-4">
+          Start date: <b>{{ rangeDates[0] | date: "dd/MM/yyyy" }}</b>
+        </div>
 
-          <div class="ui-g-4" *ngIf="displayHoursInputs">
-            Hour start:
-            <p-calendar stepMinute="60" [timeOnly]="true"></p-calendar>
-          </div>
+        <div class="ui-g-4" *ngIf="displayHoursInputs">
+          Hour start:
+          <p-calendar stepMinute="60" [timeOnly]="true"></p-calendar>
+        </div>
 
-          <div class="ui-g-4" *ngIf="displayHoursInputs">
-            Hour end: <p-calendar stepMinute="60" [timeOnly]="true"></p-calendar>
-          </div>
+        <div class="ui-g-4" *ngIf="displayHoursInputs">
+          Hour end: <p-calendar stepMinute="60" [timeOnly]="true"></p-calendar>
+        </div>
 
-          <div class="ui-g-4" *ngIf="displayHoursInputs">
-            Requested: {{ requestedNumberOfHours }} hour(s)
-          </div>
+        <div class="ui-g-4" *ngIf="displayHoursInputs">
+          Requested: {{ requestedNumberOfHours }} hour(s)
+        </div>
 
-          <div
-            class="ui-g-4"
-            *ngIf="displayRequestSummary && !displayHoursInputs"
-          >
-            End date: <b>{{ rangeDates[1] | date: "dd/MM/yyyy" }}</b>
-          </div>
-          <div
-            class="ui-g-4"
-            *ngIf="displayRequestSummary && !displayHoursInputs"
-          >
-            Requested: <b>{{ requestedNumberOfDays }}</b> day(s)
-          </div>
+        <div
+          class="ui-g-4"
+          *ngIf="displayRequestSummary && !displayHoursInputs"
+        >
+          End date: <b>{{ rangeDates[1] | date: "dd/MM/yyyy" }}</b>
+        </div>
+        <div
+          class="ui-g-4"
+          *ngIf="displayRequestSummary && !displayHoursInputs"
+        >
+          Requested: <b>{{ requestedNumberOfDays }}</b> day(s)
         </div>
       </div>
+    </div>
 
-      <div style="margin: 0 auto;">
-        <p-calendar
-          *ngIf="(requestType && requestType != 'Child care') || daysOrHours"
-          formControlName="calendar"
-          [(ngModel)]="rangeDates"
-          (onSelect)="OnCalendarSelect()"
-          (onMonthChange)="
-            DisablePublicpublicHolidaysInCalendar($event.month, $event.year)
-          "
-          [showOtherMonths]="false"
-          [locale]="en"
-          [numberOfMonths]="3"
-          selectionMode="range"
-          [disabledDays]="[0, 6]"
-          [disabledDates]="invalidDates"
-          [readonlyInput]="true"
-          [inline]="true"
-        ></p-calendar>
-      </div>
+    <div style="margin: 0 auto;">
+      <p-calendar
+        *ngIf="(requestType && requestType != 'Child care') || daysOrHours"
+        formControlName="calendar"
+        [(ngModel)]="rangeDates"
+        (onSelect)="OnCalendarSelect()"
+        (onMonthChange)="
+          DisablePublicpublicHolidaysInCalendar($event.month, $event.year)
+        "
+        [showOtherMonths]="false"
+        [locale]="en"
+        [numberOfMonths]="3"
+        selectionMode="range"
+        [disabledDays]="[0, 6]"
+        [disabledDates]="invalidDates"
+        [readonlyInput]="true"
+        [inline]="true"
+      ></p-calendar>
+    </div>
 
     <div *ngIf="!requestType || (requestType === 'Child care' && !daysOrHours)">
       <!-- Additional space for request type dorpdown -->
@@ -173,7 +191,8 @@
       *ngIf="(requestType && requestType != 'Child care') || daysOrHours"
     >
       <p-button
-        (click)="SendRequest()"
+        [disabled]="requestForm.invalid"
+        type="submit"
         icon="pi pi-check"
         label="Send request"
       ></p-button>

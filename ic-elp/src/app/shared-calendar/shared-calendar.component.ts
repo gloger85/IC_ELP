@@ -1,7 +1,7 @@
 import { DynamicControlDropdown } from './../dynamicControlDropdown';
 import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
-import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
 import { User } from '../domain/user';
 import { DynamicControlAutocomplete } from '../dynamicControlAutocomplete';
 import { DynamicControlTextbox } from '../dynamicControlTextbox';
@@ -58,11 +58,15 @@ export class SharedCalendarComponent implements OnInit {
     return __this.filteredUsers;
   }
 
-  AddFormGroup(formControlName): FormGroup {
+  AddFormGroup(formControlName: string, validators: ValidatorFn[] = null): FormGroup {
     if (formControlName) {
-      return this.fb.group({
+      const formGroup = this.fb.group({
         [formControlName]: ''
       });
+      if (validators) {
+        formGroup.controls[formControlName].setValidators(validators);
+      }
+      return formGroup;
     } else {
       return this.fb.group({});
     }
@@ -158,7 +162,7 @@ export class SharedCalendarComponent implements OnInit {
           type: 'text',
           class: 'ui-g-9'
         }));
-        (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup('reason'));
+        (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup('reason', [Validators.required]));
         break;
       }
       case 'Excused unpaid absence': {
@@ -172,7 +176,7 @@ export class SharedCalendarComponent implements OnInit {
           type: 'text',
           class: 'ui-g-9'
         }));
-        (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup('reason'));
+        (<FormArray>this.requestForm.get('dynamicFormControls')).push(this.AddFormGroup('reason', [Validators.required]));
         break;
       }
       case 'Unpaid leave': {
@@ -289,7 +293,7 @@ export class SharedCalendarComponent implements OnInit {
       requestDate: [''],
       employeeFullName: [''],
       calendar: this.rangeDates,
-      requestType: this.requestType,
+      requestType: [this.requestType, Validators.required],
       daysOrHours: this.daysOrHours,
       dynamicFormControls: this.fb.array([])
     });
@@ -468,7 +472,6 @@ export class SharedCalendarComponent implements OnInit {
   }
 
   SendRequest(): void {
-    console.log(this.requestForm.controls.requestType.value);
-    console.log(this.requestForm.controls.calendar.value);
+    console.log(this.requestForm.value);
   }
 }
