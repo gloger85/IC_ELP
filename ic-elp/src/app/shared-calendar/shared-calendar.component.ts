@@ -162,6 +162,7 @@ export class SharedCalendarComponent implements OnInit {
     this.requestType = event.value ? event.value.name : null;
     this.msgs = [];
     this.daysOrHours = null;
+    this.calendarErrorMsg = null;
     if (this.requestType === 'Paternity leave') {
       this.invalidDates = [];
       this.invalidDays = [];
