@@ -1,37 +1,61 @@
-<div>
-    <p-dialog [(visible)]="displayDialog" [modal]="true">
-        <p-header>
-            <b>Delete confirmation</b>
-        </p-header>
-        Are you sure that you want to delete this record?
-        <p-footer>
-            <p-button (click)="displayDialog=false" icon="pi pi-check-circle" styleClass="ui-button-primary" label="Yes"></p-button>
-            <p-button (click)="displayDialog=false" icon="pi pi-times-circle" styleClass="ui-button-primary" label="No"></p-button>
-        </p-footer>
-    </p-dialog>
-    <h3 class="first">Compensation reqeusts history:</h3>
-    <p-table [value]="compensations">
-        <ng-template pTemplate="header">
-            <tr>
-                <th>Compensation number</th>
-                <th>Number of hours</th>
-                <th>Start date</th>
-                <th>End date</th>
-                <th>Status</th>
-                <th>Description</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-compensation>
-            <tr>
-                <td>{{compensation.id}}</td>
-                <td>{{compensation.numberOfHours}}</td>
-                <td>{{compensation.startDate}}</td>
-                <td>{{compensation.endDate}}</td>
-                <td>{{compensation.status}} &nbsp;
-                    <p-button (click)="showDialog()" icon="pi pi-trash" styleClass="ui-button-warning" label="Cancel" *ngIf="compensation.status=='Pending'"></p-button>
-                </td>
-                <td>{{compensation.description}}</td>
-            </tr>
-        </ng-template>
-    </p-table>
-</div>
+<p-dialog [(visible)]="displayDialog" [modal]="true">
+  <p-header> <b>Delete confirmation</b> </p-header>
+  Are you sure that you want to delete this record?
+  <p-footer>
+    <p-button
+      (click)="displayDialog = false"
+      icon="pi pi-check-circle"
+      styleClass="ui-button-primary"
+      label="Yes"
+    ></p-button>
+    <p-button
+      (click)="displayDialog = false"
+      icon="pi pi-times-circle"
+      styleClass="ui-button-primary"
+      label="No"
+    ></p-button>
+  </p-footer>
+</p-dialog>
+<h3 class="first">Compensation reqeusts history:</h3>
+<p-table [value]="compensations">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Compensation number</th>
+      <th>Number of hours</th>
+      <th>Date</th>
+      <th>Status</th>
+      <th>Description</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-compensation>
+    <tr>
+      <td>{{ compensation.id }}</td>
+      <td>{{ compensation.numberOfHours }}</td>
+      <td>{{ compensation.startDate }}</td>
+      <td>
+        <span *ngIf="compensation.status == 'Approved'">
+          <p-message
+            severity="success"
+            [text]="compensation.status"
+          ></p-message>
+        </span>
+        <span *ngIf="compensation.status == 'Canceled'">
+          <p-message severity="error" [text]="compensation.status"></p-message>
+        </span>
+        <span *ngIf="compensation.status == 'Pending'">
+          <p-message severity="warn" [text]="compensation.status"></p-message>
+        </span>
+        &nbsp;
+        <span *ngIf="compensation.status == 'Pending'">
+          <p-button
+            (click)="showDialog()"
+            icon="pi pi-trash"
+            styleClass="ui-button-warning"
+            label="Cancel"
+          ></p-button>
+        </span>
+      </td>
+      <td>{{ compensation.description }}</td>
+    </tr>
+  </ng-template>
+</p-table>
