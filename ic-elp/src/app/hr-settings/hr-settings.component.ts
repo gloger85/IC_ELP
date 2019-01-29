@@ -19,6 +19,7 @@ export class HrSettingsComponent implements OnInit {
   public selectedMembers: TreeNode[];
   public team: Teams[];
   public teams: Teams[];
+  public requestStateData: any;
 
   constructor() {
     this.members = [
@@ -99,21 +100,7 @@ export class HrSettingsComponent implements OnInit {
               'collapsedIcon': 'fa fa-chevron-right'
             }
             ]
-      },
-      {
-        'label': 'Not Assigned Members (1 Member)',
-        'data': 'Not Assigned Members (1 Members)',
-        'expandedIcon': 'fa fa-folder-open',
-        'collapsedIcon': 'fa fa-folder',
-        'children': [
-              {
-                'label': 'Mikita Ujwanienko',
-                'data': 'Mikita Ujwanienko',
-                'expandedIcon': 'fa fa-chevron-down',
-                'collapsedIcon': 'fa fa-chevron-right'
-              }
-            ]
-        }
+      }
     ];
     this.team = [
       {name: 'Germany'},
@@ -123,6 +110,23 @@ export class HrSettingsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.requestStateData = {
+      labels: ['Approved', 'Cancelled', 'Awaiting'],
+      datasets: [
+          {
+              data: [300, 50, 100],
+              backgroundColor: [
+                '#36A2EB',
+                '#FF6384',
+                '#FFCE56'
+              ],
+              hoverBackgroundColor: [
+                '#36A2EB',
+                '#FF6384',
+                '#FFCE56'
+              ]
+          }]
+      };
   }
 
   showDialog(role: String) {

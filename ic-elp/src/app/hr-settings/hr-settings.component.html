@@ -23,14 +23,16 @@
         <p-tree [value]="members" [style]="{'width':'100%'}" selectionMode="single" [(selection)]="selectedMembers"></p-tree>
 
         <p-dialog header="Manage members" [(visible)]="display" [contentStyle]="{'overflow':'visible'}" [width]="280">
-          <div class="ui-g">
-            User name: <input type="text" pInputText pTooltip="Enter user name">
-            Team: <p-dropdown [options]="team" [(ngModel)]="teams" placeholder="Select team" optionLabel="name"
+          <div>
+            User name: <textarea [rows]="3" [cols]="30" pInputTextarea autoResize="autoResize" pTooltip="Enter user name"></textarea>
+          </div>
+          <div>
+            Team: <br /><p-dropdown [options]="team" [(ngModel)]="teams" placeholder="Select team" optionLabel="name"
               [showClear]="true"></p-dropdown>
           </div>
           <p-footer>
             <div style="margin-top: 20px;">
-              <p-button (click)="approveRequests()" icon="pi pi-check" styleClass="ui-button-info" label="Add"></p-button>&nbsp;&nbsp;
+              <p-button (click)="approveRequests()" icon="pi pi-check" styleClass="ui-button-info" label="Save"></p-button>
               <p-button (click)="display=false" data-dismiss="modal" icon="pi pi-minus-circle" styleClass="ui-button-warning"
                 label="Cancel"></p-button>
             </div>
@@ -39,18 +41,19 @@
 
         <p-dialog header="Add Team" [(visible)]="displayTeam" [contentStyle]="{'overflow':'visible'}" [width]="280">
           <div class="ui-g">
-            Team name: <input type="text" pInputText pTooltip="Enter team name">
+            Team name: <br />
+            <textarea [rows]="3" [cols]="30" pInputTextarea autoResize="autoResize" pTooltip="Enter team name"></textarea>
           </div>
           <p-footer>
             <div style="margin-top: 20px;">
-              <p-button (click)="approveTeamAddition()" icon="pi pi-check" styleClass="ui-button-info" label="Add"></p-button>&nbsp;&nbsp;
+              <p-button (click)="approveTeamAddition()" icon="pi pi-check" styleClass="ui-button-info" label="Save"></p-button>
               <p-button (click)="displayTeam=false" data-dismiss="modal" icon="pi pi-minus-circle" styleClass="ui-button-warning"
                 label="Cancel"></p-button>
             </div>
           </p-footer>
         </p-dialog>
 
-        <div style="margin-top: 20px;">
+        <div style="margin-top: 20px; text-align:right">
           <p-button (click)="showDialog('Team-Group')" icon="pi pi-plus-circle" styleClass="ui-button-info" label="Add new member"></p-button>&nbsp;&nbsp;
           <p-button routerLink="/user-administration" icon="pi pi-pencil" styleClass="ui-button-info" label="Manage members"></p-button>&nbsp;&nbsp;
           <p-button (click)="showTeamAdd('Team-Group')" icon="pi pi-plus-circle" styleClass="ui-button-info" label="Add Team"></p-button>&nbsp;&nbsp;

@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { AboutComponent } from './about/about.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EventLogComponent } from './event-log/event-log.component';
+import { HrEventLogComponent } from './hr-event-log/hr-event-log.component';
 import { HrDashboardComponent } from './hr-dashboard/hr-dashboard.component';
 import { HrHolidayPlannerComponent } from './hr-holiday-planner/hr-holiday-planner.component';
 import { HrReportsDashboardComponent } from './hr-reports-dashboard/hr-reports-dashboard.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'event-log', component: EventLogComponent },
+  { path: 'hr-event-log', component: HrEventLogComponent },
   { path: 'hr-dashboard', component: HrDashboardComponent },
   { path: 'hr-holiday-planner', component: HrHolidayPlannerComponent },
   { path: 'hr-reports-dashboard', component: HrReportsDashboardComponent },

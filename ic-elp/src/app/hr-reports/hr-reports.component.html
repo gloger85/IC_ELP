@@ -1,16 +1,17 @@
 <h3>HR Reports Generation</h3>
-<h6>Generate report for time period.</h6>
+<br />
 <div class="ui-g ui-fluid">
-    <div class="ui-g-2 ui-md-1"><h6>From:</h6></div>
-    <div class="ui-g-2 ui-md-3"><p-calendar [(ngModel)]="dateFrom" [showIcon]="true" tabindex="0" [disabledDates]="invalidDates" [disabledDays]="[0,6]" [readonlyInput]="true"></p-calendar></div>
-    <div class="ui-g-2 ui-md-1"><h6>to:</h6></div>
-    <div class="ui-g-2 ui-md-3"><p-calendar [(ngModel)]="dateTo" [showIcon]="true" tabindex="0" [disabledDates]="invalidDates" [disabledDays]="[0,6]" [readonlyInput]="true"></p-calendar></div>
-    <div class="ui-g-2 ui-md-1"><h6>team:</h6></div>
-    <div class="ui-g-2 ui-md-3"><p-dropdown [options]="teams" [(ngModel)]="selectedTeam" placeholder="Select a Team" optionLabel="name" [showClear]="true"></p-dropdown></div>
-    <div class="ui-g-2 ui-md-2"><p-button icon="pi pi-check" label="Generate" (click)="SendRequest()"></p-button></div>
-  </div>
-
-<div class="ui-g" *ngIf="showProgressSpinner">
+  <h6>From:</h6>
+  <p-calendar [(ngModel)]="dateFrom" [showIcon]="true" tabindex="0" [disabledDates]="invalidDates" [disabledDays]="[0,6]"
+    [readonlyInput]="true"></p-calendar>
+  &nbsp;<h6>To:</h6>
+  <p-calendar [(ngModel)]="dateTo" [showIcon]="true" tabindex="0" [disabledDates]="invalidDates" [disabledDays]="[0,6]"
+    [readonlyInput]="true"></p-calendar>
+  &nbsp;<h6>Team:</h6>
+  <p-dropdown [options]="teams" [(ngModel)]="selectedTeam" placeholder="Select a Team" optionLabel="name" [showClear]="true"></p-dropdown>
+  &nbsp;<p-button [hidden]="hideButton" icon="pi pi-check" label="Generate" (click)="SendRequest()"></p-button>
+</div>
+<div style="margin-top: 20px; text-align:center" *ngIf="showProgressSpinner">
   <h3>Generating report..</h3>
   <p-progressSpinner></p-progressSpinner>
 </div>

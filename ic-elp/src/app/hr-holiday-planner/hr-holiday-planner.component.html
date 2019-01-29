@@ -7,6 +7,9 @@
 
   <div class="ui-g-3">
     <app-hr-dashboard-menu></app-hr-dashboard-menu>
+    <div style="padding-top: 20px;">
+      <p-chart type="pie" [data]="requestStateData"></p-chart>
+    </div>
   </div>
   <div class="ui-g-8">
     <app-hr-holiday-management-calendar></app-hr-holiday-management-calendar>

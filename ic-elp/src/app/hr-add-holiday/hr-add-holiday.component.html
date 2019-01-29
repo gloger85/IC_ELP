@@ -1,29 +1,30 @@
 <p-dialog [(visible)]="displayCalendar" modal="true" [width]="480">
 
-    <p-header>
-        <b>Add Holiday</b>
-    </p-header>
+  <p-header>
+    <b>Add Holiday</b>
+  </p-header>
 
-    <form [formGroup]="addHolidayForm">
+  <form [formGroup]="addHolidayForm">
+    <div class="ui-g">
+      <div style="margin: 0 auto;">
+        <p-calendar formControlName="calendar" (onSelect)="CountNumberOfWorkingDays()" (onMonthChange)="DisablePublicpublicHolidaysInCalendar($event.month, $event.year)"
+          [showOtherMonths]="false" [(ngModel)]="rangeDates" [locale]="en" [numberOfMonths]="1" [disabledDays]="[0,6]"
+          [disabledDates]="invalidDates" [readonlyInput]="true" [inline]="true"></p-calendar>
+      </div>
+      <div style="margin: 0 auto;">
+        Type name of the holiday:<br /><textarea [rows]="3" [cols]="45" pInputTextarea autoResize="autoResize" pTooltip="Enter Holiday name"
+          formControlName="holidayName"></textarea>
+      </div>
+      <div style="margin: 0 auto;" *ngIf="rangeDates">
         <div class="ui-g">
-            <div style="margin: 0 auto;">
-              <p-calendar formControlName="calendar" (onSelect) = "CountNumberOfWorkingDays()" (onMonthChange)="DisablePublicpublicHolidaysInCalendar($event.month, $event.year)" [showOtherMonths]="false" [(ngModel)]="rangeDates" [locale]="en" [numberOfMonths]="1" [disabledDays]="[0,6]" [disabledDates]="invalidDates" [readonlyInput]="true" [inline]="true"></p-calendar>
-            </div>
-            <div class="ui-g-12">
-              Type name of the holiday:&nbsp;&nbsp;<input formControlName="holidayName" type="text" pInputText pTooltip="Enter Holiday name">
-            </div>
-            <div class="ui-g-12" *ngIf="rangeDates">
-              <div class="ui-g">
-                Date: <b>{{rangeDates | date:'dd/MM/yyyy'}}</b>
-              </div>
-          </div>
+          Date: <b>{{rangeDates | date:'dd/MM/yyyy'}}</b>
         </div>
-
-
-        <p-footer>
-            <p-button (click)="SendRequest()" icon="pi pi-check" label="Approve"></p-button>
-            &nbsp;
-            <p-button (click)="displayCalendar=false" label="Close" styleClass="ui-button-secondary"></p-button>
-        </p-footer>
-      </form>
+      </div>
+    </div>
+    <div style="margin-top: 20px; text-align:right">
+      <p-button (click)="SendRequest()" icon="pi pi-check" label="Approve"></p-button>
+      &nbsp;
+      <p-button (click)="displayCalendar=false" label="Cancel" styleClass="ui-button-warning"></p-button>
+    </div>
+  </form>
 </p-dialog>

@@ -62,6 +62,7 @@ import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { TooltipModule } from 'primeng/tooltip';
 import { TreeModule } from 'primeng/tree';
+import { HrEventLogComponent } from './hr-event-log/hr-event-log.component';
 
 
 
@@ -98,7 +99,8 @@ import { TreeModule } from 'primeng/tree';
     SharedTeamViewerComponent,
     TreeTestComponent,
     UserAdministrationComponent,
-    UserListComponent
+    UserListComponent,
+    HrEventLogComponent
   ],
   imports: [
     AccordionModule,

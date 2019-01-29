@@ -17,6 +17,7 @@ export class HrReportsComponent implements OnInit {
   teams: Team[];
   selectedTeam: Team;
   showProgressSpinner: boolean;
+  hideButton: boolean;
 
   constructor() {
     this.teams = [
@@ -27,6 +28,7 @@ export class HrReportsComponent implements OnInit {
       {name: 'Lux'}
   ];
   this.showProgressSpinner = false;
+  this.hideButton = false;
    }
 
   ngOnInit() {
@@ -38,5 +40,6 @@ export class HrReportsComponent implements OnInit {
 
   SendRequest(): void {
     this.showProgressSpinner = true;
+    this.hideButton = true;
   }
 }

@@ -29,6 +29,9 @@ export class HrDashboardMenuComponent implements OnInit {
         },
         {
           label: 'Reporting', icon: 'fa fa-fw fa-file-excel-o', routerLink: ['/hr-reports-dashboard']
+        },
+        {
+          label: 'Event log', icon: 'fa fa-fw fa-gears', routerLink: ['/hr-event-log']
         }
     ];
   }

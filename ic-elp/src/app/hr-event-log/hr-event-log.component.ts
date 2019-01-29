@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-hr-reports-dashboard',
-  templateUrl: './hr-reports-dashboard.component.html',
-  styleUrls: ['./hr-reports-dashboard.component.css']
+  selector: 'app-hr-event-log',
+  templateUrl: './hr-event-log.component.html',
+  styleUrls: ['./hr-event-log.component.css']
 })
-export class HrReportsDashboardComponent implements OnInit {
+export class HrEventLogComponent implements OnInit {
 
   public requestStateData: any;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     this.requestStateData = {
@@ -29,6 +30,6 @@ export class HrReportsDashboardComponent implements OnInit {
               ]
           }]
       };
-  }
+    }
 
 }
