@@ -63,8 +63,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { TooltipModule } from 'primeng/tooltip';
 import { TreeModule } from 'primeng/tree';
 import { HrEventLogComponent } from './hr-event-log/hr-event-log.component';
-
-
+import { SliderModule } from 'primeng/slider';
 
 @NgModule({
   declarations: [
@@ -128,7 +127,8 @@ import { HrEventLogComponent } from './hr-event-log/hr-event-log.component';
     TableModule,
     TabViewModule,
     TooltipModule,
-    TreeModule
+    TreeModule,
+    SliderModule
   ],
   providers: [ ],
   bootstrap: [AppComponent]

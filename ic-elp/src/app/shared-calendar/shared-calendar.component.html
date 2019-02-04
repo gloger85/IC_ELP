@@ -1,19 +1,8 @@
-<p-dialog
-  [(visible)]="display"
-  modal="true"
-  [width]="1060"
-  [positionTop]="10"
-  [blockScroll]="true"
-  [contentStyle]="{ 'max-height': '90vh' }"
->
+<p-dialog [(visible)]="display" modal="true" [width]="1060" [positionTop]="10" [blockScroll]="true" [contentStyle]="{ 'max-height': '90vh' }">
   <p-header>
     <!-- <div class="ui-g"> -->
     <div class="ui-g-3" style="text-align:left;">
-      <p-button
-        (click)="display = false"
-        icon="pi pi-arrow-circle-left"
-        label="Back to dashboard"
-      ></p-button>
+      <p-button (click)="display = false" icon="pi pi-arrow-circle-left" label="Back to dashboard"></p-button>
     </div>
     <div class="ui-g-6" style="text-align:center;">
       <b>Request leave datails</b>
@@ -35,20 +24,13 @@
 
         <div class="ui-g-2">Select type of request leave:</div>
         <div class="ui-g-10">
-          <p-dropdown
-            formControlName="requestType"
-            (onChange)="OnRequestTypeChange($event)"
-            [options]="requestTypes"
-          ></p-dropdown>
+          <p-dropdown formControlName="requestType" (onChange)="OnRequestTypeChange($event)" [options]="requestTypes"></p-dropdown>
           &nbsp;
-          <p-message
-            *ngIf="
+          <p-message *ngIf="
               !requestForm.controls['requestType'].valid &&
               requestForm.controls['requestType'].dirty
             "
-            severity="error"
-            text="This field is required"
-          >
+            severity="error" text="This field is required">
           </p-message>
         </div>
       </div>
@@ -56,65 +38,48 @@
       <div class="ui-g-12" *ngIf="requestType == 'Child care'">
         <div class="ui-g-2">Select days or hours:</div>
         <div class="ui-g-10">
-          <p-dropdown
-            formControlName="daysOrHours"
-            pTooltip="Select Days if you want to take 1 or 2 full day(s) child care leave or select Hours if you want to take from 1 to 8 hour(s) child care leave."
-            tooltipPosition="right"
-            (onChange)="OnDaysOrHoursChange($event)"
-            [options]="daysOrHoursOptions"
-          ></p-dropdown>
+          <p-dropdown formControlName="daysOrHours" pTooltip="Select Days if you want to take 1 or 2 full day(s) child care leave or select Hours if you want to take from 1 to 8 hour(s) child care leave."
+            tooltipPosition="right" (onChange)="OnDaysOrHoursChange($event)" [options]="daysOrHoursOptions"></p-dropdown>
         </div>
       </div>
 
-      <div
-        class="ui-g-12"
-        formArrayName="dynamicFormControls"
-        *ngFor="let control of dynamicControls; let i = index"
-      >
+      <div class="ui-g-12" formArrayName="dynamicFormControls" *ngFor="let control of dynamicControls; let i = index">
         <div [formGroupName]="i">
           <div class="ui-g-2">{{ control.label }}</div>
           <div class="ui-g-10">
             <div [ngSwitch]="control.controlType">
               <div *ngSwitchCase="'textbox'">
-                <input
-                  [formControlName]="control.key"
-                  pInputText
-                  [type]="control.type"
-                  [class]="control.class"
-                  [pTooltip]="control.tooltip"
-                /> &nbsp;
-                <p-message
-                *ngIf="
+                <input [formControlName]="control.key" pInputText [type]="control.type" [class]="control.class"
+                  [pTooltip]="control.tooltip" /> &nbsp;
+                <p-message *ngIf="
                 requestForm.controls['dynamicFormControls'].controls[i].get(control.key).invalid &&
                 requestForm.controls['dynamicFormControls'].controls[i].get(control.key).touched
             "
-                severity="error" text="This field is required">
+                  severity="error" text="This field is required">
                 </p-message>
               </div>
-
-              <p-autoComplete
-                *ngSwitchCase="'autocomplete'"
-                [formControlName]="control.key"
-                [suggestions]="control.suggestions(this)"
-                (completeMethod)="control.completeMethod($event,this)"
-                [placeholder]="control.placeholder"
-                [forceSelection]="control.forceSelection"
-                [field]="control.field"
-              ></p-autoComplete>
+              <div class="ui-g-4" *ngIf="displayHoursInputs">
+                <div *ngSwitchCase="'p-slider'" class="control.class">
+                  Start hour: <b>{{rangeHours[0]}}:00</b>, end hour: <b>{{rangeHours[1]}}:00</b>
+                  <p-slider [formControlName]="control.key" [(ngModel)]="rangeHours" [range]="control.range" (onChange)="CountNumberOfHours()"
+                    [min]="0" [max]="control.slideMax" [style]="{'width':'14em'}"></p-slider>&nbsp;
+                </div>
+              </div>
+              <p-autoComplete *ngSwitchCase="'autocomplete'" [formControlName]="control.key" [suggestions]="control.suggestions(this)"
+                (completeMethod)="control.completeMethod($event,this)" [placeholder]="control.placeholder"
+                [forceSelection]="control.forceSelection" [field]="control.field"></p-autoComplete>
 
               <div *ngSwitchCase="'dropdown'">
-                <p-dropdown
-                  *ngIf="control.onChange !== ''"
-                  [formControlName]="control.key"
-                  [options]="control.options"
-                  (onChange)="control.onChange($event,this)"
-                ></p-dropdown>
+                <p-dropdown *ngIf="control.onChange !== ''" [formControlName]="control.key" [options]="control.options"
+                  (onChange)="control.onChange($event,this)"></p-dropdown>
 
-                <p-dropdown
-                  *ngIf="control.onChange == ''"
-                  [formControlName]="control.key"
-                  [options]="control.options"
-                ></p-dropdown>
+                <p-dropdown *ngIf="control.onChange == ''" [formControlName]="control.key" [options]="control.options"></p-dropdown>
+              </div>
+              <div *ngSwitchCase="'dropdown'">
+                <p-dropdown *ngIf="control.onChange !== ''" [formControlName]="control.key" [options]="control.options"
+                  (onChange)="control.onChange($event,this)"></p-dropdown>
+
+                <p-dropdown *ngIf="control.onChange == ''" [formControlName]="control.key" [options]="control.options"></p-dropdown>
               </div>
             </div>
           </div>
@@ -127,55 +92,27 @@
         </div>
 
         <div class="ui-g-4" *ngIf="displayHoursInputs">
-          Hour start:
-          <p-calendar stepMinute="60" [timeOnly]="true"></p-calendar>
+          Requested: <b>{{ requestedNumberOfHours }} hour(s)</b>
         </div>
 
-        <div class="ui-g-4" *ngIf="displayHoursInputs">
-          Hour end: <p-calendar stepMinute="60" [timeOnly]="true"></p-calendar>
-        </div>
-
-        <div class="ui-g-4" *ngIf="displayHoursInputs">
-          Requested: {{ requestedNumberOfHours }} hour(s)
-        </div>
-
-        <div
-          class="ui-g-4"
-          *ngIf="displayRequestSummary && !displayHoursInputs"
-        >
+        <div class="ui-g-4" *ngIf="displayRequestSummary && !displayHoursInputs">
           End date: <b>{{ rangeDates[1] | date: "dd/MM/yyyy" }}</b>
         </div>
-        <div
-          class="ui-g-4"
-          *ngIf="displayRequestSummary && !displayHoursInputs"
-        >
+        <div class="ui-g-4" *ngIf="displayRequestSummary && !displayHoursInputs">
           Requested: <b>{{ requestedNumberOfDays }}</b> day(s)
         </div>
       </div>
     </div>
 
     <div style="margin: 0 auto;">
-      <p-message
-        *ngIf="calendarErrorMsg"
-        severity="error" [text]="calendarErrorMsg">
+      <p-message *ngIf="calendarErrorMsg" severity="error" [text]="calendarErrorMsg">
       </p-message>
-      <p-calendar
-        *ngIf="(requestType && requestType != 'Child care') || daysOrHours"
-        formControlName="calendar"
-        [(ngModel)]="rangeDates"
-        (onSelect)="OnCalendarSelect()"
-        (onMonthChange)="
+      <p-calendar *ngIf="(requestType && requestType != 'Child care') || daysOrHours" formControlName="calendar"
+        [(ngModel)]="rangeDates" (onSelect)="OnCalendarSelect()" (onMonthChange)="
           DisablePublicpublicHolidaysInCalendar($event.month, $event.year)
         "
-        [showOtherMonths]="false"
-        [locale]="en"
-        [numberOfMonths]="3"
-        selectionMode="range"
-        [disabledDays]="invalidDays"
-        [disabledDates]="invalidDates"
-        [readonlyInput]="true"
-        [inline]="true"
-      ></p-calendar>
+        [showOtherMonths]="false" [locale]="en" [numberOfMonths]="3" selectionMode="range" [disabledDays]="invalidDays"
+        [disabledDates]="invalidDates" [readonlyInput]="true" [inline]="true"></p-calendar>
     </div>
 
     <div *ngIf="!requestType || (requestType === 'Child care' && !daysOrHours)">
@@ -192,21 +129,10 @@
       <br />
     </div>
 
-    <p-footer
-      *ngIf="(requestType && requestType != 'Child care') || daysOrHours"
-    >
-      <p-button
-        [disabled]="requestForm.invalid"
-        type="submit"
-        icon="pi pi-check"
-        label="Send request"
-      ></p-button>
+    <p-footer *ngIf="(requestType && requestType != 'Child care') || daysOrHours">
+      <p-button [disabled]="requestForm.invalid" type="submit" icon="pi pi-check" label="Send request"></p-button>
       &nbsp;
-      <p-button
-        (click)="display = false"
-        label="Close"
-        styleClass="ui-button-secondary"
-      ></p-button>
+      <p-button (click)="display = false" label="Close" styleClass="ui-button-secondary"></p-button>
     </p-footer>
   </form>
 </p-dialog>

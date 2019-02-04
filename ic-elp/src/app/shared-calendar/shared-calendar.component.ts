@@ -12,7 +12,9 @@ import {
 import { User } from '../domain/user';
 import { DynamicControlAutocomplete } from '../dynamicControlAutocomplete';
 import { DynamicControlTextbox } from '../dynamicControlTextbox';
+import { DynamicControlSlide } from '../dynamicControlSlide';
 import { Message } from 'primeng/components/common/api';
+
 
 @Component({
   selector: 'app-shared-calendar',
@@ -29,7 +31,7 @@ export class SharedCalendarComponent implements OnInit {
   requestedNumberOfDays: number;
   requestedNumberOfHours: number;
   calendarErrorMsg: string;
-
+  rangeHours: number[];
   requestType: string;
   requestTypes: SelectItem[];
   occasions: SelectItem[];
@@ -153,6 +155,11 @@ export class SharedCalendarComponent implements OnInit {
       ![7, 14].includes(this.requestedNumberOfDays)
     ) {
       this.calendarErrorMsg = 'YOU CAN ONLY CHOOSE 7 OR 14 DAYS.';
+    } else if (
+      this.requestType === 'Child care' &&
+      ![1, 2].includes(this.requestedNumberOfDays)
+    ) {
+      this.calendarErrorMsg = 'YOU CAN ONLY CHOOSE 1 OR 2 DAYS.';
     } else {
       this.calendarErrorMsg = null;
     }
@@ -332,6 +339,18 @@ export class SharedCalendarComponent implements OnInit {
             'NO CHILD CARE ALLOWANCE FOR THE CURRENT YEAR. IT IS NECESSARY ' +
             'TO SUBMIT SIGNED FORM ENTITLING THE EMPLOYE TO CHILD CARE.'
         });
+        this.dynamicControls.push(
+          new DynamicControlSlide({
+            key: 'rangeHour',
+            range: true,
+            slideMin: 0,
+            slideMax: 24,
+            class: 'ui-g-9'
+          })
+        );
+        (<FormArray>this.requestForm.get('dynamicFormControls')).push(
+          this.AddFormGroup('rangeHour')
+        );
         break;
       }
       case 'Maternity leave': {
@@ -402,6 +421,7 @@ export class SharedCalendarComponent implements OnInit {
     }
   }
 
+
   filterUsersBroker(event, __this) {
     __this.filterUsers(event);
   }
@@ -418,7 +438,7 @@ export class SharedCalendarComponent implements OnInit {
     this.filteredUsers = filtered;
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     this.daysOrHours = null;
@@ -431,7 +451,8 @@ export class SharedCalendarComponent implements OnInit {
       calendar: this.rangeDates,
       requestType: [this.requestType, Validators.required],
       daysOrHours: this.daysOrHours,
-      dynamicFormControls: this.fb.array([])
+      dynamicFormControls: this.fb.array([]),
+      rangeHour: this.rangeHours
     });
 
     this.en = {
@@ -529,6 +550,8 @@ export class SharedCalendarComponent implements OnInit {
     );
 
     this.invalidDays = [0, 6];
+    this.rangeHours = [8, 16];
+    this.requestedNumberOfHours = 8;
 
     this.requestTypes = [
       { label: 'Select request type', value: null },
@@ -627,7 +650,15 @@ export class SharedCalendarComponent implements OnInit {
     return workingDaysCount;
   }
 
-  CountNumberOfHours() {}
+  CountNumberOfHours(): number {
+    this.requestedNumberOfHours = this.rangeHours[1] - this.rangeHours[0];
+    if (this.requestedNumberOfHours > 8) {
+      this.calendarErrorMsg = 'YOU CAN ONLY CHOOSE 8 HOURS PER DAY.';
+    } else {
+      this.calendarErrorMsg = null;
+    }
+    return this.requestedNumberOfHours;
+  }
 
   DisablePublicpublicHolidaysInCalendar(month: number, year: number): void {
     this.invalidDates = [];
