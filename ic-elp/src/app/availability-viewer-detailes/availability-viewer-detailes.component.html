@@ -7,7 +7,7 @@
 </div>
 <p-accordion [multiple]="true">
   <p-accordionTab header="Nordicks" [selected]="showTab">
-    <p-dataTable [value]="availabilityCalendarNordicks" [scrollable]="true" [scrollWidth]="'calc(100vh - 204px)'">
+    <p-dataTable [value]="availabilityCalendarNordicks" [scrollable]="true" [scrollWidth]="'calc(100vh - 240px)'">
       <p-column *ngFor="let col of colsNordicks" [sortable]="true" [field]="col.field" [header]="col.header" [style]="{width:'80px', 'text-align': 'center'}">
         <ng-template let-col let-data="rowData" pTemplate>
             <span>{{data[col.field]}}</span>
@@ -16,7 +16,7 @@
     </p-dataTable>
   </p-accordionTab>
   <p-accordionTab header="South Affrica" [selected]="showTab">
-    <p-dataTable [value]="availabilityCalendarSA" [scrollable]="true" [scrollWidth]="'calc(100vh - 204px)'">
+    <p-dataTable [value]="availabilityCalendarSA" [scrollable]="true" [scrollWidth]="'calc(100vh - 240px)'">
       <p-column *ngFor="let col of colsSA" [sortable]="true" [field]="col.field" [header]="col.header" [style]="{width:'80px', 'text-align': 'center'}">
         <ng-template let-col let-data="rowData" pTemplate>
           <span>{{data[col.field]}}</span>
@@ -25,7 +25,7 @@
     </p-dataTable>
   </p-accordionTab>
   <p-accordionTab header="UK" [selected]="showTab">
-    <p-dataTable [value]="availabilityCalendarUK" [scrollable]="true" [scrollWidth]="'calc(100vh - 204px)'">
+    <p-dataTable [value]="availabilityCalendarUK" [scrollable]="true" [scrollWidth]="'calc(100vh - 240px)'">
       <p-column *ngFor="let col of colsUK" [sortable]="true" [field]="col.field" [header]="col.header" [style]="{width:'80px', 'text-align': 'center'}">
           <ng-template let-col let-data="rowData" pTemplate>
               <span>{{data[col.field]}}</span>
