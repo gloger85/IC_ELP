@@ -1,0 +1,22 @@
+<div class="ui-g">
+    <div class="ui-g-12">
+      <div style="padding-top: 20px;">
+        <app-shared-detail-info-bar></app-shared-detail-info-bar>
+      </div>
+    </div>
+
+
+
+      <div class="ui-g-3">
+          <app-shared-dashboard-menu></app-shared-dashboard-menu>
+          <div style="padding-top: 20px;">
+              <p-chart type="pie" [data]="requestStateData"></p-chart>
+          </div>
+      </div>
+      <div class="ui-g-1">
+      </div>
+      <div class="ui-g-8">
+          <app-availability-viewer-detailes></app-availability-viewer-detailes>
+      </div>
+
+  </div>

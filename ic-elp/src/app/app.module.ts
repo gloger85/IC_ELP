@@ -10,6 +10,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './about/about.component';
 import { AppRoutingModule } from './/app-routing.module';
+import { AvailabilityViewerComponent } from './availability-viewer/availability-viewer.component';
+import { AvailabilityViewerDetailesComponent } from './availability-viewer-detailes/availability-viewer-detailes.component';
 import { CompensationHistoryComponent } from './compensation-history/compensation-history.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EventLogComponent } from './event-log/event-log.component';
@@ -17,6 +19,7 @@ import { HrAddHolidayComponent } from './hr-add-holiday/hr-add-holiday.component
 import { HrDashboardComponent } from './hr-dashboard/hr-dashboard.component';
 import { HrDashboardMenuComponent } from './hr-dashboard-menu/hr-dashboard-menu.component';
 import { HrDetailInfoBarComponent } from './hr-detail-info-bar/hr-detail-info-bar.component';
+import { HrEventLogComponent } from './hr-event-log/hr-event-log.component';
 import { HrHolidayManagementCalendarComponent } from './hr-holiday-management-calendar/hr-holiday-management-calendar.component';
 import { HrHolidayPlannerComponent } from './hr-holiday-planner/hr-holiday-planner.component';
 import { HrReportsComponent } from './hr-reports/hr-reports.component';
@@ -26,6 +29,7 @@ import { HrViewerComponent } from './hr-viewer/hr-viewer.component';
 import { LeaveRequestsListComponent } from './leave-requests-list/leave-requests-list.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { ManagerAvailabilityViewerComponent } from './manager-availability-viewer/manager-availability-viewer.component';
 import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard.component';
 import { ManagerInboxComponent } from './manager-inbox/manager-inbox.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
@@ -58,17 +62,18 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { PanelModule } from 'primeng/panel';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { TooltipModule } from 'primeng/tooltip';
 import { TreeModule } from 'primeng/tree';
-import { HrEventLogComponent } from './hr-event-log/hr-event-log.component';
-import { SliderModule } from 'primeng/slider';
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
+    AvailabilityViewerComponent,
+    AvailabilityViewerDetailesComponent,
     CompensationHistoryComponent,
     DashboardComponent,
     EventLogComponent,
@@ -76,6 +81,7 @@ import { SliderModule } from 'primeng/slider';
     HrDashboardComponent,
     HrDashboardMenuComponent,
     HrDetailInfoBarComponent,
+    HrEventLogComponent,
     HrHolidayManagementCalendarComponent,
     HrHolidayPlannerComponent,
     HrReportsComponent,
@@ -99,7 +105,7 @@ import { SliderModule } from 'primeng/slider';
     TreeTestComponent,
     UserAdministrationComponent,
     UserListComponent,
-    HrEventLogComponent
+    ManagerAvailabilityViewerComponent
   ],
   imports: [
     AccordionModule,
@@ -124,11 +130,11 @@ import { SliderModule } from 'primeng/slider';
     PanelModule,
     ProgressSpinnerModule,
     ReactiveFormsModule,
+    SliderModule,
     TableModule,
     TabViewModule,
     TooltipModule,
-    TreeModule,
-    SliderModule
+    TreeModule
   ],
   providers: [ ],
   bootstrap: [AppComponent]

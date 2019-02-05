@@ -22,6 +22,9 @@ export class SharedDashboardMenuComponent implements OnInit {
           label: 'Manager Inbox (4)', icon: 'fa fa-fw fa-inbox', routerLink: ['/manager-inbox']
         },
         {
+          label: 'Availability Viewer', icon: 'fa fa-table', routerLink: ['/manager-availability-viewer']
+        },
+        {
           label: 'Event log', icon: 'fa fa-fw fa-gears', routerLink: ['/event-log']
         }
     ];
