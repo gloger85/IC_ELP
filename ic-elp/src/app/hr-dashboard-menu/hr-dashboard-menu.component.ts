@@ -28,7 +28,7 @@ export class HrDashboardMenuComponent implements OnInit {
           label: 'Holiday Planner', icon: 'fa fa-fw fa-calendar', routerLink: ['/hr-holiday-planner']
         },
         {
-          label: 'Availability Viewer', icon: 'fa fa-table', routerLink: ['/availability-viewer']
+          label: 'Availability Viewer', icon: 'fa fa-fw fa-table', routerLink: ['/availability-viewer']
         },
         {
           label: 'Reporting', icon: 'fa fa-fw fa-file-excel-o', routerLink: ['/hr-reports-dashboard']

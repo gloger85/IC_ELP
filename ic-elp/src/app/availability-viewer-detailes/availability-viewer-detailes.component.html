@@ -2,35 +2,62 @@
   <h1>Availability Viever</h1>
 </div>
 <div style="margin-bottom: 1em">
-  <p-button label="Show All" (click)="openAll()" ></p-button>&nbsp;
-  <p-button label="Close All" (click)="closeAll()" ></p-button>
+  <p-button label="Show All" (click)="openAll()"></p-button>&nbsp;
+  <p-button label="Close All" (click)="closeAll()"></p-button>
 </div>
 <p-accordion [multiple]="true">
   <p-accordionTab header="Nordicks" [selected]="showTab">
-    <p-dataTable [value]="availabilityCalendarNordicks" [scrollable]="true" [scrollWidth]="'calc(100%)'">
-      <p-column *ngFor="let col of colsNordicks" [sortable]="true" [field]="col.field" [header]="col.header" [style]="{width:'80px', 'text-align': 'center'}">
-        <ng-template let-col let-data="rowData" pTemplate>
-            <span>{{data[col.field]}}</span>
-        </ng-template>
-      </p-column>
-    </p-dataTable>
+    <p-table [columns]="colsNordicks" [value]="availabilityCalendarNordicks" [scrollable]="true">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [ngClass]="checkIfWeekend(col.header)">
+            {{col.header| date:'dd-MMM'}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns" [ngClass]="checkLeaveType(rowData[col.field],col.header)">
+            {{rowData[col.field]}}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </p-accordionTab>
   <p-accordionTab header="South Affrica" [selected]="showTab">
-    <p-dataTable [value]="availabilityCalendarSA" [scrollable]="true" [scrollWidth]="'calc(100%)'">
-      <p-column *ngFor="let col of colsSA" [sortable]="true" [field]="col.field" [header]="col.header" [style]="{width:'80px', 'text-align': 'center'}">
-        <ng-template let-col let-data="rowData" pTemplate>
-          <span>{{data[col.field]}}</span>
-        </ng-template>
-      </p-column>
-    </p-dataTable>
+    <p-table [columns]="colsSA" [value]="availabilityCalendarSA" [scrollable]="true">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [ngClass]="checkIfWeekend(col.header)">
+            {{col.header | date:'dd-MMM'}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns" [ngClass]="checkLeaveType(rowData[col.field],col.header)">
+            {{rowData[col.field]}}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </p-accordionTab>
   <p-accordionTab header="UK" [selected]="showTab">
-    <p-dataTable [value]="availabilityCalendarUK" [scrollable]="true" [scrollWidth]="'calc(100%)'">
-      <p-column *ngFor="let col of colsUK" [sortable]="true" [field]="col.field" [header]="col.header" [style]="{width:'80px', 'text-align': 'center'}">
-          <ng-template let-col let-data="rowData" pTemplate>
-              <span ng-format >{{data[col.field]}}</span>
-            </ng-template>
-      </p-column>
-    </p-dataTable>
+    <p-table [columns]="colsUK" [value]="availabilityCalendarUK" [scrollable]="true">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [ngClass]="checkIfWeekend(col.header)">
+            {{col.header | date:'dd-MMM'}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns" [ngClass]="checkLeaveType(rowData[col.field],col.header)">
+            {{rowData[col.field]}}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </p-accordionTab>
 </p-accordion>
