@@ -53,6 +53,7 @@ import { CardModule } from 'primeng/card';
 import { ChartModule } from 'primeng/chart';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DataTableModule } from 'primeng/datatable';
+import { DatePipe } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { HttpModule } from '@angular/http';
@@ -136,7 +137,7 @@ import { TreeModule } from 'primeng/tree';
     TooltipModule,
     TreeModule
   ],
-  providers: [ ],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

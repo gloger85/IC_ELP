@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-availability-viewer-detailes',
@@ -8,28 +10,27 @@ import { Component, OnInit } from '@angular/core';
       background-color: #1CA979 !important;
       color: #ffffff !important;
       text-align: center;
-      width: 80px;
-  }
-
+      font-size: 15px;
+    }
   .sickLeave {
       background-color: #fcbb1c !important;
       color: #ffffff !important;
       text-align: center;
-      width: 80px;
-       }
+      font-size: 12px;
+    }
 
   .weekend {
       background-color: #a3ae8e !important;
       color: #ffffff !important;
       text-align: center;
-      width: 80px;
-       }
+      font-size: 12px;
+    }
 
   .normal {
       background-color: #ffffff !important;
       text-align: center;
-      width: 80px;
-        }
+      font-size: 12px;
+    }
 `]
 })
 export class AvailabilityViewerDetailesComponent implements OnInit {
@@ -40,94 +41,49 @@ export class AvailabilityViewerDetailesComponent implements OnInit {
   colsSA: any[];
   availabilityCalendarUK: any[];
   colsUK: any[];
-  date: Date[];
-  today = new Date();
+  startDate = new Date();
+  dateFrom = new Date();
+  dateTo = new Date();
   showTab: boolean;
   isWeekend: boolean;
-  /* nextMonth = new Date() + 31;
-  dateFrom = this.today.getDay() + '-' + this.today.getMonth() + '-' + this.today.getFullYear();
-  dateTo = this.today.getDay() + '-' + this.today.getMonth() + 1 + '-' + this.today.getFullYear(); */
+  temp = new Object();
 
-  constructor() { }
+  constructor(public datepipe: DatePipe, private location: Location) { }
 
   ngOnInit() {
     this.showTab = true;
     this.isWeekend = false;
+    this.dateFrom = new Date(this.dateFrom.getFullYear(), this.dateFrom.getMonth(), 1);
+    this.dateTo = new Date(this.dateFrom.getFullYear(), this.dateFrom.getMonth(), this.dateFrom.getDate() + 30);
+
+    console.log('from: ' + this.dateFrom);
+    console.log('to: ' + this.dateTo);
+
     this.colsNordicks = [{
-      /*
-      field: 'StudentId',
-      header: this.dateFrom
-    }, {
-      field: 'Dept',
-      header: this.dateTo
-    }, {
-      field: 'PassoutYear',
-      header: 'Passout Year'
-      */
-      field: 'number',
-      header: ''
-    },
-    {
       field: 'nameSurname',
       header: ''
-    },
-    {
-      field: '2019-01-01',
-      header: '2019-01-01'
-    },
-    {
-      field: '2019-01-02',
-      header: '2019-01-02'
-    },
-    {
-      field: '2019-01-03',
-      header: '2019-01-03'
-    },
-    {
-      field: '2019-01-04',
-      header: '2019-01-04'
-    },
-    {
-      field: '2019-01-05',
-      header: '2019-01-05'
-    },
-    {
-      field: '2019-01-06',
-      header: '2019-01-06'
-    },
-    {
-      field: '2019-01-07',
-      header: '2019-01-07'
-    },
-    {
-      field: '2019-01-08',
-      header: '2019-01-08'
-    },
-    {
-      field: '2019-01-09',
-      header: '2019-01-09'
-    },
-    ];
+    }];
 
-    this.availabilityCalendarNordicks = [
+     this.availabilityCalendarNordicks = [
       {
-        number: '1',
         nameSurname: 'Andrzej Apple',
-        '2019-01-01': 'SL'
+        '2019-02-14': 'SL',
+        '2019-02-15': 'SL'
       },
       {
-        number: '2',
         nameSurname: 'Greg Don Vasyl',
-        '2019-01-02': 'SL'
+        '2019-02-12': 'SL'
       },
       {
         number: '3',
         nameSurname: 'Dżołana Amaizing',
-        '2019-01-02': 'H'
+        '2019-02-18': 'H'
       },
       {
         number: '4',
-        nameSurname: 'Dżanusz Polic'
+        nameSurname: 'Dżanusz Polic',
+        '2019-02-12': 'H',
+        '2019-02-13': 'H'
       },
       {
         number: '5',
@@ -135,119 +91,37 @@ export class AvailabilityViewerDetailesComponent implements OnInit {
       }
     ];
     this.colsSA = [{
-      field: 'number',
-      header: ''
-    },
-    {
       field: 'nameSurname',
       header: ''
-    },
-    {
-      field: '2019-01-01',
-      header: '2019-01-01'
-    },
-    {
-      field: '2019-01-02',
-      header: '2019-01-02'
-    },
-    {
-      field: '2019-01-03',
-      header: '2019-01-03'
-    },
-    {
-      field: '2019-01-04',
-      header: '2019-01-04'
-    },
-    {
-      field: '2019-01-05',
-      header: '2019-01-05'
-    },
-    {
-      field: '2019-01-06',
-      header: '2019-01-06'
-    },
-    {
-      field: '2019-01-07',
-      header: '2019-01-07'
-    },
-    {
-      field: '2019-01-08',
-      header: '2019-01-08'
-    },
-    {
-      field: '2019-01-09',
-      header: '2019-01-09'
-    },
-    ];
+    }];
 
     this.availabilityCalendarSA = [
       {
         number: '1',
         nameSurname: 'Jaroslaw Psikuta',
-        '2019-01-02': 'H'
+        '2019-02-02': 'H'
       },
       {
         number: '2',
         nameSurname: 'Radek Orzel',
-        '2019-01-07': 'SL'
+        '2019-02-07': 'SL'
       },
       {
         number: '3',
         nameSurname: 'Wielki Szu',
-        '2019-01-08': 'H'
+        '2019-02-08': 'H'
       },
       {
         number: '4',
         nameSurname: 'Thor Odinson',
-        '2019-01-08': ''
+        '2019-02-08': ''
       }
     ];
 
     this.colsUK = [{
-      field: 'number',
-      header: ''
-    },
-    {
       field: 'nameSurname',
       header: ''
-    },
-    {
-      field: '2019-01-01',
-      header: '2019-01-01'
-    },
-    {
-      field: '2019-01-02',
-      header: '2019-01-02'
-    },
-    {
-      field: '2019-01-03',
-      header: '2019-01-03'
-    },
-    {
-      field: '2019-01-04',
-      header: '2019-01-04'
-    },
-    {
-      field: '2019-01-05',
-      header: '2019-01-05'
-    },
-    {
-      field: '2019-01-06',
-      header: '2019-01-06'
-    },
-    {
-      field: '2019-01-07',
-      header: '2019-01-07'
-    },
-    {
-      field: '2019-01-08',
-      header: '2019-01-08'
-    },
-    {
-      field: '2019-01-09',
-      header: '2019-01-09'
-    },
-    ];
+    }];
 
     this.availabilityCalendarUK = [
       {
@@ -279,10 +153,16 @@ export class AvailabilityViewerDetailesComponent implements OnInit {
       },
       {
         number: '6',
-        nameSurname: 'Chan Zolo',
+        nameSurname: 'Chan Ziolo',
         '2019-01-04': 'H'
       }
     ];
+
+    for (const q = this.dateFrom; q < this.dateTo; q.setDate(q.getDate() + 1)) {
+      this.colsNordicks.push({ field: this.datepipe.transform(q, 'yyyy-MM-dd'), header: this.datepipe.transform(q, 'yyyy-MM-dd') });
+      this.colsSA.push({ field: this.datepipe.transform(q, 'yyyy-MM-dd'), header: this.datepipe.transform(q, 'yyyy-MM-dd') });
+      this.colsUK.push({ field: this.datepipe.transform(q, 'yyyy-MM-dd'), header: this.datepipe.transform(q, 'yyyy-MM-dd') });
+      }
   }
 
   openAll() {
@@ -292,6 +172,7 @@ export class AvailabilityViewerDetailesComponent implements OnInit {
   closeAll() {
     this.showTab = false;
   }
+
   checkLeaveType(leaveType, weekDate) {
     let style = 'normal';
     this.checkIfWeekend(weekDate);
@@ -310,10 +191,10 @@ export class AvailabilityViewerDetailesComponent implements OnInit {
     }
 
   }
+
   checkIfWeekend(weekDate) {
     let style = null;
     const myDate = new Date(weekDate);
-    console.log (weekDate);
     if (myDate.getDay() === 0 || myDate.getDay() === 6) {
       this.isWeekend = true;
       return style = 'weekend';
@@ -322,5 +203,35 @@ export class AvailabilityViewerDetailesComponent implements OnInit {
       this.isWeekend = false;
       return style = 'normal';
     } /* saturday is 6th day and sunday 0 day of the week */
+  }
+
+  prevWeek() {
+    alert('i co jeszcze?!'); /*
+    this.dateFrom = new Date(this.dateFrom.getFullYear(), this.dateFrom.getMonth(), this.dateFrom.getDate() - 7);
+    this.dateTo = new Date(this.dateTo.getFullYear(), this.dateTo.getMonth(), this.dateTo.getDate() - 7);
+    /* while (this.colsNordicks.length > 2) {
+      this.colsNordicks.pop();
+  }
+    for (const q = this.dateFrom; q < this.dateTo; q.setDate(q.getDate() + 1)) {
+      this.colsNordicks.push({ field: this.datepipe.transform(q, 'yyyy-MM-dd'), header: this.datepipe.transform(q, 'yyyy-MM-dd') });
+    }*/
+  }
+
+  nextWeek() {
+    alert('chcialbys!');
+/*
+
+    this.dateFrom = new Date(this.dateFrom.getFullYear(), this.dateFrom.getMonth(), this.dateFrom.getDate() + 7);
+    this.dateTo = new Date(this.dateTo.getFullYear(), this.dateTo.getMonth(), this.dateTo.getDate() + 7);
+    while (this.colsNordicks.length > 2) {
+      this.colsNordicks.pop();
+    }
+    for (const q = this.dateFrom; q < this.dateTo; q.setDate(q.getDate() + 1)) {
+      this.colsNordicks.push({ field: this.datepipe.transform(q, 'yyyy-MM-dd'), header: this.datepipe.transform(q, 'yyyy-MM-dd') });
+    }
+    */
+  }
+  GoBack(): void {
+    this.location.back();
   }
 }

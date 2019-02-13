@@ -1,13 +1,18 @@
 <div style="text-align:center">
   <h1>Availability Viever</h1>
 </div>
-<div style="margin-bottom: 1em">
+<div style="text-align:center">
+  <p-button (click)="GoBack()" icon="pi pi-arrow-circle-left" label="Back" styleClass="ui-button-warning"></p-button>
+  &nbsp;
   <p-button label="Show All" (click)="openAll()"></p-button>&nbsp;
-  <p-button label="Close All" (click)="closeAll()"></p-button>
+  <p-button label="Close All" (click)="closeAll()"></p-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>February</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <p-button icon="pi pi-chevron-left" (click)="prevWeek()"></p-button>&nbsp;
+  <p-button icon="pi pi-chevron-right" (click)="nextWeek()"></p-button>
 </div>
 <p-accordion [multiple]="true">
   <p-accordionTab header="Nordicks" [selected]="showTab">
-    <p-table [columns]="colsNordicks" [value]="availabilityCalendarNordicks" [scrollable]="true">
+    <p-table [columns]="colsNordicks" [value]="availabilityCalendarNordicks">
       <ng-template pTemplate="header" let-columns>
         <tr>
           <th *ngFor="let col of columns" [ngClass]="checkIfWeekend(col.header)">
@@ -25,7 +30,7 @@
     </p-table>
   </p-accordionTab>
   <p-accordionTab header="South Affrica" [selected]="showTab">
-    <p-table [columns]="colsSA" [value]="availabilityCalendarSA" [scrollable]="true">
+    <p-table [columns]="colsSA" [value]="availabilityCalendarSA">
       <ng-template pTemplate="header" let-columns>
         <tr>
           <th *ngFor="let col of columns" [ngClass]="checkIfWeekend(col.header)">
@@ -43,7 +48,7 @@
     </p-table>
   </p-accordionTab>
   <p-accordionTab header="UK" [selected]="showTab">
-    <p-table [columns]="colsUK" [value]="availabilityCalendarUK" [scrollable]="true">
+    <p-table [columns]="colsUK" [value]="availabilityCalendarUK">
       <ng-template pTemplate="header" let-columns>
         <tr>
           <th *ngFor="let col of columns" [ngClass]="checkIfWeekend(col.header)">
