@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../domain/user';
 import { Location } from '@angular/common';
+import { SelectItem } from 'primeng/api';
 
 @Component({
   selector: 'app-user-list',
@@ -10,8 +11,17 @@ import { Location } from '@angular/common';
 export class UserListComponent implements OnInit {
 
   public users: User[];
+  public teams: SelectItem[];
 
-  constructor(private location: Location) { }
+  constructor(private location: Location) {
+    this.teams = [
+      {label: 'Aon 360', value: {id: 1, name: 'Aon 360'}},
+      {label: 'Germany', value: {id: 1, name: 'Germany'}},
+      {label: 'Luxemburg', value: {id: 1, name: 'Luxemburg'}},
+      {label: 'Nordics', value: {id: 1, name: 'Nordics'}},
+      {label: 'South Africa', value: {id: 1, name: 'South Africa'}},
+    ];
+   }
 
   ngOnInit() {
     this.users = [
