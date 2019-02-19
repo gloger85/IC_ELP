@@ -61,6 +61,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MegaMenuModule } from 'primeng/megamenu';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { PanelModule } from 'primeng/panel';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { SliderModule } from 'primeng/slider';
@@ -128,6 +129,7 @@ import { TreeModule } from 'primeng/tree';
     MegaMenuModule,
     MessageModule,
     MessagesModule,
+    MultiSelectModule,
     PanelModule,
     ProgressSpinnerModule,
     ReactiveFormsModule,
