@@ -1,5 +1,5 @@
 <div style="text-align:center">
-  <h1>Availability Viever</h1>
+  <h1 class="first">Availability Viever<br /><br /></h1>
 </div>
 <div style="text-align:center">
   <p-button (click)="GoBack()" icon="pi pi-arrow-circle-left" label="Back" styleClass="ui-button-warning"></p-button>
@@ -22,7 +22,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-rowData let-columns="columns">
         <tr>
-          <td *ngFor="let col of columns" [ngClass]="checkLeaveType(rowData[col.field],col.header)">
+          <td *ngFor="let col of columns" [ngClass]="checkColumnType(rowData[col.field],col.header)">
             {{rowData[col.field]}}
           </td>
         </tr>
@@ -40,7 +40,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-rowData let-columns="columns">
         <tr>
-          <td *ngFor="let col of columns" [ngClass]="checkLeaveType(rowData[col.field],col.header)">
+          <td *ngFor="let col of columns" [ngClass]="checkColumnType(rowData[col.field],col.header)">
             {{rowData[col.field]}}
           </td>
         </tr>
@@ -58,7 +58,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-rowData let-columns="columns">
         <tr>
-          <td *ngFor="let col of columns" [ngClass]="checkLeaveType(rowData[col.field],col.header)">
+          <td *ngFor="let col of columns" [ngClass]="checkColumnType(rowData[col.field],col.header)">
             {{rowData[col.field]}}
           </td>
         </tr>

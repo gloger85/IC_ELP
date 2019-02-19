@@ -10,26 +10,32 @@ import { Location } from '@angular/common';
       background-color: #1CA979 !important;
       color: #ffffff !important;
       text-align: center;
-      font-size: 15px;
+      font-size: '12px';
     }
   .sickLeave {
       background-color: #fcbb1c !important;
       color: #ffffff !important;
       text-align: center;
-      font-size: 12px;
+      font-size: '12px';
     }
 
   .weekend {
       background-color: #a3ae8e !important;
       color: #ffffff !important;
       text-align: center;
-      font-size: 12px;
+      font-size: '12px';
     }
 
   .normal {
       background-color: #ffffff !important;
       text-align: center;
-      font-size: 12px;
+      font-size: '12px';
+    }
+
+  .emptyTh {
+      text-align: left;
+      width: 120px;
+      font-size: '8px';
     }
 `]
 })
@@ -64,7 +70,7 @@ export class AvailabilityViewerDetailesComponent implements OnInit {
       header: ''
     }];
 
-     this.availabilityCalendarNordicks = [
+    this.availabilityCalendarNordicks = [
       {
         nameSurname: 'Andrzej Apple',
         '2019-02-14': 'SL',
@@ -162,7 +168,7 @@ export class AvailabilityViewerDetailesComponent implements OnInit {
       this.colsNordicks.push({ field: this.datepipe.transform(q, 'yyyy-MM-dd'), header: this.datepipe.transform(q, 'yyyy-MM-dd') });
       this.colsSA.push({ field: this.datepipe.transform(q, 'yyyy-MM-dd'), header: this.datepipe.transform(q, 'yyyy-MM-dd') });
       this.colsUK.push({ field: this.datepipe.transform(q, 'yyyy-MM-dd'), header: this.datepipe.transform(q, 'yyyy-MM-dd') });
-      }
+    }
   }
 
   openAll() {
@@ -173,40 +179,45 @@ export class AvailabilityViewerDetailesComponent implements OnInit {
     this.showTab = false;
   }
 
-  checkLeaveType(leaveType, weekDate) {
+  checkColumnType(leaveType, weekDate) {
     let style = 'normal';
     this.checkIfWeekend(weekDate);
-    if (this.isWeekend) {
-      return style = 'weekend';
-    }
+
     switch (leaveType) {
       case 'H':
-        return style = 'holiday';
+        style = 'holiday';
         break;
       case 'SL':
-        return style = 'sickLeave';
+        style = 'sickLeave';
         break;
       default:
-        return style = 'normal';
+        style = 'normal';
     }
-
+    if (this.isWeekend) {
+      style = 'weekend';
+    }
+    return style;
   }
 
   checkIfWeekend(weekDate) {
     let style = null;
     const myDate = new Date(weekDate);
+
     if (myDate.getDay() === 0 || myDate.getDay() === 6) {
       this.isWeekend = true;
-      return style = 'weekend';
-
+      style = 'weekend';
     } else {
       this.isWeekend = false;
-      return style = 'normal';
+      style = 'normal';
     } /* saturday is 6th day and sunday 0 day of the week */
+    if (!weekDate) {
+      style = 'emptyTh';
+    }
+    return style;
   }
 
   prevWeek() {
-    alert('i co jeszcze?!'); /*
+    alert('TODO: logika do pokazywania miesiaca wczesniej'); /*
     this.dateFrom = new Date(this.dateFrom.getFullYear(), this.dateFrom.getMonth(), this.dateFrom.getDate() - 7);
     this.dateTo = new Date(this.dateTo.getFullYear(), this.dateTo.getMonth(), this.dateTo.getDate() - 7);
     /* while (this.colsNordicks.length > 2) {
@@ -218,18 +229,18 @@ export class AvailabilityViewerDetailesComponent implements OnInit {
   }
 
   nextWeek() {
-    alert('chcialbys!');
-/*
+    alert('TODO: logika do pokazywania miesiaca pozniej');
+    /*
 
-    this.dateFrom = new Date(this.dateFrom.getFullYear(), this.dateFrom.getMonth(), this.dateFrom.getDate() + 7);
-    this.dateTo = new Date(this.dateTo.getFullYear(), this.dateTo.getMonth(), this.dateTo.getDate() + 7);
-    while (this.colsNordicks.length > 2) {
-      this.colsNordicks.pop();
-    }
-    for (const q = this.dateFrom; q < this.dateTo; q.setDate(q.getDate() + 1)) {
-      this.colsNordicks.push({ field: this.datepipe.transform(q, 'yyyy-MM-dd'), header: this.datepipe.transform(q, 'yyyy-MM-dd') });
-    }
-    */
+        this.dateFrom = new Date(this.dateFrom.getFullYear(), this.dateFrom.getMonth(), this.dateFrom.getDate() + 7);
+        this.dateTo = new Date(this.dateTo.getFullYear(), this.dateTo.getMonth(), this.dateTo.getDate() + 7);
+        while (this.colsNordicks.length > 2) {
+          this.colsNordicks.pop();
+        }
+        for (const q = this.dateFrom; q < this.dateTo; q.setDate(q.getDate() + 1)) {
+          this.colsNordicks.push({ field: this.datepipe.transform(q, 'yyyy-MM-dd'), header: this.datepipe.transform(q, 'yyyy-MM-dd') });
+        }
+        */
   }
   GoBack(): void {
     this.location.back();
