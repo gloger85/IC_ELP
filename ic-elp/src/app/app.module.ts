@@ -20,6 +20,7 @@ import { HrDashboardComponent } from './hr-dashboard/hr-dashboard.component';
 import { HrDashboardMenuComponent } from './hr-dashboard-menu/hr-dashboard-menu.component';
 import { HrDetailInfoBarComponent } from './hr-detail-info-bar/hr-detail-info-bar.component';
 import { HrEventLogComponent } from './hr-event-log/hr-event-log.component';
+import { HrHolidayPlannerCalendarComponent } from './hr-holiday-planner-calendar/hr-holiday-planner-calendar.component';
 import { HrHolidayManagementCalendarComponent } from './hr-holiday-management-calendar/hr-holiday-management-calendar.component';
 import { HrHolidayPlannerComponent } from './hr-holiday-planner/hr-holiday-planner.component';
 import { HrReportsComponent } from './hr-reports/hr-reports.component';
@@ -84,6 +85,7 @@ import { TreeModule } from 'primeng/tree';
     HrDashboardMenuComponent,
     HrDetailInfoBarComponent,
     HrEventLogComponent,
+    HrHolidayPlannerCalendarComponent,
     HrHolidayManagementCalendarComponent,
     HrHolidayPlannerComponent,
     HrReportsComponent,

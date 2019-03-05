@@ -131,4 +131,11 @@ export class TreeTestComponent implements OnInit {
         },
     ];
   }
+
+  public approveRequests() {
+  }
+
+  public cancelRequests() {
+
+  }
 }

@@ -9,7 +9,7 @@ import { MenuItem } from 'primeng/components/common/menuitem';
 
 export class HrDashboardMenuComponent implements OnInit {
 
-  private mainMenuItems: MenuItem[];
+  public mainMenuItems: MenuItem[];
 
   constructor() { }
 
