@@ -68,6 +68,9 @@ import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { TooltipModule } from 'primeng/tooltip';
 import { TreeModule } from 'primeng/tree';
+import { AuthService } from './services/auth/auth.service';
+import { AuthGuard } from './services/route-guards/auth-guard.guard';
+import { httpInterceptorproviders } from './services/auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -137,7 +140,12 @@ import { TreeModule } from 'primeng/tree';
     TooltipModule,
     TreeModule
   ],
-  providers: [DatePipe],
+  providers: [
+    DatePipe,
+    AuthService,
+    AuthGuard,
+    httpInterceptorproviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

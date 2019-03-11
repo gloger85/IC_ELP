@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CommonModule } from '@angular/common';
 
 import { AboutComponent } from './about/about.component';
 import { AvailabilityViewerComponent } from './availability-viewer/availability-viewer.component';
@@ -19,28 +18,109 @@ import { ManagerInboxComponent } from './manager-inbox/manager-inbox.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { PasswordCreateNewComponent } from './password-create-new/password-create-new.component';
 import { UserAdministrationComponent } from './user-administration/user-administration.component';
-
+import { AuthGuard } from './services/route-guards/auth-guard.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'about', component: AboutComponent },
-  { path: 'availability-viewer', component: AvailabilityViewerComponent},
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'event-log', component: EventLogComponent },
-  { path: 'hr-event-log', component: HrEventLogComponent },
-  { path: 'hr-dashboard', component: HrDashboardComponent },
-  { path: 'hr-holiday-planner', component: HrHolidayPlannerComponent },
-  { path: 'hr-reports-dashboard', component: HrReportsDashboardComponent },
-  { path: 'hr-settings', component: HrSettingsComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'logout', component: LogoutComponent },
-  { path: 'manager-availability-viewer', component: ManagerAvailabilityViewerComponent },
-  { path: 'manager-dashboard', component: ManagerDashboardComponent },
-  { path: 'manager-inbox', component: ManagerInboxComponent },
-  { path: 'password-reset', component: PasswordResetComponent },
-  { path: 'password-create-new', component: PasswordCreateNewComponent },
-  { path: 'user-administration', component: UserAdministrationComponent}
-  ];
+  {
+    path: '',
+    canActivateChild: [AuthGuard],
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: '/login'
+      },
+      {
+        path: 'logout',
+        component: LogoutComponent,
+        redirectTo: ''
+      },
+      { 
+        path: 'about', 
+        component: AboutComponent,
+        data: {}
+      },
+      { 
+        path: 'availability-viewer', 
+        component: AvailabilityViewerComponent,
+        data: {}
+      },
+      { 
+        path: 'dashboard', 
+        component: DashboardComponent, 
+        data: { allowedRoles: ['ADMIN']}
+      },
+      { 
+        path: 'event-log', 
+        component: EventLogComponent ,
+        data: {}
+      },
+      { 
+        path: 'hr-event-log', 
+        component: HrEventLogComponent,
+        data: {} 
+      },
+      { 
+        path: 'hr-dashboard', 
+        component: HrDashboardComponent,
+        data: {} 
+      },
+      { 
+        path: 'hr-holiday-planner', 
+        component: HrHolidayPlannerComponent,
+        data: {}
+      },
+      { 
+        path: 'hr-reports-dashboard', 
+        component: HrReportsDashboardComponent,
+        data: {} 
+      },
+      { path: 'hr-settings', 
+        component: HrSettingsComponent,
+        data: {} 
+      },
+      { 
+        path: 'login', 
+        component: LoginComponent ,
+        data: {}
+      },
+      { 
+        path: 'logout', 
+        component: LogoutComponent,
+        data: {} 
+      },
+      { 
+        path: 'manager-availability-viewer', 
+        component: ManagerAvailabilityViewerComponent,
+        data: {} 
+      },
+      { 
+        path: 'manager-dashboard', 
+        component: ManagerDashboardComponent,
+        data: {}
+      },
+      { 
+        path: 'manager-inbox', 
+        component: ManagerInboxComponent,
+        data: {} 
+      },
+      { 
+        path: 'password-reset', 
+        component: PasswordResetComponent,
+        data: {} 
+      },
+      { 
+        path: 'password-create-new', 
+        component: PasswordCreateNewComponent,
+        data: {} 
+      },
+      { 
+        path: 'user-administration', 
+        component: UserAdministrationComponent
+      }
+    ]
+  }
+];
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],

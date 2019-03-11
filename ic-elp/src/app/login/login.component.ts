@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import {Message} from 'primeng/components/common/api';
+import { AuthService } from '../services/auth/auth.service';
+import { TokenStorageService } from '../services/auth/token-storage.service';
+import { AuthLoginInfo } from './authorization/login-info';
 
 @Component({
   selector: 'app-login',
@@ -10,52 +12,63 @@ import {Message} from 'primeng/components/common/api';
 
 export class LoginComponent implements OnInit {
 
-  msgs: Message[] = [];
-
   private _loginRoutingMap: Map<string, string> = new Map([
-      ['hr@infosys.com', 'hr-dashboard'],
-      ['manager@infosys.com', 'manager-dashboard'],
-      ['member@infosys.com', 'dashboard']
-    ]);
+    ['hr@infosys.com', 'hr-dashboard'],
+    ['manager@infosys.com', 'manager-dashboard'],
+    ['member@infosys.com', 'dashboard']
+  ]);
 
-  constructor(private router: Router) {
+
+  form: any = {};
+  isLoggedIn =false;
+  isLoginFailed = false;
+  // msgs: Message[] = [];
+  errorMessage: string = '';
+  roles: string[] = [];
+  private loginInfo: AuthLoginInfo;
+
+  constructor(private router: Router, private authService: AuthService, private tokenStorage: TokenStorageService) {
   }
 
   ngOnInit() {
-  }
-
-  public login(email: string): void {
-    // tslint:disable-next-line:no-console
-    console.info(`Email entered: ${email}`);
-    email = email.trim().toLocaleLowerCase();
-
-    if (!email) {
-      this.showErrorMessage();
-      console.error('Email not provided');
-      return;
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.roles = this.tokenStorage.getAuthorities();
     }
-
-    // tslint:disable-next-line:no-console
-    console.info(`Navigate to: ${this.getDashboardUrlByEmail(email)}`);
-    this.router.navigate([`./${this.getDashboardUrlByEmail(email)}`]);
   }
 
-  private getDashboardUrlByEmail(email: string): string {
-    const dashboardUrl: string = this._loginRoutingMap.get(email);
+  onSubmit() {
+    console.log(this.form);
 
-    // TODO: We should look for better option here.
-    if (typeof dashboardUrl === 'undefined' || !dashboardUrl) {
-      this.showErrorMessage();
-    }
+    this.loginInfo = new AuthLoginInfo(
+      this.form.username,
+      this.form.password
+    );
 
-    return dashboardUrl;
+    this.authService.attemptLogin(this.loginInfo).subscribe(
+      data => {
+        console.log(data);
+        this.tokenStorage.saveToken(data.token);
+        this.tokenStorage.saveUsername(data.username);
+        this.tokenStorage.saveAuthorities(data.authorities);
+
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.roles = this.tokenStorage.getAuthorities();
+        // window.location.reload();
+        this.router.navigateByUrl('/dashboard')
+      },
+      error => {
+        console.log(error);
+        this.errorMessage = "Email or password is not valid";
+        this.isLoginFailed = true;
+      }
+    )
   }
 
-  public showErrorMessage() : void{
-    // tslint:disable-next-line:no-console
-    console.error('Incorect e-mail and/or password');
-    this.msgs = [];
-    this.msgs.push({severity:'error', summary:'Incorect e-mail and/or password', detail:'Please make sure that the email and password are correct'});
-    return;
+  reloadPage() {
+    window.location.reload();
   }
 }
+
+
