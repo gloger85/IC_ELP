@@ -20,6 +20,7 @@ import { HrDashboardComponent } from './hr-dashboard/hr-dashboard.component';
 import { HrDashboardMenuComponent } from './hr-dashboard-menu/hr-dashboard-menu.component';
 import { HrDetailInfoBarComponent } from './hr-detail-info-bar/hr-detail-info-bar.component';
 import { HrEventLogComponent } from './hr-event-log/hr-event-log.component';
+import { HrHolidayPlannerCalendarComponent } from './hr-holiday-planner-calendar/hr-holiday-planner-calendar.component';
 import { HrHolidayManagementCalendarComponent } from './hr-holiday-management-calendar/hr-holiday-management-calendar.component';
 import { HrHolidayPlannerComponent } from './hr-holiday-planner/hr-holiday-planner.component';
 import { HrReportsComponent } from './hr-reports/hr-reports.component';
@@ -61,6 +62,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MegaMenuModule } from 'primeng/megamenu';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { PanelModule } from 'primeng/panel';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { SliderModule } from 'primeng/slider';
@@ -86,6 +88,7 @@ import { httpInterceptorproviders } from './services/auth/auth-interceptor.servi
     HrDashboardMenuComponent,
     HrDetailInfoBarComponent,
     HrEventLogComponent,
+    HrHolidayPlannerCalendarComponent,
     HrHolidayManagementCalendarComponent,
     HrHolidayPlannerComponent,
     HrReportsComponent,
@@ -131,6 +134,7 @@ import { httpInterceptorproviders } from './services/auth/auth-interceptor.servi
     MegaMenuModule,
     MessageModule,
     MessagesModule,
+    MultiSelectModule,
     PanelModule,
     ProgressSpinnerModule,
     ReactiveFormsModule,

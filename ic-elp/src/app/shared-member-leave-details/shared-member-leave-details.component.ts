@@ -10,11 +10,10 @@ import { SharedCalendarComponent } from '../shared-calendar/shared-calendar.comp
 export class SharedMemberLeaveDetailsComponent implements OnInit {
 
   @ViewChild(SharedCalendarComponent)
-  private sharedCalendar: SharedCalendarComponent;
+  public sharedCalendar: SharedCalendarComponent;
 
-  constructor(
-    private router: Router
-  ) { }
+  constructor(public router: Router) {
+  }
 
   ngOnInit() {
   }

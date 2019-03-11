@@ -4,7 +4,8 @@
       <app-hr-detail-info-bar></app-hr-detail-info-bar>
     </div>
   </div>
-  <div style="position:absolute; left:10px; right:10px; padding-top: 120px;">
-    <app-availability-viewer-detailes></app-availability-viewer-detailes>
-  </div>
 </div>
+<p-dialog [visible]="true" [modal]="true" [closable]="false"
+[maximizable]="true" [responsive]="true" [width]="1680" >
+  <app-availability-viewer-detailes></app-availability-viewer-detailes>
+</p-dialog>

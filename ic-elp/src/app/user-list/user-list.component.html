@@ -124,6 +124,12 @@
                 <div class="ui-g-5"><input #registeredOverhours type="text" pInputText value="123"></div>
               </div>
             </p-card>
+            <p-card class="ui-g-12">
+              <div class="ui-g">
+                <div class="ui-g-3"><b>Manager of team:</b></div>
+                <div class="ui-g-5"><p-multiSelect [style]="{'width': '100%'}" [options]="teams" defaultLabel="None"></p-multiSelect></div>
+              </div>
+            </p-card>
           </div>
         </div>
         <div class="modal-footer">
