@@ -11,18 +11,10 @@ import { AuthLoginInfo } from './authorization/login-info';
 })
 
 export class LoginComponent implements OnInit {
-
-  private _loginRoutingMap: Map<string, string> = new Map([
-    ['hr@infosys.com', 'hr-dashboard'],
-    ['manager@infosys.com', 'manager-dashboard'],
-    ['member@infosys.com', 'dashboard']
-  ]);
-
-
+  
   form: any = {};
   isLoggedIn =false;
   isLoginFailed = false;
-  // msgs: Message[] = [];
   errorMessage: string = '';
   roles: string[] = [];
   private loginInfo: AuthLoginInfo;
@@ -38,8 +30,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form);
-
     this.loginInfo = new AuthLoginInfo(
       this.form.username,
       this.form.password
@@ -47,19 +37,16 @@ export class LoginComponent implements OnInit {
 
     this.authService.attemptLogin(this.loginInfo).subscribe(
       data => {
-        console.log(data);
         this.tokenStorage.saveToken(data.token);
         this.tokenStorage.saveUsername(data.username);
         this.tokenStorage.saveAuthorities(data.authorities);
-
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getAuthorities();
-        // window.location.reload();
+        this.newStatus(this.isLoggedIn);
+        this.roles = this.tokenStorage.getAuthorities();        
         this.router.navigateByUrl('/dashboard')
       },
       error => {
-        console.log(error);
         this.errorMessage = "Email or password is not valid";
         this.isLoginFailed = true;
       }
@@ -68,6 +55,10 @@ export class LoginComponent implements OnInit {
 
   reloadPage() {
     window.location.reload();
+  }
+
+  private newStatus(value: boolean) {
+    this.authService.changeStatus(value);
   }
 }
 

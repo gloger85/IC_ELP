@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthLoginInfo } from 'src/app/login/authorization/login-info';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { JwtResponse } from 'src/app/login/authorization/jwt-response';
 import { TokenStorageService } from './token-storage.service';
 
@@ -16,10 +16,17 @@ const httpOptions = {
 // CanActivate interface manages navigation business rules
 export class AuthService {
 
+  private statusSource = new BehaviorSubject<boolean>(false);
+  currentStatus = this.statusSource.asObservable();
+
   private loginUrl = 'http://localhost:8080/login';
   private logoutUrl = 'http://localhost:8080/logout';
 
   constructor(private http: HttpClient, private tokenStorage: TokenStorageService) { }
+
+  changeStatus(status: boolean) {
+    this.statusSource.next(status)
+  }
 
   attemptLogin(credentials: AuthLoginInfo): Observable<JwtResponse> {
     return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
