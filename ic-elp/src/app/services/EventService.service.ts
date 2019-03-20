@@ -11,9 +11,6 @@ export class EventService {
     constructor(private http: HttpClient) {}
 
     getEvent() {
-        return this.http.get<any>('assets/data/events.json')
-                    .toPromise()
-                    .then(res => <Event[]>res.data)
-                    .then(data => data );
+        return this.http.get<Event[]>('http://localhost:8080/logs/all');
     }
   }

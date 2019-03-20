@@ -13,7 +13,7 @@ import { AuthLoginInfo } from './authorization/login-info';
 export class LoginComponent implements OnInit {
   
   form: any = {};
-  isLoggedIn =false;
+  isLoggedIn =true;
   isLoginFailed = false;
   errorMessage: string = '';
   roles: string[] = [];
@@ -44,7 +44,17 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.newStatus(this.isLoggedIn);
         this.roles = this.tokenStorage.getAuthorities();        
-        this.router.navigateByUrl('/dashboard')
+        // this.router.navigateByUrl('/dashboard')
+        if(this.roles.includes("SUPER_ADMIN") || this.roles.includes("USER")) {
+          this.router.navigate(['/manager-dashboard'])
+        } else if (this.roles.includes("HR_ADMIN")){
+          this.router.navigate(['/hr-dashboard'])
+        } else if (this.roles.includes("MANAGER")) {
+          this.router.navigate(['/manager-dashboard'])
+        } else {
+          this.router.navigate(["/login"])
+        }
+    
       },
       error => {
         this.errorMessage = "Email or password is not valid";

@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LogoutComponent implements OnInit {
 
-  loggedIn: boolean;
+  loggedIn: boolean = true;
 
   constructor(private authService: AuthService, private tokenService :TokenStorageService, private router: Router) { }
 

@@ -13,9 +13,9 @@
           {{row.date | date:'dd/MM/yyyy'}}
       </ng-template>
       </p-column>
-      <p-column field="user" header="USER" [style]="{'text-align': 'center'}" [sortable]='true'></p-column>
-      <p-column field="typeOfAction" header="TYPE OF ACTION" [style]="{'text-align': 'center'}" [sortable]='true'></p-column>
-      <p-column field="change" header="CHANGE" [style]="{'text-align': 'center'}" [sortable]='true'></p-column>
+      <p-column field="username" header="USER" [style]="{'text-align': 'center'}" [sortable]='true'></p-column>
+      <p-column field="action" header="TYPE OF ACTION" [style]="{'text-align': 'center'}" [sortable]='true'></p-column>
+      <p-column field="changeDescription" header="CHANGE" [style]="{'width': '250px', 'text-align': 'center'}" [sortable]='true'></p-column>
     </p-dataTable>
 
     </p-accordionTab>

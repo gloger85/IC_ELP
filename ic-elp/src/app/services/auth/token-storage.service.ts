@@ -51,4 +51,8 @@ export class TokenStorageService {
     }
     return this.roles;
   }
+
+  isTokenPresent() {
+    return this.getToken() ? true : false;
+  }
 }

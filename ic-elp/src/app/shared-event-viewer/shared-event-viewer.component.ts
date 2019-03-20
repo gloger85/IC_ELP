@@ -11,10 +11,11 @@ export class SharedEventViewerComponent implements OnInit {
 
   events: Event[];
 
-
   constructor(private eventService: EventService) { }
 
   ngOnInit() {
-      this.eventService.getEvent().then(events => this.events = events);
+      this.eventService.getEvent().subscribe( data => {
+        this.events = data;
+      })
   }
 }

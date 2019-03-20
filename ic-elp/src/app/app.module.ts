@@ -73,6 +73,7 @@ import { TreeModule } from 'primeng/tree';
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './services/route-guards/auth-guard.guard';
 import { httpInterceptorproviders } from './services/auth/auth-interceptor.service';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import { httpInterceptorproviders } from './services/auth/auth-interceptor.servi
     TreeTestComponent,
     UserAdministrationComponent,
     UserListComponent,
-    ManagerAvailabilityViewerComponent
+    ManagerAvailabilityViewerComponent,
+    RegisterComponent
   ],
   imports: [
     AccordionModule,
