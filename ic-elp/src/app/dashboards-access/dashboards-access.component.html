@@ -1,0 +1,11 @@
+<div class="container">
+  <div *ngIf="hasAuthority == 1 || hasAuthority == 2" class="sysAdmin">
+    <p-button routerLink="/hr-dashboard" label="HR_ADMIN"></p-button>
+  </div>
+  <div *ngIf="hasAuthority == 1 || hasAuthority == 3" class="sysAdmin">
+    <p-button routerLink="/manager-dashboard" label="MANAGER"></p-button>
+  </div>
+  <div *ngIf="hasAuthority == 1 || hasAuthority == 4" class="sysAdmin">
+    <p-button routerLink="/dashboard" label="USER"></p-button>
+  </div>
+</div>

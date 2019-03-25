@@ -4,6 +4,13 @@ import { AuthService } from '../services/auth/auth.service';
 import { TokenStorageService } from '../services/auth/token-storage.service';
 import { AuthLoginInfo } from './authorization/login-info';
 
+enum Roles {
+  superAdmin = "SUPER_ADMIN",
+  hrAdmin = "HR_ADMIN",
+  manager = "MANAGER",
+  user = "USER"
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -44,17 +51,7 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.newStatus(this.isLoggedIn);
         this.roles = this.tokenStorage.getAuthorities();        
-        // this.router.navigateByUrl('/dashboard')
-        if(this.roles.includes("SUPER_ADMIN") || this.roles.includes("USER")) {
-          this.router.navigate(['/manager-dashboard'])
-        } else if (this.roles.includes("HR_ADMIN")){
-          this.router.navigate(['/hr-dashboard'])
-        } else if (this.roles.includes("MANAGER")) {
-          this.router.navigate(['/manager-dashboard'])
-        } else {
-          this.router.navigate(["/login"])
-        }
-    
+        this.router.navigateByUrl('/dashboard')
       },
       error => {
         this.errorMessage = "Email or password is not valid";

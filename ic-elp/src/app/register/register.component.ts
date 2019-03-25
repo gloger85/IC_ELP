@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SignUpInfo } from '../domain/sigup-info';
 import { AuthService } from '../services/auth/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,8 +17,7 @@ export class RegisterComponent implements OnInit {
   isSignedUpFailed = false;
   errorMessage = '';
 
-
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -37,6 +37,7 @@ export class RegisterComponent implements OnInit {
       console.log(data);
       this.isSignedUp = true;
       this.isSignedUpFailed = false;
+      this.router.navigate(['/hr-dashboard'])
     },
       error => {
         console.log(error);

@@ -23,7 +23,7 @@ export class AuthService {
   private loginUrl = 'http://localhost:8080/login';
   private logoutUrl = 'http://localhost:8080/logout';
   private signupUrl = 'http://localhost:8080/users/register';
-
+  
   constructor(private http: HttpClient, private tokenStorage: TokenStorageService) { }
 
   changeStatus(status: boolean) {

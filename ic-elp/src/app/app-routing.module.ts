@@ -105,11 +105,6 @@ const routes: Routes = [
         component: ManagerInboxComponent,
         data: {allowedRoles: ['SUPER_ADMIN', 'MANAGER']} 
       },
-      { 
-        path: 'password-reset', 
-        component: PasswordResetComponent,
-        data: {allowedRoles: ['SUPER_ADMIN', 'HR_ADMIN', 'MANAGER', 'USER']} 
-      },
       // { 
       //   path: 'password-create-new', 
       //   component: PasswordCreateNewComponent,
@@ -126,6 +121,10 @@ const routes: Routes = [
         data: {allowedRoles: ['SUPER_ADMIN', 'HR_ADMIN']}
       }
     ]
+  },
+  { 
+    path: 'password-reset', 
+    component: PasswordResetComponent
   }
 ];
 

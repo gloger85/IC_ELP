@@ -74,6 +74,7 @@ import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './services/route-guards/auth-guard.guard';
 import { httpInterceptorproviders } from './services/auth/auth-interceptor.service';
 import { RegisterComponent } from './register/register.component';
+import { DashboardsAccessComponent } from './dashboards-access/dashboards-access.component';
 
 @NgModule({
   declarations: [
@@ -114,7 +115,8 @@ import { RegisterComponent } from './register/register.component';
     UserAdministrationComponent,
     UserListComponent,
     ManagerAvailabilityViewerComponent,
-    RegisterComponent
+    RegisterComponent,
+    DashboardsAccessComponent
   ],
   imports: [
     AccordionModule,

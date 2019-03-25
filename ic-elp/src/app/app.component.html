@@ -2,15 +2,15 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-        <i><a routerLink="/" routerLinkActive="active" class="navbar-brand">
+        <i><a routerLinkActive="active" class="navbar-brand">
             <img src="/src/app/images/infosys_logo.png" alt="Infosys Consulting Electronic Leave Platform" />
             Electronic Leave Platform</a>
         </i>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarResponsive">
+          <app-dashboards-access></app-dashboards-access>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
             <a routerLink="/dashboard" routerLinkActive="active" class="nav-link">Home
