@@ -735,7 +735,9 @@ export class SharedCalendarComponent implements OnInit {
   }
 
   IsInvalidDate(date: Date): boolean {
-    return this.invalidDates.includes(date);
+    return this.invalidDates.some(d => {
+      return d.toDateString() == date.toDateString();
+    });
   }
 
   IsPublicHoliday(date: Date): boolean {
