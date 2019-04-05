@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -11,7 +12,9 @@ const httpOptions = {
 })
 export class PasswordResetService {
 
-  private passwordReset = "http://localhost:8080/users/password/reset"
+  webApiUrl = environment.webApiUrl;
+
+  private passwordReset = this.webApiUrl + 'users/password/reset'
 
   constructor(private http: HttpClient) { }
 

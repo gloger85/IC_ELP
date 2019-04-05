@@ -1,16 +1,19 @@
-import { HttpClient, HttpClientModule  } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Event } from '../domain/event';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
 
-    constructor(private http: HttpClient) {}
+  webApiUrl = environment.webApiUrl;
 
-    getEvent() {
-        return this.http.get<Event[]>('http://localhost:8080/logs/all');
-    }
+  constructor(private http: HttpClient) {}
+
+  getEvent() {
+    return this.http.get<Event[]>(this.webApiUrl + 'logs/all');
   }
+}

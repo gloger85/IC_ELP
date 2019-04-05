@@ -5,6 +5,8 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { JwtResponse } from 'src/app/login/authorization/jwt-response';
 import { TokenStorageService } from './token-storage.service';
 import { SignUpInfo } from 'src/app/domain/sigup-info';
+import { environment } from 'src/environments/environment';
+
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -17,13 +19,15 @@ const httpOptions = {
 // CanActivate interface manages navigation business rules
 export class AuthService {
 
+  webApiUrl = environment.webApiUrl;
+
   private statusSource = new BehaviorSubject<boolean>(this.tokenStorage.isTokenPresent());
   currentStatus = this.statusSource.asObservable();
 
-  private loginUrl = 'http://localhost:8080/login';
-  private logoutUrl = 'http://localhost:8080/logout';
-  private signupUrl = 'http://localhost:8080/users/register';
-  
+  private loginUrl = this.webApiUrl + 'login';
+  private logoutUrl = this.webApiUrl + 'logout';
+  private signupUrl = this.webApiUrl + 'users/register';
+
   constructor(private http: HttpClient, private tokenStorage: TokenStorageService) { }
 
   changeStatus(status: boolean) {
@@ -39,7 +43,7 @@ export class AuthService {
   }
 
   isAuthorized(allowedRoutes: string[]): boolean {
-    
+
     if(allowedRoutes == null || allowedRoutes.length === 0) {
       return true;
     }
