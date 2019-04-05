@@ -75,12 +75,6 @@
 
                 <p-dropdown *ngIf="control.onChange == ''" [formControlName]="control.key" [options]="control.options"></p-dropdown>
               </div>
-              <div *ngSwitchCase="'dropdown'">
-                <p-dropdown *ngIf="control.onChange !== ''" [formControlName]="control.key" [options]="control.options"
-                  (onChange)="control.onChange($event,this)"></p-dropdown>
-
-                <p-dropdown *ngIf="control.onChange == ''" [formControlName]="control.key" [options]="control.options"></p-dropdown>
-              </div>
             </div>
           </div>
         </div>
