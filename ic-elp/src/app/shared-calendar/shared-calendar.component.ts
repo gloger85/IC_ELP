@@ -15,7 +15,6 @@ import { DynamicControlTextbox } from '../dynamicControlTextbox';
 import { DynamicControlSlide } from '../dynamicControlSlide';
 import { Message } from 'primeng/components/common/api';
 
-
 @Component({
   selector: 'app-shared-calendar',
   templateUrl: './shared-calendar.component.html',
@@ -160,6 +159,11 @@ export class SharedCalendarComponent implements OnInit {
       ![1, 2].includes(this.requestedNumberOfDays)
     ) {
       this.calendarErrorMsg = 'YOU CAN ONLY CHOOSE 1 OR 2 DAYS.';
+    } else if (
+      this.requestType === 'On demand leave' &&
+      this.requestedNumberOfDays > 4
+    ) {
+      this.calendarErrorMsg = 'YOU CAN ONLY CHOOSE UP TO 4 DAYS.';
     } else {
       this.calendarErrorMsg = null;
     }
@@ -225,6 +229,12 @@ export class SharedCalendarComponent implements OnInit {
         break;
       }
       case 'On demand leave': {
+        this.msgs.push({
+          severity: 'warn',
+          summary: 'Important information!',
+          detail:
+            'YOU CAN ONLY CHOOSE UP TO 4 DAYS OF ON DEMAND LEAVE PER YEAR.'
+        });
         break;
       }
       case 'Occassional leave': {
@@ -421,7 +431,6 @@ export class SharedCalendarComponent implements OnInit {
     }
   }
 
-
   filterUsersBroker(event, __this) {
     __this.filterUsers(event);
   }
@@ -438,7 +447,7 @@ export class SharedCalendarComponent implements OnInit {
     this.filteredUsers = filtered;
   }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.daysOrHours = null;

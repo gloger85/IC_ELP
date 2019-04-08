@@ -6,7 +6,7 @@
     Selected names:
   </div>
   <div>
-    <span *ngFor="let file of selectedFiles">{{file.label}} </span>
+    <span *ngFor="let file of selectedFiles">{{file.label}}<br/> </span>
   </div>
   <div style="margin: 0 auto; text-align:right">
       <p-button (click)="approveRequests()" icon="pi pi-check" styleClass="ui-button-info" label="Approve requests"></p-button>&nbsp;&nbsp;
