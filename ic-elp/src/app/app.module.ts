@@ -13,6 +13,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { AvailabilityViewerComponent } from './availability-viewer/availability-viewer.component';
 import { AvailabilityViewerDetailesComponent } from './availability-viewer-detailes/availability-viewer-detailes.component';
 import { CompensationHistoryComponent } from './compensation-history/compensation-history.component';
+import { CalendarService } from './services/calendar/calendar.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EventLogComponent } from './event-log/event-log.component';
 import { HrAddHolidayComponent } from './hr-add-holiday/hr-add-holiday.component';
@@ -149,9 +150,10 @@ import { DashboardsAccessComponent } from './dashboards-access/dashboards-access
     TreeModule
   ],
   providers: [
-    DatePipe,
-    AuthService,
     AuthGuard,
+    AuthService,
+    CalendarService,
+    DatePipe,
     httpInterceptorproviders
   ],
   bootstrap: [AppComponent]
