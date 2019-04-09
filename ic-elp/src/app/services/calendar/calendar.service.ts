@@ -4,8 +4,35 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class CalendarService {
+  constructor() {}
 
-  constructor() { }
+  CountNumberOfWorkingDays(
+    rangeDates: Date[],
+    invalidDates: Date[],
+    invalidDays: number[]
+  ): number {
+    if (!rangeDates || !rangeDates[1]) {
+      return 1;
+    }
+
+    let workingDaysCount = 0;
+    const startDate: Date = rangeDates[0];
+    const endDate: Date = rangeDates[1];
+    const date: Date = new Date(startDate);
+
+    while (date <= endDate) {
+      if (
+        !(
+          this.IsInvalidDate(invalidDates, date) ||
+          this.IsInvalidDay(invalidDays, date)
+        )
+      ) {
+        workingDaysCount++;
+      }
+      date.setDate(date.getDate() + 1);
+    }
+    return workingDaysCount;
+  }
 
   GetPublicHolidaysByYear(year: number): Array<Date> {
     const publicHolidays: Array<Date> = [

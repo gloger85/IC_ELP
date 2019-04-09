@@ -119,7 +119,7 @@ export class SharedCalendarComponent implements OnInit {
       this.rangeDates[0] = this.rangeDates[1];
       this.rangeDates[1] = null;
     }
-    this.CountNumberOfWorkingDays();
+    this.requestedNumberOfDays = this._calendarService.CountNumberOfWorkingDays(this.rangeDates, this.invalidDates, this.invalidDays);
     if (this.rangeDates[1]) {
       this.CalendarValidate();
     }
@@ -637,28 +637,6 @@ export class SharedCalendarComponent implements OnInit {
     ];
   }
 
-  CountNumberOfWorkingDays(): number {
-    if (!this.rangeDates || !this.rangeDates[1]) {
-      this.requestedNumberOfDays = 1;
-      return 1;
-    }
-
-    let workingDaysCount = 0;
-    const startDate: Date = this.rangeDates[0];
-    const endDate: Date = this.rangeDates[1];
-    const date: Date = new Date(startDate);
-
-    while (date <= endDate) {
-      if (!(this._calendarService.IsInvalidDate(this.invalidDates, date) || this._calendarService.IsInvalidDay(this.invalidDays, date))) {
-        workingDaysCount++;
-      }
-      date.setDate(date.getDate() + 1);
-    }
-
-    this.requestedNumberOfDays = workingDaysCount;
-    return workingDaysCount;
-  }
-
   CountNumberOfHours(): number {
     this.requestedNumberOfHours = this.rangeHours[1] - this.rangeHours[0];
     if (this.requestedNumberOfHours > 8) {
@@ -682,23 +660,6 @@ export class SharedCalendarComponent implements OnInit {
         this.invalidDates.push.apply(this.invalidDates, this._calendarService.GetPublicHolidaysByYear(year + 1));
       }
     }
-  }
-
-  IsPublicHoliday(date: Date): boolean {
-    const publicHolidays: Array<Date> = this._calendarService.GetPublicHolidaysByYear(
-      date.getFullYear()
-    );
-
-    const month: number = date.getMonth();
-    const day: number = date.getDate();
-
-    for (const publicHoliday of publicHolidays) {
-      if (month === publicHoliday.getMonth() && day === publicHoliday.getDate()) {
-        return true;
-      }
-    }
-
-    return false;
   }
 
   SendRequest(): void {
