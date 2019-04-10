@@ -35,20 +35,8 @@
     </div>
   </div>
 </p-card>
-
 <p-dialog [(visible)]="display" modal="true" [width]="500">
   <p-header> <b>Compensation datails</b> </p-header>
-  <p-card class="ui-g-12">
-    <div class="ui-g">
-      <div class="ui-g-6"><b>Number of hours:</b></div>
-      <div class="ui-g-6">
-        <p-dropdown
-          [options]="noOfHoursSelectItems"
-          [pTooltip]="noOfHoursTooltip"
-        ></p-dropdown>
-      </div>
-    </div>
-  </p-card>
   <p-card class="ui-g-12">
     <div class="ui-g">
       <div class="ui-g-6"><b>Date:</b></div>
@@ -58,7 +46,24 @@
           [showIcon]="true"
           dateFormat="dd/mm/yy"
           [style]="{ position: 'fixed', 'z-index': '2' }"
+          [disabledDays]="invalidDays"
+          [disabledDates]="invalidDates"
+          [readonlyInput]="true"
+          (onMonthChange)="
+          DisablePublicpublicHolidaysInCalendar($event.month, $event.year)
+        "
         ></p-calendar>
+      </div>
+    </div>
+  </p-card>
+  <p-card class="ui-g-12">
+    <div class="ui-g">
+      <div class="ui-g-6"><b>Number of hours:</b></div>
+      <div class="ui-g-6">
+        <p-dropdown
+          [options]="noOfHoursSelectItems"
+          [pTooltip]="noOfHoursTooltip"
+        ></p-dropdown>
       </div>
     </div>
   </p-card>

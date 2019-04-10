@@ -1,3 +1,4 @@
+import { CalendarService } from './../services/calendar/calendar.service';
 import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 
@@ -11,9 +12,27 @@ export class SharedMemberCompensationDetailsComponent implements OnInit {
   noOfHoursSelectItems: SelectItem[];
   noOfHoursTooltip: string;
 
-  constructor() {}
+  invalidDates: Array<Date>;
+  invalidDays: number[];
+
+  constructor(private _calendarService: CalendarService) {}
 
   ngOnInit() {
+    this.DisablePublicpublicHolidaysInCalendar(
+      new Date().getMonth(),
+      new Date().getFullYear()
+    );
+  }
+
+  DisablePublicpublicHolidaysInCalendar(month: number, year: number): void {
+    this.invalidDates = [];
+    this.invalidDays = [];
+
+    this.invalidDays = [0, 6];
+    this.invalidDates.push.apply(
+      this.invalidDates,
+      this._calendarService.GetPublicHolidaysByYear(year)
+    );
   }
 
   showDialog(requestType) {
