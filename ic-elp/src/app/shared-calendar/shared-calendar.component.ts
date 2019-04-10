@@ -15,7 +15,7 @@ import { DynamicControlAutocomplete } from '../dynamicControlAutocomplete';
 import { DynamicControlTextbox } from '../dynamicControlTextbox';
 import { DynamicControlSlide } from '../dynamicControlSlide';
 import { Message } from 'primeng/components/common/api';
-import { RequestType} from '../domain/request-enums';
+import { RequestType, Occassion, DeathOf } from '../domain/request-enums';
 
 @Component({
   selector: 'app-shared-calendar',
@@ -120,7 +120,11 @@ export class SharedCalendarComponent implements OnInit {
       this.rangeDates[0] = this.rangeDates[1];
       this.rangeDates[1] = null;
     }
-    this.requestedNumberOfDays = this._calendarService.CountNumberOfWorkingDays(this.rangeDates, this.invalidDates, this.invalidDays);
+    this.requestedNumberOfDays = this._calendarService.CountNumberOfWorkingDays(
+      this.rangeDates,
+      this.invalidDates,
+      this.invalidDays
+    );
     if (this.rangeDates[1]) {
       this.CalendarValidate();
     }
@@ -130,7 +134,7 @@ export class SharedCalendarComponent implements OnInit {
   OnOccasionChange(event, __this) {
     const occasion = event.value ? event.value.name : null;
 
-    if (occasion === 'Death') {
+    if (occasion === Occassion.death) {
       __this.dynamicControls.push(
         new DynamicControlDropdown({
           key: 'degreeOfKinship',
@@ -244,9 +248,9 @@ export class SharedCalendarComponent implements OnInit {
           severity: 'warn',
           summary: 'Important information!',
           detail:
-          'APPLYING FOR OCCASSIONAL LEAVE REQUIRES SUBMITTING TO HR '
-          + 'DEPARTMENT DOCUMENT CONFIRMING FORMALLY THE OCCASION '
-          + '(eg. birth/marriage/death certificate).'
+            'APPLYING FOR OCCASSIONAL LEAVE REQUIRES SUBMITTING TO HR ' +
+            'DEPARTMENT DOCUMENT CONFIRMING FORMALLY THE OCCASION ' +
+            '(eg. birth/marriage/death certificate).'
         });
         this.dynamicControls.push(
           new DynamicControlDropdown({
@@ -452,7 +456,7 @@ export class SharedCalendarComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _calendarService: CalendarService
-    ) {}
+  ) {}
 
   ngOnInit() {
     this.daysOrHours = null;
@@ -569,8 +573,14 @@ export class SharedCalendarComponent implements OnInit {
 
     this.requestTypes = [
       { label: 'Select request type', value: null },
-      { label: RequestType.personalLeave, value: { id: 1, name: RequestType.personalLeave } },
-      { label: RequestType.onDemandLeave, value: { id: 2, name: RequestType.onDemandLeave } },
+      {
+        label: RequestType.personalLeave,
+        value: { id: 1, name: RequestType.personalLeave }
+      },
+      {
+        label: RequestType.onDemandLeave,
+        value: { id: 2, name: RequestType.onDemandLeave }
+      },
       {
         label: RequestType.occassionalLeave,
         value: { id: 3, name: RequestType.occassionalLeave }
@@ -583,11 +593,26 @@ export class SharedCalendarComponent implements OnInit {
         label: RequestType.excusedUnpaidAbsence,
         value: { id: 5, name: RequestType.excusedUnpaidAbsence }
       },
-      { label: RequestType.unpaidLeave, value: { id: 6, name: RequestType.unpaidLeave } },
-      { label: RequestType.childCare, value: { id: 7, name: RequestType.childCare } },
-      { label: RequestType.maternityLeave, value: { id: 8, name: RequestType.maternityLeave } },
-      { label: RequestType.parentalLeave, value: { id: 9, name: RequestType.parentalLeave } },
-      { label: RequestType.paternityLeave, value: { id: 10, name: RequestType.paternityLeave } },
+      {
+        label: RequestType.unpaidLeave,
+        value: { id: 6, name: RequestType.unpaidLeave }
+      },
+      {
+        label: RequestType.childCare,
+        value: { id: 7, name: RequestType.childCare }
+      },
+      {
+        label: RequestType.maternityLeave,
+        value: { id: 8, name: RequestType.maternityLeave }
+      },
+      {
+        label: RequestType.parentalLeave,
+        value: { id: 9, name: RequestType.parentalLeave }
+      },
+      {
+        label: RequestType.paternityLeave,
+        value: { id: 10, name: RequestType.paternityLeave }
+      },
       {
         label: RequestType.unpaidChildcareLeave,
         value: { id: 11, name: RequestType.unpaidChildcareLeave }
@@ -597,38 +622,50 @@ export class SharedCalendarComponent implements OnInit {
     this.occasions = [
       { label: 'Select occasion', value: null },
       {
-        label: 'Employee’s wedding',
-        value: { id: 1, name: 'Employee’s wedding' }
+        label: Occassion.employeesWedding,
+        value: { id: 1, name: Occassion.employeesWedding }
       },
       {
-        label: 'Emploee’s child wedding',
-        value: { id: 2, name: 'Emploee’s child wedding' }
+        label: Occassion.emploeesChildWedding,
+        value: { id: 2, name: Occassion.emploeesChildWedding }
       },
-      { label: 'Death', value: { id: 3, name: 'Death' } },
-      { label: 'Child birth', value: { id: 4, name: 'Child birth' } }
+      { label: Occassion.death, value: { id: 3, name: Occassion.death } },
+      {
+        label: Occassion.childBirth,
+        value: { id: 4, name: Occassion.childBirth }
+      }
     ];
 
     this.degreesOfKinship = [
       { label: 'Select degree', value: null },
-      { label: 'Spouse', value: { id: 1, name: 'Spouse' } },
-      { label: 'Child', value: { id: 2, name: 'Child' } },
-      { label: 'Mother', value: { id: 3, name: 'Mother' } },
-      { label: 'Father', value: { id: 4, name: 'Father' } },
-      { label: 'Father-in-law', value: { id: 5, name: 'Father-in-law' } },
-      { label: 'Mother-in-law', value: { id: 6, name: 'Mother-in-law' } },
-      { label: 'Grandfather', value: { id: 7, name: 'Grandfather' } },
-      { label: 'Grandmother', value: { id: 8, name: 'Grandmother' } },
-      { label: 'Stepfather', value: { id: 9, name: 'Stepfather' } },
-      { label: 'Stepmother', value: { id: 10, name: 'Stepmother' } },
-      { label: 'Sister', value: { id: 11, name: 'Sister' } },
-      { label: 'Brother', value: { id: 12, name: 'Brother' } },
+      { label: DeathOf.spouse, value: { id: 1, name: DeathOf.spouse } },
+      { label: DeathOf.child, value: { id: 2, name: DeathOf.child } },
+      { label: DeathOf.mother, value: { id: 3, name: DeathOf.mother } },
+      { label: DeathOf.father, value: { id: 4, name: DeathOf.father } },
       {
-        label: 'Other dependent or person being under employee’s care',
-        value: {
-          id: 13,
-          name: 'Other dependent or person being under employee’s care'
-        }
-      }
+        label: DeathOf.fatherInLaw,
+        value: { id: 5, name: DeathOf.fatherInLaw }
+      },
+      {
+        label: DeathOf.motherInLaw,
+        value: { id: 6, name: DeathOf.motherInLaw }
+      },
+      {
+        label: DeathOf.grandfather,
+        value: { id: 7, name: DeathOf.grandfather }
+      },
+      {
+        label: DeathOf.grandmother,
+        value: { id: 8, name: DeathOf.grandmother }
+      },
+      { label: DeathOf.stepfather, value: { id: 9, name: DeathOf.stepfather } },
+      {
+        label: DeathOf.stepmother,
+        value: { id: 10, name: DeathOf.stepmother }
+      },
+      { label: DeathOf.sister, value: { id: 11, name: DeathOf.sister } },
+      { label: DeathOf.brother, value: { id: 12, name: DeathOf.brother } },
+      { label: DeathOf.other, value: { id: 13, name: DeathOf.other } }
     ];
 
     this.daysOrHoursOptions = [
@@ -654,11 +691,17 @@ export class SharedCalendarComponent implements OnInit {
 
     if (this.requestType !== 'Paternity leave') {
       this.invalidDays = [0, 6];
-      this.invalidDates.push.apply(this.invalidDates, this._calendarService.GetPublicHolidaysByYear(year));
+      this.invalidDates.push.apply(
+        this.invalidDates,
+        this._calendarService.GetPublicHolidaysByYear(year)
+      );
 
       if (month >= 11) {
         // Kalendarz wyswietlany na przelomie roku
-        this.invalidDates.push.apply(this.invalidDates, this._calendarService.GetPublicHolidaysByYear(year + 1));
+        this.invalidDates.push.apply(
+          this.invalidDates,
+          this._calendarService.GetPublicHolidaysByYear(year + 1)
+        );
       }
     }
   }
