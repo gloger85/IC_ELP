@@ -15,6 +15,7 @@ import { DynamicControlAutocomplete } from '../dynamicControlAutocomplete';
 import { DynamicControlTextbox } from '../dynamicControlTextbox';
 import { DynamicControlSlide } from '../dynamicControlSlide';
 import { Message } from 'primeng/components/common/api';
+import { RequestType} from '../domain/request-enums';
 
 @Component({
   selector: 'app-shared-calendar',
@@ -151,17 +152,17 @@ export class SharedCalendarComponent implements OnInit {
 
   CalendarValidate() {
     if (
-      this.requestType === 'Paternity leave' &&
+      this.requestType === RequestType.paternityLeave &&
       ![7, 14].includes(this.requestedNumberOfDays)
     ) {
       this.calendarErrorMsg = 'YOU CAN ONLY CHOOSE 7 OR 14 DAYS.';
     } else if (
-      this.requestType === 'Child care' &&
+      this.requestType === RequestType.childCare &&
       ![1, 2].includes(this.requestedNumberOfDays)
     ) {
       this.calendarErrorMsg = 'YOU CAN ONLY CHOOSE 1 OR 2 DAYS.';
     } else if (
-      this.requestType === 'On demand leave' &&
+      this.requestType === RequestType.onDemandLeave &&
       this.requestedNumberOfDays > 4
     ) {
       this.calendarErrorMsg = 'YOU CAN ONLY CHOOSE UP TO 4 DAYS.';
@@ -175,7 +176,7 @@ export class SharedCalendarComponent implements OnInit {
     this.msgs = [];
     this.daysOrHours = null;
     this.calendarErrorMsg = null;
-    if (this.requestType === 'Paternity leave') {
+    if (this.requestType === RequestType.paternityLeave) {
       this.invalidDates = [];
       this.invalidDays = [];
     } else {
@@ -198,7 +199,7 @@ export class SharedCalendarComponent implements OnInit {
     (<FormArray>this.requestForm.get('dynamicFormControls')).controls = [];
 
     switch (this.requestType) {
-      case 'Personal Leave': {
+      case RequestType.personalLeave: {
         this.dynamicControls.push(
           new DynamicControlAutocomplete({
             key: 'agreedWithUser',
@@ -229,7 +230,7 @@ export class SharedCalendarComponent implements OnInit {
         );
         break;
       }
-      case 'On demand leave': {
+      case RequestType.onDemandLeave: {
         this.msgs.push({
           severity: 'warn',
           summary: 'Important information!',
@@ -238,13 +239,14 @@ export class SharedCalendarComponent implements OnInit {
         });
         break;
       }
-      case 'Occassional leave': {
+      case RequestType.occassionalLeave: {
         this.msgs.push({
           severity: 'warn',
           summary: 'Important information!',
           detail:
-            'APPLYING FOR OCCASSIONAL LEAVE REQUIRES SUBMITTING DOCUMENT ' +
-            'CONFIRMING FORMALLY THE OCCASION (eg. birth/marriage/death certificate).'
+          'APPLYING FOR OCCASSIONAL LEAVE REQUIRES SUBMITTING TO HR '
+          + 'DEPARTMENT DOCUMENT CONFIRMING FORMALLY THE OCCASION '
+          + '(eg. birth/marriage/death certificate).'
         });
         this.dynamicControls.push(
           new DynamicControlDropdown({
@@ -259,7 +261,7 @@ export class SharedCalendarComponent implements OnInit {
         );
         break;
       }
-      case 'Excused paid absence': {
+      case RequestType.excusedPaidAbsence: {
         this.msgs.push({
           severity: 'warn',
           summary: 'Important information!',
@@ -281,7 +283,7 @@ export class SharedCalendarComponent implements OnInit {
         );
         break;
       }
-      case 'Excused unpaid absence': {
+      case RequestType.excusedUnpaidAbsence: {
         this.msgs.push({
           severity: 'warn',
           summary: 'Important information!',
@@ -304,7 +306,7 @@ export class SharedCalendarComponent implements OnInit {
         );
         break;
       }
-      case 'Unpaid leave': {
+      case RequestType.unpaidLeave: {
         this.msgs.push({
           severity: 'warn',
           summary: 'Important information!',
@@ -342,7 +344,7 @@ export class SharedCalendarComponent implements OnInit {
         );
         break;
       }
-      case 'Child care': {
+      case RequestType.childCare: {
         this.msgs.push({
           severity: 'error',
           summary: 'Important information!',
@@ -364,7 +366,7 @@ export class SharedCalendarComponent implements OnInit {
         );
         break;
       }
-      case 'Maternity leave': {
+      case RequestType.maternityLeave: {
         this.msgs.push({
           severity: 'warn',
           summary: 'Important information!',
@@ -375,7 +377,7 @@ export class SharedCalendarComponent implements OnInit {
         });
         break;
       }
-      case 'Parental leave': {
+      case RequestType.parentalLeave: {
         this.msgs.push({
           severity: 'warn',
           summary: 'Important information!',
@@ -386,7 +388,7 @@ export class SharedCalendarComponent implements OnInit {
         });
         break;
       }
-      case 'Paternity leave': {
+      case RequestType.paternityLeave: {
         this.msgs.push({
           severity: 'warn',
           summary: 'Important information!',
@@ -397,7 +399,7 @@ export class SharedCalendarComponent implements OnInit {
         });
         break;
       }
-      case 'Unpaid childcare leave': {
+      case RequestType.unpaidChildcareLeave: {
         this.msgs.push({
           severity: 'warn',
           summary: 'Important information!',
@@ -410,7 +412,6 @@ export class SharedCalendarComponent implements OnInit {
       }
       default: {
         return;
-        break;
       }
     }
   }
@@ -568,28 +569,28 @@ export class SharedCalendarComponent implements OnInit {
 
     this.requestTypes = [
       { label: 'Select request type', value: null },
-      { label: 'Personal Leave', value: { id: 1, name: 'Personal Leave' } },
-      { label: 'On demand leave', value: { id: 2, name: 'On demand leave' } },
+      { label: RequestType.personalLeave, value: { id: 1, name: RequestType.personalLeave } },
+      { label: RequestType.onDemandLeave, value: { id: 2, name: RequestType.onDemandLeave } },
       {
-        label: 'Occassional leave',
-        value: { id: 3, name: 'Occassional leave' }
+        label: RequestType.occassionalLeave,
+        value: { id: 3, name: RequestType.occassionalLeave }
       },
       {
-        label: 'Excused paid absence',
-        value: { id: 4, name: 'Excused paid absence' }
+        label: RequestType.excusedPaidAbsence,
+        value: { id: 4, name: RequestType.excusedPaidAbsence }
       },
       {
-        label: 'Excused unpaid absence',
-        value: { id: 5, name: 'Excused unpaid absence' }
+        label: RequestType.excusedUnpaidAbsence,
+        value: { id: 5, name: RequestType.excusedUnpaidAbsence }
       },
-      { label: 'Unpaid leave', value: { id: 6, name: 'Unpaid leave' } },
-      { label: 'Child care', value: { id: 7, name: 'Child care' } },
-      { label: 'Maternity leave', value: { id: 8, name: 'Maternity leave' } },
-      { label: 'Parental leave', value: { id: 9, name: 'Parental leave' } },
-      { label: 'Paternity leave', value: { id: 10, name: 'Paternity leave' } },
+      { label: RequestType.unpaidLeave, value: { id: 6, name: RequestType.unpaidLeave } },
+      { label: RequestType.childCare, value: { id: 7, name: RequestType.childCare } },
+      { label: RequestType.maternityLeave, value: { id: 8, name: RequestType.maternityLeave } },
+      { label: RequestType.parentalLeave, value: { id: 9, name: RequestType.parentalLeave } },
+      { label: RequestType.paternityLeave, value: { id: 10, name: RequestType.paternityLeave } },
       {
-        label: 'Unpaid childcare leave',
-        value: { id: 11, name: 'Unpaid childcare leave' }
+        label: RequestType.unpaidChildcareLeave,
+        value: { id: 11, name: RequestType.unpaidChildcareLeave }
       }
     ];
 

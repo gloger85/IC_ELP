@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  webApiUrl: 'http://localhost:8080/'
+  // webApiUrl: 'http://localhost:8080/'
+  webApiUrl: 'https://ic-elp.herokuapp.com/'
 };
 
 /*
