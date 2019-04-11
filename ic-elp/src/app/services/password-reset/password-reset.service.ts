@@ -19,6 +19,6 @@ export class PasswordResetService {
   constructor(private http: HttpClient) { }
 
   restorePassword(email): Observable<string> {
-    return this.http.post<string>("http://localhost:8080/password/reset", email, httpOptions);
+    return this.http.post<string>(this.passwordReset, email, httpOptions);
   }
 }
