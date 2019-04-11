@@ -43,7 +43,7 @@
         <div class="form-group">
           <button class="registerButton" type="submit" class="btn btn-primary">Register</button>
           <div *ngIf="f.submitted && isSignedUpFailed" class="alert alert-warning">
-            Signup failed!<br>
+            {{errorMessage}}<br>
           </div>
           <button class="registerButton" type="submit" class="btn btn-warning" routerLink="/hr-dashboard">Back</button>
         </div>

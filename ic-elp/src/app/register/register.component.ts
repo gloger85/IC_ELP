@@ -40,8 +40,10 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['/hr-dashboard'])
     },
       error => {
-        console.log(error);
         this.errorMessage = error.error.message;
+        if(this.errorMessage.includes('SQL')) {
+          this.errorMessage = 'User with that email already exists'; 
+        }
         this.isSignedUpFailed = true;
       }
     );
