@@ -7,9 +7,7 @@
   <form [formGroup]="addHolidayForm">
     <div class="ui-g">
       <div style="margin: 0 auto;">
-        <p-calendar formControlName="calendar" (onSelect)="CountNumberOfWorkingDays()" (onMonthChange)="DisablePublicpublicHolidaysInCalendar($event.month, $event.year)"
-          [showOtherMonths]="false" [(ngModel)]="rangeDates" [locale]="en" [numberOfMonths]="1" [disabledDays]="[0,6]"
-          [disabledDates]="invalidDates" [readonlyInput]="true" [inline]="true"></p-calendar>
+        <p-calendar formControlName="calendar" [(ngModel)]="date" [readonlyInput]="true" [inline]="true"></p-calendar>
       </div>
       <div style="margin: 0 auto;">
         Type name of the holiday:<br /><textarea [rows]="3" [cols]="45" pInputTextarea autoResize="autoResize" pTooltip="Enter Holiday name"

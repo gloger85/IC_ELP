@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { SelectItem } from 'primeng/api';
 import { HrAddHolidayComponent } from '../hr-add-holiday/hr-add-holiday.component';
 
 @Component({

@@ -15,7 +15,7 @@ import { DynamicControlAutocomplete } from '../dynamicControlAutocomplete';
 import { DynamicControlTextbox } from '../dynamicControlTextbox';
 import { DynamicControlSlide } from '../dynamicControlSlide';
 import { Message } from 'primeng/components/common/api';
-import { RequestType, Occassion, DeathOf } from '../domain/request-enums';
+import { RequestType, Occassion, DeathOf } from '../domain/enums/request-enums';
 
 @Component({
   selector: 'app-shared-calendar',

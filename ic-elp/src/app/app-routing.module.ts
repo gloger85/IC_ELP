@@ -7,7 +7,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EventLogComponent } from './event-log/event-log.component';
 import { HrEventLogComponent } from './hr-event-log/hr-event-log.component';
 import { HrDashboardComponent } from './hr-dashboard/hr-dashboard.component';
-import { HrHolidayPlannerComponent } from './hr-holiday-planner/hr-holiday-planner.component';
 import { HrReportsDashboardComponent } from './hr-reports-dashboard/hr-reports-dashboard.component';
 import { HrSettingsComponent } from './hr-settings/hr-settings.component';
 import { LoginComponent } from './login/login.component';
@@ -20,6 +19,7 @@ import { PasswordCreateNewComponent } from './password-create-new/password-creat
 import { UserAdministrationComponent } from './user-administration/user-administration.component';
 import { AuthGuard } from './services/route-guards/auth-guard.guard';
 import { RegisterComponent } from './register/register.component';
+import { HrHolidayPlannerComponent } from './hr-holiday-planner/hr-holiday-planner.component';
 
 const routes: Routes = [
   {
