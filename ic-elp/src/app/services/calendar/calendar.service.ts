@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { RequestType, Occassion, DeathOf } from 'src/app/domain/enums/request-enums';
 
 @Injectable({
   providedIn: 'root'
@@ -87,5 +88,48 @@ export class CalendarService {
 
   IsInvalidDay(invalidDays: number[], date: Date) {
     return invalidDays.includes(date.getDay());
+  }
+
+  GetNoOfDaysByReqType(
+    requestType: string,
+    occassion?: string,
+    deathOf?: string
+  ): number {
+    if (requestType === RequestType.onDemandLeave) {
+      return 4;
+    }
+    if (requestType === RequestType.childCare) {
+      return 2;
+    }
+
+    switch (occassion) {
+      case Occassion.childBirth:
+      case Occassion.employeesWedding:
+        return 2;
+
+      case Occassion.emploeesChildWedding:
+        return 1;
+    }
+
+    switch (deathOf) {
+      case DeathOf.child:
+      case DeathOf.father:
+      case DeathOf.mother:
+      case DeathOf.spouse:
+        return 2;
+
+      case DeathOf.brother:
+      case DeathOf.fatherInLaw:
+      case DeathOf.grandfather:
+      case DeathOf.grandmother:
+      case DeathOf.motherInLaw:
+      case DeathOf.other:
+      case DeathOf.sister:
+      case DeathOf.stepfather:
+      case DeathOf.stepmother:
+        return 1;
+    }
+
+    return 366;
   }
 }
