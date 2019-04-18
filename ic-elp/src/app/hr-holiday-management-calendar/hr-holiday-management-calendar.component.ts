@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { SelectItem } from 'primeng/api';
 import { HrAddHolidayComponent } from '../hr-add-holiday/hr-add-holiday.component';
+import { Holiday } from '../domain/holiday/holiday';
+import { HolidayService } from '../services/holiday/holiday.service';
+import { DataService } from '../services/data/data.service';
 
 @Component({
   selector: 'app-hr-holiday-management-calendar',
@@ -9,20 +13,30 @@ import { HrAddHolidayComponent } from '../hr-add-holiday/hr-add-holiday.componen
 export class HrHolidayManagementCalendarComponent implements OnInit {
   @ViewChild(HrAddHolidayComponent)
   private hrAddHoliday: HrAddHolidayComponent;
-  compensations: any;
+  holidays: Holiday[];
   displayDialog = false;
   holidayName: any;
   rangeDates: Date;
   display = false;
+  buttonState: string;
+  idTaken: number;
 
-  constructor() {}
+  constructor(private holidayService: HolidayService, private dataService: DataService) {}
 
   ngOnInit() {
-    this.compensations = [
-      { name: 'StarWars Day', holidayDate: '2018-05-04'},
-      { name: 'Halloween', holidayDate: '2018-10-31'},
-      { name: 'Compensation for 11.11', holidayDate: '2018-12-01'},
-    ];
+
+    this.holidayService.getRefreshNeeded
+        .subscribe(() => {
+          this.getAllHolidays();
+        });
+    this.getAllHolidays();
+    this.dataService.currentButtonState.subscribe(status => {
+      this.buttonState = status;
+    });
+
+    this.dataService.currentIdTaken.subscribe( id => {
+      this.idTaken = id;
+    });
   }
 
   showDialog() {
@@ -31,11 +45,34 @@ export class HrHolidayManagementCalendarComponent implements OnInit {
 
   showCalendar() {
     this.hrAddHoliday.displayCalendar = true;
+    this.buttonState = 'Add Clicked';
+    this.newStatus(this.buttonState);
   }
 
-  editCompensation() {
+  editCompensation(id: number) {
     this.hrAddHoliday.displayCalendar = true;
-    this.hrAddHoliday.addHolidayForm.controls['holidayName'].setValue('StarWars Day');
-    this.hrAddHoliday.addHolidayForm.controls['calendar'].setValue('04/05/2018');
+    this.buttonState = 'Edit Clicked';
+    this.newStatus(this.buttonState);
+    this.newIdStatus(id);    
+  }
+
+  deleteHoliday(id: number) {
+    this.displayDialog = false;
+    this.holidayService.removeHoliday(id).subscribe(() => {
+      console.log("Entry deleted");
+    });
+  }
+
+  private getAllHolidays() {
+    this.holidayService.getAllHolidays().subscribe( data => {
+      this.holidays = data;
+    });
+  }
+
+  private newStatus(value: string) {
+    this.dataService.changeState(value);
+  }
+  private newIdStatus(id: number) {
+    this.dataService.notifyId(id);
   }
 }

@@ -7,20 +7,22 @@
   <form [formGroup]="addHolidayForm">
     <div class="ui-g">
       <div style="margin: 0 auto;">
-        <p-calendar formControlName="calendar" [(ngModel)]="date" [readonlyInput]="true" [inline]="true"></p-calendar>
+        <p-calendar formControlName="calendar" [(ngModel)]="requestDate" [readonlyInput]="true" [inline]="true">
+        </p-calendar>
       </div>
       <div style="margin: 0 auto;">
-        Type name of the holiday:<br /><textarea [rows]="3" [cols]="45" pInputTextarea autoResize="autoResize" pTooltip="Enter Holiday name"
-          formControlName="holidayName"></textarea>
+        Type name of the holiday:<br /><textarea [rows]="3" [cols]="45" pInputTextarea autoResize="autoResize"
+          pTooltip="Enter Holiday name" formControlName="holidayName"></textarea>
       </div>
-      <div style="margin: 0 auto;" *ngIf="rangeDates">
+      <div style="margin: 0 auto;" *ngIf="date">
         <div class="ui-g">
-          Date: <b>{{rangeDates | date:'dd/MM/yyyy'}}</b>
+          Date: <b>{{date | date:'dd/MM/yyyy'}}</b>
         </div>
       </div>
     </div>
     <div style="margin-top: 20px; text-align:right">
-      <p-button (click)="SendRequest()" icon="pi pi-check" label="Approve"></p-button>
+        <p-button *ngIf="buttonState == 'Add Clicked'" (click)="SendRequest()" icon="pi pi-check" label="Approve"></p-button>
+        <p-button *ngIf="buttonState == 'Edit Clicked'" (click)="editHoliday(idTaken)" icon="pi pi-check" label="Edit"></p-button>
       &nbsp;
       <p-button (click)="displayCalendar=false" label="Cancel" styleClass="ui-button-warning"></p-button>
     </div>

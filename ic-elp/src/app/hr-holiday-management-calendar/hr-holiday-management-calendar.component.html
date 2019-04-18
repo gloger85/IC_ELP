@@ -1,14 +1,4 @@
 <div class="ui-g">
-  <p-dialog [(visible)]="displayDialog" [modal]="true">
-    <p-header>
-      <b>Delete confirmation</b>
-    </p-header>
-    Are you sure that you want to delete this record?
-    <p-footer>
-      <p-button (click)="displayDialog=false" icon="pi pi-check-circle" styleClass="ui-button-primary" label="Yes"></p-button>
-      <p-button (click)="displayDialog=false" icon="pi pi-times-circle" styleClass="ui-button-warning" label="Cancel"></p-button>
-    </p-footer>
-  </p-dialog>
   <h3 class="first">List of Added Holidays:</h3>
   <div class="ui-g">
     <div class="ui-g-12">
@@ -16,24 +6,33 @@
         <p-button (click)="showCalendar()" icon="pi pi-plus-circle" label="Add Holiday"></p-button>
       </div>
     </div>
-    <p-table [value]="compensations">
+    <p-table [value]="holidays">
       <ng-template pTemplate="header">
         <tr>
           <th class="text-center">Holiday name</th>
           <th class="text-center">Date</th>
-          <th></th>
+          <th class="text-center">Operation</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-leave>
+      <ng-template pTemplate="body" let-holiday>
         <tr>
-          <td class="text-center">{{leave.name}}</td>
-          <td class="text-center">{{leave.holidayDate}}</td>
+          <td class="text-center">{{holiday.name}}</td>
+          <td class="text-center">{{holiday.date}}</td>
           <td class="text-center">
-            <p-button icon="fa fa-fw fa-edit" label="Edit" (click)="editCompensation()"></p-button>&nbsp;&nbsp;
+            <p-button icon="fa fa-fw fa-edit" label="Edit" (click)="editCompensation(holiday.id)"></p-button>&nbsp;&nbsp;
             <p-button (click)="showDialog()" icon="pi pi-trash" styleClass="ui-button-warning" label="Delete"></p-button>
           </td>
         </tr>
-
+        <p-dialog [(visible)]="displayDialog" [modal]="true">
+          <p-header>
+            <b>Delete confirmation</b>
+          </p-header>
+          Are you sure that you want to delete this record?
+          <p-footer>
+            <p-button (click)="deleteHoliday(holiday.id)" icon="pi pi-check-circle" styleClass="ui-button-primary" label="Yes"></p-button>
+            <p-button (click)="displayDialog=false" icon="pi pi-times-circle" styleClass="ui-button-warning" label="Cancel"></p-button>
+          </p-footer>
+        </p-dialog>
       </ng-template>
     </p-table>
   </div>

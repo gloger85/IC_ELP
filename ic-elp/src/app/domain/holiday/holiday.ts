@@ -1,6 +1,11 @@
 export class Holiday {
-    id: number;
-    dateFrom: Date;
-    dateTo: Date;
-    name: String;
+
+    id: string;
+    date: Date;
+    name: string;
+
+    constructor(name: string ,date?: Date ){
+        this.date = date;
+        this.name = name;
+    }
 }
