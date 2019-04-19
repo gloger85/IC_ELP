@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LeaveRequest } from '../domain/leaveRequest';
+import { LeaveRequest } from '../domain/leave-request/leaveRequest';
 
 @Component({
   selector: 'app-leave-requests-list',
