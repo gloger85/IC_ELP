@@ -28,3 +28,18 @@
     </div>
   </form>
 </p-dialog>
+
+<p-dialog [(visible)]="isError" [modal]="true">
+  <p-header> <b>Duplicate holiday entry</b> </p-header>
+  <div class="warning-text-center">Choose another date...</div> 
+  <p-footer>
+    <div class="button-center">
+        <p-button
+        (click)="isError = false"
+        icon="pi pi-check-circle"
+        styleClass="ui-button-primary"
+        label="Yes"
+        ></p-button>
+    </div>
+  </p-footer>
+</p-dialog>

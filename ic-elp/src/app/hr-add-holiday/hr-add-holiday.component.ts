@@ -20,6 +20,7 @@ export class HrAddHolidayComponent implements OnInit {
   holiday: Holiday;
   buttonState: string;
   idTaken: number;
+  isError: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -48,7 +49,7 @@ export class HrAddHolidayComponent implements OnInit {
   
   
   SendRequest(): void {
-    let dateToString = this.addHolidayForm.controls['calendar'].value;
+    let dateToString: Date = this.addHolidayForm.controls['calendar'].value;
     let abstractToString = this.addHolidayForm.controls['holidayName'].value;
     this.displayCalendar = false;
     
@@ -59,6 +60,7 @@ export class HrAddHolidayComponent implements OnInit {
     }, 
     error => {
       console.log('data  was not sent');
+      this.isError = true;
     })
   }
 // TODO: automatically update the body of the holiday on edit button pressed
