@@ -116,6 +116,8 @@ export class CalendarService {
       case DeathOf.father:
       case DeathOf.mother:
       case DeathOf.spouse:
+      case DeathOf.stepfather:
+      case DeathOf.stepmother:
         return 2;
 
       case DeathOf.brother:
@@ -125,8 +127,6 @@ export class CalendarService {
       case DeathOf.motherInLaw:
       case DeathOf.other:
       case DeathOf.sister:
-      case DeathOf.stepfather:
-      case DeathOf.stepmother:
         return 1;
     }
 

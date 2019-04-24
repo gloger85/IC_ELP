@@ -22,6 +22,7 @@ import { HrDashboardMenuComponent } from './hr-dashboard-menu/hr-dashboard-menu.
 import { HrDetailInfoBarComponent } from './hr-detail-info-bar/hr-detail-info-bar.component';
 import { HrEventLogComponent } from './hr-event-log/hr-event-log.component';
 import { HrHolidayManagementCalendarComponent } from './hr-holiday-management-calendar/hr-holiday-management-calendar.component';
+import { HrHolidayPlannerCalendarComponent } from './hr-holiday-planner-calendar/hr-holiday-planner-calendar.component';
 import { HrHolidayPlannerComponent } from './hr-holiday-planner/hr-holiday-planner.component';
 import { HrReportsComponent } from './hr-reports/hr-reports.component';
 import { HrReportsDashboardComponent } from './hr-reports-dashboard/hr-reports-dashboard.component';
@@ -91,6 +92,7 @@ import { DashboardsAccessComponent } from './dashboards-access/dashboards-access
     HrDetailInfoBarComponent,
     HrEventLogComponent,
     HrHolidayManagementCalendarComponent,
+    HrHolidayPlannerCalendarComponent,
     HrHolidayPlannerComponent,
     HrReportsComponent,
     HrReportsDashboardComponent,

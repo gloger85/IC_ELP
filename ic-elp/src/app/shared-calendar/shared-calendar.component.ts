@@ -1,3 +1,4 @@
+import { RequestTypes } from './../domain/leave-request/request-types';
 import { CalendarService } from './../services/calendar/calendar.service';
 import { DynamicControlDropdown } from './../dynamicControlDropdown';
 import { Component, OnInit } from '@angular/core';
@@ -29,14 +30,17 @@ export class SharedCalendarComponent implements OnInit {
   invalidDays: number[];
   en: any;
   pl: any;
+  maxNoOfDays = 0;
   requestedNumberOfDays: number;
   requestedNumberOfHours: number;
   calendarErrorMsg: string;
   rangeHours: number[];
   requestType: string;
   requestTypes: SelectItem[];
+  occassion: string;
   occasions: SelectItem[];
-  degreesOfKinship: SelectItem[];
+  degreesOfKinship: string;
+  degreesOfKinships: SelectItem[];
   daysOrHoursOptions: SelectItem[];
   daysOrHours: string;
 
@@ -44,6 +48,8 @@ export class SharedCalendarComponent implements OnInit {
   displayRequestSummary: boolean;
   displayHoursInputs: boolean;
   requestForm: FormGroup;
+
+  reqTypeContainer: RequestTypes;
 
   agreedWithUser: User;
   replacementUser: User;
@@ -133,18 +139,25 @@ export class SharedCalendarComponent implements OnInit {
 
   OnOccasionChange(event, __this) {
     const occasion = event.value ? event.value.name : null;
+    __this.degreesOfKinship = null;
 
     if (occasion === Occassion.death) {
       __this.dynamicControls.push(
         new DynamicControlDropdown({
           key: 'degreeOfKinship',
           label: 'Degree of kinship:',
-          options: __this.degreesOfKinship
+          options: __this.degreesOfKinships
         })
       );
       (<FormArray>__this.requestForm.get('dynamicFormControls')).push(
         new FormGroup({ degreeOfKinship: new FormControl() })
       );
+      (<FormArray>__this.requestForm.get('dynamicFormControls'))
+        .controls[1].get('degreeOfKinship').valueChanges.subscribe(val => {
+          __this.degreesOfKinship = val.name;
+          __this.UpdateMaxNoOfDays();
+        });
+
     } else if (
       __this.dynamicControls.length > 1 &&
       __this.dynamicControls[1].key === 'degreeOfKinship'
@@ -152,6 +165,7 @@ export class SharedCalendarComponent implements OnInit {
       __this.dynamicControls.pop();
       (<FormArray>__this.requestForm.get('dynamicFormControls')).removeAt(1);
     }
+    __this.UpdateMaxNoOfDays();
   }
 
   CalendarValidate() {
@@ -161,15 +175,9 @@ export class SharedCalendarComponent implements OnInit {
     ) {
       this.calendarErrorMsg = 'YOU CAN ONLY CHOOSE 7 OR 14 DAYS.';
     } else if (
-      this.requestType === RequestType.childCare &&
-      ![1, 2].includes(this.requestedNumberOfDays)
+      this.requestedNumberOfDays > this.maxNoOfDays
     ) {
-      this.calendarErrorMsg = 'YOU CAN ONLY CHOOSE 1 OR 2 DAYS.';
-    } else if (
-      this.requestType === RequestType.onDemandLeave &&
-      this.requestedNumberOfDays > 4
-    ) {
-      this.calendarErrorMsg = 'YOU CAN ONLY CHOOSE UP TO 4 DAYS.';
+      this.calendarErrorMsg = `YOU CAN ONLY CHOOSE UP TO ${this.maxNoOfDays} DAY(S).`;
     } else {
       this.calendarErrorMsg = null;
     }
@@ -200,6 +208,8 @@ export class SharedCalendarComponent implements OnInit {
     this.displayRequestSummary = false;
     this.displayHoursInputs = false;
     this.dynamicControls = [];
+    this.occassion = null;
+    this.degreesOfKinship = null;
     (<FormArray>this.requestForm.get('dynamicFormControls')).controls = [];
 
     switch (this.requestType) {
@@ -263,6 +273,10 @@ export class SharedCalendarComponent implements OnInit {
         (<FormArray>this.requestForm.get('dynamicFormControls')).push(
           this.AddFormGroup('occasion')
         );
+        (<FormArray>this.requestForm.get('dynamicFormControls'))
+        .controls[0].get('occasion').valueChanges.subscribe(val => {
+          this.occassion = val ? val.name : null;
+        });
         break;
       }
       case RequestType.excusedPaidAbsence: {
@@ -418,6 +432,7 @@ export class SharedCalendarComponent implements OnInit {
         return;
       }
     }
+    this.UpdateMaxNoOfDays();
   }
 
   OnDaysOrHoursChange(event) {
@@ -456,7 +471,9 @@ export class SharedCalendarComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _calendarService: CalendarService
-  ) {}
+  ) {
+    this.reqTypeContainer = new RequestTypes();
+  }
 
   ngOnInit() {
     this.daysOrHours = null;
@@ -571,108 +588,13 @@ export class SharedCalendarComponent implements OnInit {
     this.rangeHours = [8, 16];
     this.requestedNumberOfHours = 8;
 
-    this.requestTypes = [
-      { label: 'Select request type', value: null },
-      {
-        label: RequestType.personalLeave,
-        value: { id: 1, name: RequestType.personalLeave }
-      },
-      {
-        label: RequestType.onDemandLeave,
-        value: { id: 2, name: RequestType.onDemandLeave }
-      },
-      {
-        label: RequestType.occassionalLeave,
-        value: { id: 3, name: RequestType.occassionalLeave }
-      },
-      {
-        label: RequestType.excusedPaidAbsence,
-        value: { id: 4, name: RequestType.excusedPaidAbsence }
-      },
-      {
-        label: RequestType.excusedUnpaidAbsence,
-        value: { id: 5, name: RequestType.excusedUnpaidAbsence }
-      },
-      {
-        label: RequestType.unpaidLeave,
-        value: { id: 6, name: RequestType.unpaidLeave }
-      },
-      {
-        label: RequestType.childCare,
-        value: { id: 7, name: RequestType.childCare }
-      },
-      {
-        label: RequestType.maternityLeave,
-        value: { id: 8, name: RequestType.maternityLeave }
-      },
-      {
-        label: RequestType.parentalLeave,
-        value: { id: 9, name: RequestType.parentalLeave }
-      },
-      {
-        label: RequestType.paternityLeave,
-        value: { id: 10, name: RequestType.paternityLeave }
-      },
-      {
-        label: RequestType.unpaidChildcareLeave,
-        value: { id: 11, name: RequestType.unpaidChildcareLeave }
-      }
-    ];
+    this.requestTypes = this.reqTypeContainer.GetReqSelectIts();
 
-    this.occasions = [
-      { label: 'Select occasion', value: null },
-      {
-        label: Occassion.employeesWedding,
-        value: { id: 1, name: Occassion.employeesWedding }
-      },
-      {
-        label: Occassion.emploeesChildWedding,
-        value: { id: 2, name: Occassion.emploeesChildWedding }
-      },
-      { label: Occassion.death, value: { id: 3, name: Occassion.death } },
-      {
-        label: Occassion.childBirth,
-        value: { id: 4, name: Occassion.childBirth }
-      }
-    ];
+    this.occasions = this.reqTypeContainer.GetReqOccasions();
 
-    this.degreesOfKinship = [
-      { label: 'Select degree', value: null },
-      { label: DeathOf.spouse, value: { id: 1, name: DeathOf.spouse } },
-      { label: DeathOf.child, value: { id: 2, name: DeathOf.child } },
-      { label: DeathOf.mother, value: { id: 3, name: DeathOf.mother } },
-      { label: DeathOf.father, value: { id: 4, name: DeathOf.father } },
-      {
-        label: DeathOf.fatherInLaw,
-        value: { id: 5, name: DeathOf.fatherInLaw }
-      },
-      {
-        label: DeathOf.motherInLaw,
-        value: { id: 6, name: DeathOf.motherInLaw }
-      },
-      {
-        label: DeathOf.grandfather,
-        value: { id: 7, name: DeathOf.grandfather }
-      },
-      {
-        label: DeathOf.grandmother,
-        value: { id: 8, name: DeathOf.grandmother }
-      },
-      { label: DeathOf.stepfather, value: { id: 9, name: DeathOf.stepfather } },
-      {
-        label: DeathOf.stepmother,
-        value: { id: 10, name: DeathOf.stepmother }
-      },
-      { label: DeathOf.sister, value: { id: 11, name: DeathOf.sister } },
-      { label: DeathOf.brother, value: { id: 12, name: DeathOf.brother } },
-      { label: DeathOf.other, value: { id: 13, name: DeathOf.other } }
-    ];
+    this.degreesOfKinships = this.reqTypeContainer.GetReqDegreeOfKinships();
 
-    this.daysOrHoursOptions = [
-      { label: 'Select days or hours', value: null },
-      { label: 'Days', value: { id: 1, name: 'Days' } },
-      { label: 'Hours', value: { id: 2, name: 'Hours' } }
-    ];
+    this.daysOrHoursOptions = this.reqTypeContainer.GetDaysOrHoursOptions();
   }
 
   CountNumberOfHours(): number {
@@ -708,5 +630,11 @@ export class SharedCalendarComponent implements OnInit {
 
   SendRequest(): void {
     console.log(this.requestForm.value);
+  }
+
+  UpdateMaxNoOfDays(): void {
+    this.maxNoOfDays = this._calendarService.GetNoOfDaysByReqType(
+      this.requestType, this.occassion, this.degreesOfKinship
+    );
   }
 }
