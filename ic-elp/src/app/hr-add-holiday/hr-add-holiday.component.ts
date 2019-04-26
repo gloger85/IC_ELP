@@ -5,6 +5,7 @@ import { Holiday } from '../domain/holiday/holiday';
 import { DataService } from '../services/data/data.service';
 import { DatePipe } from '@angular/common';
 import { error } from '@angular/compiler/src/util';
+import { DateService } from '../services/date/date.service';
 
 @Component({
   selector: 'app-hr-add-holiday',
@@ -26,7 +27,7 @@ export class HrAddHolidayComponent implements OnInit {
     private fb: FormBuilder,
     private holidayService: HolidayService,
     private dataService: DataService,
-    private datePipe: DatePipe
+    private dateService: DateService
   ) { }
 
   ngOnInit() {
@@ -49,10 +50,10 @@ export class HrAddHolidayComponent implements OnInit {
   
   
   SendRequest(): void {
-    let dateToString: Date = this.addHolidayForm.controls['calendar'].value;
+    let datee: Date = new Date(this.addHolidayForm.controls['calendar'].value);
+    let dateToString: Date = this.dateService.transformDate(datee);
     let abstractToString = this.addHolidayForm.controls['holidayName'].value;
     this.displayCalendar = false;
-    
     this.holiday = new Holiday(abstractToString, dateToString);
 
     this.holidayService.addHolidays(this.holiday).subscribe( data => {
