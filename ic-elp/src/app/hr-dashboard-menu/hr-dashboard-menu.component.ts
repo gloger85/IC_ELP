@@ -34,6 +34,9 @@ export class HrDashboardMenuComponent implements OnInit {
         label: 'Availability Viewer', icon: 'fa fa-fw fa-table', routerLink: ['/availability-viewer']
       },
       {
+        label: 'Compensation manager', icon: 'fa fa-fw fa-table', routerLink: ['/compensation-manager']
+      },
+      {
         label: 'Reporting', icon: 'fa fa-fw fa-file-excel-o', routerLink: ['/hr-reports-dashboard']
       },
       {
