@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AboutComponent } from './about/about.component';
 import { AvailabilityViewerComponent } from './availability-viewer/availability-viewer.component';
+import { CompensationManagerComponent } from './compensation-manager/compensation-manager.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EventLogComponent } from './event-log/event-log.component';
 import { HrEventLogComponent } from './hr-event-log/hr-event-log.component';
@@ -36,82 +37,87 @@ const routes: Routes = [
         component: LogoutComponent,
         redirectTo: ''
       },
-      { 
-        path: 'about', 
+      {
+        path: 'about',
         component: AboutComponent,
         data: {}
       },
-      { 
-        path: 'availability-viewer', 
+      {
+        path: 'availability-viewer',
         component: AvailabilityViewerComponent,
         data: {allowedRoles: ['SUPER_ADMIN', 'HR_ADMIN', 'MANAGER']}
       },
-      { 
-        path: 'dashboard', 
-        component: DashboardComponent, 
+      {
+        path: 'compensation-manager',
+        component: CompensationManagerComponent,
+        data: {allowedRoles: ['SUPER_ADMIN', 'HR_ADMIN', 'MANAGER']}
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
         data: {allowedRoles: ['SUPER_ADMIN', 'USER', 'HR_ADMIN']}
       },
-      { 
-        path: 'event-log', 
+      {
+        path: 'event-log',
         component: EventLogComponent ,
         data: {allowedRoles: ['SUPER_ADMIN', 'HR_ADMIN', 'MANAGER']}
       },
-      // { 
-      //   path: 'hr-event-log', 
+      // {
+      //   path: 'hr-event-log',
       //   component: HrEventLogComponent,
-      //   data: {} 
+      //   data: {}
       // },
-      { 
-        path: 'hr-dashboard', 
+      {
+        path: 'hr-dashboard',
         component: HrDashboardComponent,
-        data: {allowedRoles: ['SUPER_ADMIN', 'HR_ADMIN']} 
+        data: {allowedRoles: ['SUPER_ADMIN', 'HR_ADMIN']}
       },
-      { 
-        path: 'hr-holiday-planner', 
+      {
+        path: 'hr-holiday-planner',
         component: HrHolidayPlannerComponent,
         data: {allowedRoles: ['SUPER_ADMIN', 'HR_ADMIN']}
       },
-      { 
-        path: 'hr-reports-dashboard', 
+      {
+        path: 'hr-reports-dashboard',
         component: HrReportsDashboardComponent,
-        data: {allowedRoles: ['SUPER_ADMIN', 'HR_ADMIN']} 
+        data: {allowedRoles: ['SUPER_ADMIN', 'HR_ADMIN']}
       },
-      { path: 'hr-settings', 
+      { path: 'hr-settings',
         component: HrSettingsComponent,
-        data: {allowedRoles: ['SUPER_ADMIN', 'HR_ADMIN']} 
+        data: {allowedRoles: ['SUPER_ADMIN', 'HR_ADMIN']}
       },
-      { 
-        path: 'login', 
-        component: LoginComponent ,
+      {
+        path: 'login',
+        component: LoginComponent,
         data: {}
       },
-      { 
-        path: 'logout', 
+      {
+        path: 'logout',
         component: LogoutComponent,
         data: {allowedRoles: ['SUPER_ADMIN', 'HR_ADMIN', 'MANAGER', 'USER']}
       },
-      { 
-        path: 'manager-availability-viewer', 
+      {
+        path: 'manager-availability-viewer',
         component: ManagerAvailabilityViewerComponent,
         data: {allowedRoles: ['SUPER_ADMIN', 'MANAGER']}
       },
-      { 
-        path: 'manager-dashboard', 
+      {
+        path: 'manager-dashboard',
         component: ManagerDashboardComponent,
         data: {allowedRoles: ['SUPER_ADMIN', 'MANAGER']}
       },
-      { 
-        path: 'manager-inbox', 
+      {
+        path: 'manager-inbox',
         component: ManagerInboxComponent,
-        data: {allowedRoles: ['SUPER_ADMIN', 'MANAGER']} 
+        data: {allowedRoles: ['SUPER_ADMIN', 'MANAGER']}
       },
-      // { 
-      //   path: 'password-create-new', 
+      // {
+      //   path: 'password-create-new',
       //   component: PasswordCreateNewComponent,
-      //   data: {} 
+      //   data: {}
       // },
-      { 
-        path: 'user-administration', 
+      {
+        path: 'user-administration',
         component: UserAdministrationComponent,
         data: {allowedRoles: ['SUPER_ADMIN', 'HR_ADMIN', 'MANAGER']}
       },
@@ -122,8 +128,8 @@ const routes: Routes = [
       }
     ]
   },
-  { 
-    path: 'password-reset', 
+  {
+    path: 'password-reset',
     component: PasswordResetComponent
   }
 ];

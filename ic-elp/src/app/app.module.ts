@@ -76,6 +76,7 @@ import { AuthGuard } from './services/route-guards/auth-guard.guard';
 import { httpInterceptorproviders } from './services/auth/auth-interceptor.service';
 import { RegisterComponent } from './register/register.component';
 import { DashboardsAccessComponent } from './dashboards-access/dashboards-access.component';
+import { CompensationManagerComponent } from './compensation-manager/compensation-manager.component';
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import { DashboardsAccessComponent } from './dashboards-access/dashboards-access
     UserListComponent,
     ManagerAvailabilityViewerComponent,
     RegisterComponent,
-    DashboardsAccessComponent
+    DashboardsAccessComponent,
+    CompensationManagerComponent
   ],
   imports: [
     AccordionModule,
