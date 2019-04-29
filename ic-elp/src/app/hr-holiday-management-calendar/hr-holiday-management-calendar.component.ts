@@ -20,6 +20,8 @@ export class HrHolidayManagementCalendarComponent implements OnInit {
   display = false;
   buttonState: string;
   idTaken: number;
+  idChoosen:number;
+  columnNames: any[];
 
   constructor(private holidayService: HolidayService, private dataService: DataService) {}
 
@@ -37,10 +39,17 @@ export class HrHolidayManagementCalendarComponent implements OnInit {
     this.dataService.currentIdTaken.subscribe( id => {
       this.idTaken = id;
     });
+
+    this.columnNames = [
+      {field: 'name', header: 'Holiday Name'},
+      {field: 'date', header: 'Date'},
+      {field: 'operation', header: 'Operation'},
+    ]
   }
 
-  showDialog() {
+  showDialog(id: number) {
     this.displayDialog = true;
+    this.idChoosen = id;
   }
 
   showCalendar() {

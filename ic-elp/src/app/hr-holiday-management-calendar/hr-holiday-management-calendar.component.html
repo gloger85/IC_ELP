@@ -6,21 +6,29 @@
         <p-button (click)="showCalendar()" icon="pi pi-plus-circle" label="Add Holiday"></p-button>
       </div>
     </div>
-    <p-table [value]="holidays">
+    <p-table [columns]="columnNames" [value]="holidays"  sortField="date" [sortOrder]="1">
       <ng-template pTemplate="header">
         <tr>
-          <th class="text-center">Holiday name</th>
-          <th class="text-center">Date</th>
-          <th class="text-center">Operation</th>
+          <th class="text-center" *ngFor="let col of columnNames" [pSortableColumn]="col.field" [pSortableColumnDisabled]="col.operation">
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-holiday>
+      <ng-template pTemplate="body" let-holiday let-columns="columnNames">
         <tr>
-          <td class="text-center">{{holiday.name}}</td>
+          <!-- <td class="text-center">{{holiday.name}}</td>
           <td class="text-center">{{holiday.date}}</td>
           <td class="text-center">
             <p-button icon="fa fa-fw fa-edit" label="Edit" (click)="editCompensation(holiday.id)"></p-button>&nbsp;&nbsp;
-            <p-button (click)="showDialog()" icon="pi pi-trash" styleClass="ui-button-warning" label="Delete"></p-button>
+            <p-button (click)="showDialog(holiday.id)" icon="pi pi-trash" styleClass="ui-button-warning" label="Delete"></p-button>
+          </td> -->
+          <td *ngFor="let col of columnNames">
+            {{holiday[col.field]}}
+            <div *ngIf="col.field=='operation'">
+              <p-button icon="fa fa-fw fa-edit" label="Edit" (click)="editCompensation(holiday.id)"></p-button>&nbsp;&nbsp;
+              <p-button (click)="showDialog(holiday.id)" icon="pi pi-trash" styleClass="ui-button-warning" label="Delete"></p-button>
+            </div>
           </td>
         </tr>
         <p-dialog [(visible)]="displayDialog" [modal]="true">
@@ -29,7 +37,7 @@
           </p-header>
           Are you sure that you want to delete this record?
           <p-footer>
-            <p-button (click)="deleteHoliday(holiday.id)" icon="pi pi-check-circle" styleClass="ui-button-primary" label="Yes"></p-button>
+            <p-button (click)="deleteHoliday(idChoosen)" icon="pi pi-check-circle" styleClass="ui-button-primary" label="Yes"></p-button>
             <p-button (click)="displayDialog=false" icon="pi pi-times-circle" styleClass="ui-button-warning" label="Cancel"></p-button>
           </p-footer>
         </p-dialog>

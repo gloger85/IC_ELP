@@ -64,12 +64,14 @@ export class HrAddHolidayComponent implements OnInit {
       this.isError = true;
     })
   }
-// TODO: automatically update the body of the holiday on edit button pressed
+  
   editHoliday(id: number) {
     let holiday: Holiday;
+    let dateToUTC = this.addHolidayForm.controls['calendar'].value
     this.holidayService.getHolidayById(id).subscribe(data => {
       holiday = data;
       holiday.name = this.addHolidayForm.controls['holidayName'].value;
+      holiday.date = this.dateService.transformDate(dateToUTC);
       this.holidayService.updateHoliday(id, holiday).subscribe(() => {
         console.log('Data sent');
       },
