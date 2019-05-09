@@ -19,7 +19,7 @@ export class CompensationManagerComponent implements OnInit {
         id: '132',
         user: 'Andrzej Kowalczyk',
         numberOfHours: 4,
-        startDate: '2018-12-03',
+        startDate: new Date('2018-12-03'),
         endDate: '2018-12-03',
         status: 'Pending',
         description: 'DB BackUp'
@@ -28,7 +28,7 @@ export class CompensationManagerComponent implements OnInit {
         id: '132',
         user: 'Jan Wasyl',
         numberOfHours: -4,
-        startDate: '2018-12-03',
+        startDate: new Date('2018-12-03'),
         endDate: '2018-12-03',
         status: 'Pending',
         description: ''
@@ -37,7 +37,7 @@ export class CompensationManagerComponent implements OnInit {
         id: '342',
         user: 'Damian Bobner',
         numberOfHours: 4,
-        startDate: '2018-10-01',
+        startDate: new Date('2018-10-01'),
         endDate: '2018-10-01',
         status: 'Approved',
         description: 'Other description'
@@ -46,7 +46,7 @@ export class CompensationManagerComponent implements OnInit {
         id: '112',
         user: 'Donatan Krol',
         numberOfHours: -4,
-        startDate: '2018-10-03',
+        startDate: new Date('2018-10-03'),
         endDate: '2018-10-03',
         status: 'Canceled',
         description: ''
@@ -55,7 +55,7 @@ export class CompensationManagerComponent implements OnInit {
         id: '345',
         user: 'Dorian Krol',
         numberOfHours: 4,
-        startDate: '2018-11-15',
+        startDate: new Date('2018-11-15'),
         endDate: '2018-11-15',
         status: 'Approved',
         description: 'Urgent INC474637'

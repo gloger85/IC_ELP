@@ -58,6 +58,8 @@ export class HrAddHolidayComponent implements OnInit {
 
     this.holidayService.addHolidays(this.holiday).subscribe( data => {
       console.log('data send');
+      console.log(datee);
+      
     }, 
     error => {
       console.log('data  was not sent');
